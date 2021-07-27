@@ -426,36 +426,36 @@
                     </execution>
                 </executions>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>au.com.dius.pact.provider</groupId>-->
-<!--                <artifactId>maven</artifactId>-->
-<!--                <version>4.2.7</version>-->
-<!--                <configuration>-->
-<!--                    <pactBrokerUrl>${pact.broker.url}</pactBrokerUrl>-->
-<!--                    <pactBrokerToken>${pact.broker.token}</pactBrokerToken>-->
-<!--                    <systemPropertyVariables>-->
-<!--                        <pact.verifier.publishResults>true</pact.verifier.publishResults>-->
-<!--                    </systemPropertyVariables>-->
+            <plugin>
+                <groupId>au.com.dius.pact.provider</groupId>
+                <artifactId>maven</artifactId>
+                <version>4.2.7</version>
+                <configuration>
+                    <pactBrokerUrl>${pact.broker.url}</pactBrokerUrl>
+                    <pactBrokerToken>${pact.broker.token}</pactBrokerToken>
+                    <systemPropertyVariables>
+                        <pact.verifier.publishResults>true</pact.verifier.publishResults>
+                    </systemPropertyVariables>
 
-<!--                    <serviceProviders>-->
-<!--                        <serviceProvider>-->
-<!--                            <name>${pact.api.name}</name>-->
-<!--                            <protocol>${pact.api.protocol}</protocol>-->
-<!--                            <host>${pact.api.host}</host>-->
-<!--                            <port>${pact.api.port}</port>-->
-<!--                        </serviceProvider>-->
-<!--                    </serviceProviders>-->
+                    <serviceProviders>
+                        <serviceProvider>
+                            <name>${pact.api.name}</name>
+                            <protocol>${pact.api.protocol}</protocol>
+                            <host>${pact.api.host}</host>
+                            <port>${pact.api.port}</port>
+                        </serviceProvider>
+                    </serviceProviders>
 
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <phase>integration-test</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>verify</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>com.coveo</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
