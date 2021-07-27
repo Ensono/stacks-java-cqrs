@@ -9,19 +9,19 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.xxAMIDOxx</groupId>
-    <artifactId>xxSTACKSxx-api</artifactId>
+    <groupId>com.amido</groupId>
+    <artifactId>stacks-api-cqrs</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
-    <name>xxSTACKSxx-api</name>
-    <description>Demo project for Java</description>
+    <name>stacks-api-cqrs</name>
+    <description>Demo project for Java with CQRS</description>
 
     <properties>
         <java.version>11</java.version>
         <org.projectlombok.version>1.18.0</org.projectlombok.version>
         <org.springdoc-openapi.version>1.5.9</org.springdoc-openapi.version>
         <applicationinsights.version>2.6.3</applicationinsights.version>
-        <cosmosdb.version>3.6.0</cosmosdb.version>
+        <cosmosdb.version>2.3.5</cosmosdb.version>
         <azure.springboot.version>3.6.0</azure.springboot.version>
         <azure.servicebus.version>3.6.4</azure.servicebus.version>
         <jackson.version>2.12.3</jackson.version>
@@ -134,8 +134,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.azure.spring</groupId>
-            <artifactId>azure-spring-boot-starter-cosmos</artifactId>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-cosmosdb-spring-boot-starter</artifactId>
             <version>${cosmosdb.version}</version>
             <exclusions>
                 <exclusion>
@@ -403,7 +403,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.xxAMIDOxx.xxSTACKSxx.Application</mainClass>
+                    <mainClass>com.amido.stacks.Application</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -451,36 +451,36 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>au.com.dius.pact.provider</groupId>
-                <artifactId>maven</artifactId>
-                <version>4.2.7</version>
-                <configuration>
-                    <pactBrokerUrl>${pact.broker.url}</pactBrokerUrl>
-                    <pactBrokerToken>${pact.broker.token}</pactBrokerToken>
-                    <systemPropertyVariables>
-                        <pact.verifier.publishResults>true</pact.verifier.publishResults>
-                    </systemPropertyVariables>
+<!--            <plugin>-->
+<!--                <groupId>au.com.dius.pact.provider</groupId>-->
+<!--                <artifactId>maven</artifactId>-->
+<!--                <version>4.2.7</version>-->
+<!--                <configuration>-->
+<!--                    <pactBrokerUrl>${pact.broker.url}</pactBrokerUrl>-->
+<!--                    <pactBrokerToken>${pact.broker.token}</pactBrokerToken>-->
+<!--                    <systemPropertyVariables>-->
+<!--                        <pact.verifier.publishResults>true</pact.verifier.publishResults>-->
+<!--                    </systemPropertyVariables>-->
 
-                    <serviceProviders>
-                        <serviceProvider>
-                            <name>${pact.api.name}</name>
-                            <protocol>${pact.api.protocol}</protocol>
-                            <host>${pact.api.host}</host>
-                            <port>${pact.api.port}</port>
-                        </serviceProvider>
-                    </serviceProviders>
+<!--                    <serviceProviders>-->
+<!--                        <serviceProvider>-->
+<!--                            <name>${pact.api.name}</name>-->
+<!--                            <protocol>${pact.api.protocol}</protocol>-->
+<!--                            <host>${pact.api.host}</host>-->
+<!--                            <port>${pact.api.port}</port>-->
+<!--                        </serviceProvider>-->
+<!--                    </serviceProviders>-->
 
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>integration-test</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>verify</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>com.coveo</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
