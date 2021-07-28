@@ -1,6 +1,5 @@
 package com.amido.stacks.menu.handlers;
 
-import com.amido.stacks.core.messaging.publish.ApplicationEventPublisher;
 import com.amido.stacks.menu.commands.CreateItemCommand;
 import com.amido.stacks.menu.domain.Category;
 import com.amido.stacks.menu.domain.Item;
@@ -19,9 +18,8 @@ import java.util.*;
 @Component
 public class CreateItemHandler extends MenuBaseCommandHandler<CreateItemCommand> {
 
-  public CreateItemHandler(
-      MenuRepository menuRepository, ApplicationEventPublisher applicationEventPublisher) {
-    super(menuRepository, applicationEventPublisher);
+  public CreateItemHandler(MenuRepository menuRepository) {
+    super(menuRepository);
   }
 
   @Override

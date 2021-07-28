@@ -1,10 +1,8 @@
 package com.amido.stacks.menu.handlers;
 
 import com.amido.stacks.core.cqrs.handler.CommandHandler;
-import com.amido.stacks.core.messaging.publish.ApplicationEventPublisher;
 import com.amido.stacks.menu.commands.CreateMenuCommand;
 import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.events.MenuCreatedEvent;
 import com.amido.stacks.menu.exception.MenuAlreadyExistsException;
 import com.amido.stacks.menu.repository.MenuRepository;
 import org.springframework.data.domain.Page;
@@ -20,12 +18,8 @@ public class CreateMenuHandler implements CommandHandler<CreateMenuCommand> {
 
   protected MenuRepository menuRepository;
 
-  private ApplicationEventPublisher applicationEventPublisher;
-
-  public CreateMenuHandler(
-      MenuRepository menuRepository, ApplicationEventPublisher applicationEventPublisher) {
+  public CreateMenuHandler(MenuRepository menuRepository) {
     this.menuRepository = menuRepository;
-    this.applicationEventPublisher = applicationEventPublisher;
   }
 
   @Override
@@ -44,8 +38,6 @@ public class CreateMenuHandler implements CommandHandler<CreateMenuCommand> {
             command.getEnabled());
 
     menuRepository.save(menu);
-
-    applicationEventPublisher.publish(new MenuCreatedEvent(command, id));
 
     return Optional.of(id);
   }

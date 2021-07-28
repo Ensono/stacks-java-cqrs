@@ -1,6 +1,5 @@
 package com.amido.stacks.menu.handlers;
 
-import com.amido.stacks.core.messaging.publish.ApplicationEventPublisher;
 import com.amido.stacks.menu.commands.UpdateMenuCommand;
 import com.amido.stacks.menu.domain.Menu;
 import com.amido.stacks.menu.events.MenuEvent;
@@ -16,9 +15,8 @@ import java.util.UUID;
 @Component
 public class UpdateMenuHandler extends MenuBaseCommandHandler<UpdateMenuCommand> {
 
-  public UpdateMenuHandler(
-      MenuRepository menuRepository, ApplicationEventPublisher applicationEventPublisher) {
-    super(menuRepository, applicationEventPublisher);
+  public UpdateMenuHandler(MenuRepository menuRepository) {
+    super(menuRepository);
   }
 
   @Override

@@ -1,6 +1,5 @@
 package com.amido.stacks.menu.handlers;
 
-import com.amido.stacks.core.messaging.publish.ApplicationEventPublisher;
 import com.amido.stacks.menu.commands.DeleteCategoryCommand;
 import com.amido.stacks.menu.domain.Category;
 import com.amido.stacks.menu.domain.Menu;
@@ -18,9 +17,8 @@ import java.util.stream.Collectors;
 @Component
 public class DeleteCategoryHandler extends MenuBaseCommandHandler<DeleteCategoryCommand> {
 
-  public DeleteCategoryHandler(
-      MenuRepository menuRepository, ApplicationEventPublisher applicationEventPublisher) {
-    super(menuRepository, applicationEventPublisher);
+  public DeleteCategoryHandler(MenuRepository menuRepository) {
+    super(menuRepository);
   }
 
   Optional<UUID> handleCommand(Menu menu, DeleteCategoryCommand command) {

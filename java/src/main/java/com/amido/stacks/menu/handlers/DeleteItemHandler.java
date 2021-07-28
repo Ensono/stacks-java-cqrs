@@ -1,6 +1,5 @@
 package com.amido.stacks.menu.handlers;
 
-import com.amido.stacks.core.messaging.publish.ApplicationEventPublisher;
 import com.amido.stacks.menu.commands.DeleteItemCommand;
 import com.amido.stacks.menu.domain.Category;
 import com.amido.stacks.menu.domain.Item;
@@ -21,9 +20,8 @@ import java.util.stream.Collectors;
 @Component
 public class DeleteItemHandler extends MenuBaseCommandHandler<DeleteItemCommand> {
 
-  public DeleteItemHandler(
-      MenuRepository menuRepository, ApplicationEventPublisher applicationEventPublisher) {
-    super(menuRepository, applicationEventPublisher);
+  public DeleteItemHandler(MenuRepository menuRepository) {
+    super(menuRepository);
   }
 
   @Override

@@ -1,7 +1,6 @@
 package com.amido.stacks.menu.handlers;
 
 import com.amido.stacks.core.cqrs.handler.CommandHandler;
-import com.amido.stacks.core.messaging.publish.ApplicationEventPublisher;
 import com.amido.stacks.menu.commands.MenuCommand;
 import com.amido.stacks.menu.domain.Category;
 import com.amido.stacks.menu.domain.Item;
@@ -18,12 +17,8 @@ public abstract class MenuBaseCommandHandler<T extends MenuCommand> implements C
 
   protected MenuRepository menuRepository;
 
-  private ApplicationEventPublisher applicationEventPublisher;
-
-  public MenuBaseCommandHandler(
-      MenuRepository menuRepository, ApplicationEventPublisher applicationEventPublisher) {
+  public MenuBaseCommandHandler(MenuRepository menuRepository) {
     this.menuRepository = menuRepository;
-    this.applicationEventPublisher = applicationEventPublisher;
   }
 
   @Override
@@ -34,15 +29,7 @@ public abstract class MenuBaseCommandHandler<T extends MenuCommand> implements C
             .findById(command.getMenuId().toString())
             .orElseThrow(() -> new MenuNotFoundException(command));
 
-    var result = handleCommand(menu, command);
-
-    publishEvents(raiseApplicationEvents(menu, command));
-
-    return result;
-  }
-
-  private void publishEvents(List<MenuEvent> menuEvents) {
-    menuEvents.forEach(applicationEventPublisher::publish);
+    return handleCommand(menu, command);
   }
 
   abstract Optional<UUID> handleCommand(Menu menu, T command);
