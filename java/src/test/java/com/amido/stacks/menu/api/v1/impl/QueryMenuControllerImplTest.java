@@ -1,7 +1,7 @@
 package com.amido.stacks.menu.api.v1.impl;
 
-import com.microsoft.azure.spring.autoconfigure.cosmosdb.CosmosAutoConfiguration;
-import com.microsoft.azure.spring.autoconfigure.cosmosdb.CosmosDbRepositoriesAutoConfiguration;
+import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
+import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import com.amido.stacks.menu.api.v1.dto.response.MenuDTO;
 import com.amido.stacks.menu.api.v1.dto.response.SearchMenuResult;
 import com.amido.stacks.menu.api.v1.dto.response.SearchMenuResultItem;
@@ -40,7 +40,7 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration(
-    exclude = {CosmosDbRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class})
+    exclude = {CosmosRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class})
 @Tag("Integration")
 @ActiveProfiles("test")
 public class QueryMenuControllerImplTest {

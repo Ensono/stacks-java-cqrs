@@ -1,7 +1,7 @@
 package com.amido.stacks.menu.api.v1.impl;
 
-import com.microsoft.azure.spring.autoconfigure.cosmosdb.CosmosAutoConfiguration;
-import com.microsoft.azure.spring.autoconfigure.cosmosdb.CosmosDbRepositoriesAutoConfiguration;
+import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
+import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import com.amido.stacks.core.api.dto.ErrorResponse;
 import com.amido.stacks.menu.api.v1.dto.request.UpdateItemRequest;
 import com.amido.stacks.menu.api.v1.dto.response.ResourceUpdatedResponse;
@@ -41,7 +41,7 @@ import static org.springframework.http.HttpStatus.OK;
 /** @author ArathyKrishna */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration(
-    exclude = {CosmosDbRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class})
+    exclude = {CosmosRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class})
 @Tag("Integration")
 @ActiveProfiles("test")
 class UpdateItemControllerImplTest {

@@ -21,7 +21,7 @@
         <org.projectlombok.version>1.18.0</org.projectlombok.version>
         <org.springdoc-openapi.version>1.5.9</org.springdoc-openapi.version>
         <applicationinsights.version>2.6.3</applicationinsights.version>
-        <cosmosdb.version>2.3.5</cosmosdb.version>
+        <cosmosdb.version>3.6.0</cosmosdb.version>
         <azure.springboot.version>3.6.0</azure.springboot.version>
         <jackson.version>2.12.3</jackson.version>
         <mockito.version>3.11.2</mockito.version>
@@ -133,8 +133,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-cosmosdb-spring-boot-starter</artifactId>
+            <groupId>com.azure.spring</groupId>
+            <artifactId>azure-spring-boot-starter-cosmos</artifactId>
             <version>${cosmosdb.version}</version>
             <exclusions>
                 <exclusion>
@@ -461,7 +461,7 @@
                 <artifactId>fmt-maven-plugin</artifactId>
                 <version>${fmt-maven-plugin.version}</version>
                 <configuration>
-                    <displayFiles>false</displayFiles>
+                    <displayFiles>true</displayFiles>
                     <verbose>true</verbose>
                     <filesNamePattern>.*\.java</filesNamePattern>
                     <additionalSourceDirectories/>

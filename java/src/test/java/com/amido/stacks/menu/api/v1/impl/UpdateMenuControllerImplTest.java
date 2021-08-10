@@ -1,7 +1,7 @@
 package com.amido.stacks.menu.api.v1.impl;
 
-import com.microsoft.azure.spring.autoconfigure.cosmosdb.CosmosAutoConfiguration;
-import com.microsoft.azure.spring.autoconfigure.cosmosdb.CosmosDbRepositoriesAutoConfiguration;
+import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
+import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import com.amido.stacks.core.api.dto.ErrorResponse;
 import com.amido.stacks.menu.api.v1.dto.request.UpdateMenuRequest;
 import com.amido.stacks.menu.api.v1.dto.response.ResourceUpdatedResponse;
@@ -24,7 +24,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.azure.data.cosmos.internal.Utils.randomUUID;
+import static com.azure.cosmos.implementation.Utils.randomUUID;
 import static com.amido.stacks.menu.domain.MenuHelper.createMenu;
 import static com.amido.stacks.util.TestHelper.getBaseURL;
 import static com.amido.stacks.util.TestHelper.getRequestHttpEntity;
@@ -34,7 +34,7 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration(
-    exclude = {CosmosDbRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class})
+    exclude = {CosmosRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class})
 @Tag("Integration")
 @ActiveProfiles("test")
 class UpdateMenuControllerImplTest {
