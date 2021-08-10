@@ -9,12 +9,11 @@ import com.amido.stacks.menu.events.MenuUpdatedEvent;
 import com.amido.stacks.menu.exception.CategoryAlreadyExistsException;
 import com.amido.stacks.menu.exception.CategoryDoesNotExistException;
 import com.amido.stacks.menu.repository.MenuRepository;
-import org.springframework.stereotype.Component;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.stereotype.Component;
 
 /** @author ArathyKrishna */
 @Component
@@ -34,8 +33,8 @@ public class UpdateCategoryHandler extends MenuBaseCommandHandler<UpdateCategory
   /**
    * if the request is to update the name and description of a category If there is a category with
    * the same name but only updating the description then allow that else throw a category already
-   * exists com.amido.core.api.exception if a category with the same name doesn't exits then update the requested
-   * category.
+   * exists com.amido.core.api.exception if a category with the same name doesn't exits then update
+   * the requested category.
    *
    * @param menu menu
    * @param command update category request

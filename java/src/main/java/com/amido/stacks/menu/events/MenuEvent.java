@@ -2,7 +2,6 @@ package com.amido.stacks.menu.events;
 
 import com.amido.stacks.core.messaging.event.ApplicationEvent;
 import com.amido.stacks.menu.commands.MenuCommand;
-
 import java.util.UUID;
 
 public abstract class MenuEvent extends ApplicationEvent {

@@ -1,17 +1,16 @@
 package com.amido.stacks.menu.mappers;
 
+import static org.junit.Assert.assertEquals;
+
 import com.amido.stacks.menu.api.v1.dto.request.CreateCategoryRequest;
 import com.amido.stacks.menu.api.v1.dto.request.CreateItemRequest;
 import com.amido.stacks.menu.api.v1.dto.request.CreateMenuRequest;
 import com.amido.stacks.menu.commands.CreateCategoryCommand;
 import com.amido.stacks.menu.commands.CreateItemCommand;
 import com.amido.stacks.menu.commands.CreateMenuCommand;
+import java.util.UUID;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
-import java.util.UUID;
-
-import static org.junit.Assert.assertEquals;
 
 @Tag("Unit")
 class RequestToCommandMapperTest {

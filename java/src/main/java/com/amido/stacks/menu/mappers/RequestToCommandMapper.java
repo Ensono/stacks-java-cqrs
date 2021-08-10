@@ -2,7 +2,6 @@ package com.amido.stacks.menu.mappers;
 
 import com.amido.stacks.menu.api.v1.dto.request.*;
 import com.amido.stacks.menu.commands.*;
-
 import java.util.UUID;
 
 public class RequestToCommandMapper {

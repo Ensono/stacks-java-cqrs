@@ -1,16 +1,15 @@
 package com.amido.stacks.core.api.filter;
 
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.MDC;
-import org.springframework.core.annotation.Order;
-import org.springframework.web.filter.OncePerRequestFilter;
-
+import java.io.IOException;
+import java.util.UUID;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.UUID;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.MDC;
+import org.springframework.core.annotation.Order;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 @Order(1)
 public class CorrelationIdFilter extends OncePerRequestFilter {

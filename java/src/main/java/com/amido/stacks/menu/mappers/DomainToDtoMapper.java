@@ -7,10 +7,9 @@ import com.amido.stacks.menu.api.v1.dto.response.SearchMenuResultItem;
 import com.amido.stacks.menu.domain.Category;
 import com.amido.stacks.menu.domain.Item;
 import com.amido.stacks.menu.domain.Menu;
-import org.springframework.stereotype.Component;
-
 import java.util.UUID;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 
 @Component
 public class DomainToDtoMapper {

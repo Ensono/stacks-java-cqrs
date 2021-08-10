@@ -33,9 +33,9 @@ public class Menu {
       this.categories = new ArrayList<>();
     }
     this.categories =
-            this.categories.stream()
-                    .filter(c -> !c.getId().equals(category.getId()))
-                    .collect(Collectors.toList());
+        this.categories.stream()
+            .filter(c -> !c.getId().equals(category.getId()))
+            .collect(Collectors.toList());
     this.categories.add(category);
     return this;
   }

@@ -1,7 +1,17 @@
 package com.amido.stacks.menu.api.v1.impl;
 
-import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
-import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
+import static com.amido.stacks.menu.domain.MenuHelper.createMenu;
+import static com.amido.stacks.menu.domain.MenuHelper.createMenus;
+import static com.amido.stacks.util.TestHelper.getBaseURL;
+import static java.util.UUID.randomUUID;
+import static org.assertj.core.api.BDDAssertions.then;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
+
 import com.amido.stacks.menu.api.v1.dto.response.MenuDTO;
 import com.amido.stacks.menu.api.v1.dto.response.SearchMenuResult;
 import com.amido.stacks.menu.api.v1.dto.response.SearchMenuResultItem;
@@ -10,6 +20,10 @@ import com.amido.stacks.menu.domain.Item;
 import com.amido.stacks.menu.domain.Menu;
 import com.amido.stacks.menu.mappers.DomainToDtoMapper;
 import com.amido.stacks.menu.repository.MenuRepository;
+import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
+import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
+import java.util.*;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +36,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static com.amido.stacks.menu.domain.MenuHelper.createMenu;
-import static com.amido.stacks.menu.domain.MenuHelper.createMenus;
-import static com.amido.stacks.util.TestHelper.getBaseURL;
-import static java.util.UUID.randomUUID;
-import static org.assertj.core.api.BDDAssertions.then;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.core.IsNull.notNullValue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration(

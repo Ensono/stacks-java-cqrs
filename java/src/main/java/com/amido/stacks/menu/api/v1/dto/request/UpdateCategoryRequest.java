@@ -1,11 +1,10 @@
 package com.amido.stacks.menu.api.v1.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotBlank;
 
 /** @author ArathyKrishna */
 @Data

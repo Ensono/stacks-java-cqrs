@@ -1,7 +1,6 @@
 package com.amido.stacks.menu.exception;
 
 import com.amido.stacks.menu.commands.MenuCommand;
-
 import java.util.UUID;
 
 public class ItemAlreadyExistsException extends MenuApiException {

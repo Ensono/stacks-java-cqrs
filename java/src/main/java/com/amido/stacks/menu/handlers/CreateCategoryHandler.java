@@ -8,9 +8,8 @@ import com.amido.stacks.menu.events.MenuEvent;
 import com.amido.stacks.menu.events.MenuUpdatedEvent;
 import com.amido.stacks.menu.exception.CategoryAlreadyExistsException;
 import com.amido.stacks.menu.repository.MenuRepository;
-import org.springframework.stereotype.Component;
-
 import java.util.*;
+import org.springframework.stereotype.Component;
 
 @Component
 public class CreateCategoryHandler extends MenuBaseCommandHandler<CreateCategoryCommand> {

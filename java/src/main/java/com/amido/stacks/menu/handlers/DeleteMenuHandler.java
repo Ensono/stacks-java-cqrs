@@ -5,12 +5,11 @@ import com.amido.stacks.menu.domain.Menu;
 import com.amido.stacks.menu.events.MenuDeletedEvent;
 import com.amido.stacks.menu.events.MenuEvent;
 import com.amido.stacks.menu.repository.MenuRepository;
-import org.springframework.stereotype.Component;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.stereotype.Component;
 
 /**
  * Handler for deleting menu

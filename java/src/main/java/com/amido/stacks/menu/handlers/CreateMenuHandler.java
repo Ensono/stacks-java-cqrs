@@ -5,13 +5,12 @@ import com.amido.stacks.menu.commands.CreateMenuCommand;
 import com.amido.stacks.menu.domain.Menu;
 import com.amido.stacks.menu.exception.MenuAlreadyExistsException;
 import com.amido.stacks.menu.repository.MenuRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Component;
 
 @Component
 public class CreateMenuHandler implements CommandHandler<CreateMenuCommand> {

@@ -11,9 +11,8 @@ import com.amido.stacks.menu.events.MenuUpdatedEvent;
 import com.amido.stacks.menu.exception.CategoryDoesNotExistException;
 import com.amido.stacks.menu.exception.ItemAlreadyExistsException;
 import com.amido.stacks.menu.repository.MenuRepository;
-import org.springframework.stereotype.Component;
-
 import java.util.*;
+import org.springframework.stereotype.Component;
 
 @Component
 public class CreateItemHandler extends MenuBaseCommandHandler<CreateItemCommand> {

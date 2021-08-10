@@ -8,10 +8,9 @@ import com.amido.stacks.menu.events.MenuEvent;
 import com.amido.stacks.menu.events.MenuUpdatedEvent;
 import com.amido.stacks.menu.exception.CategoryDoesNotExistException;
 import com.amido.stacks.menu.repository.MenuRepository;
-import org.springframework.stereotype.Component;
-
 import java.util.*;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 
 /** @author ArathyKrishna */
 @Component

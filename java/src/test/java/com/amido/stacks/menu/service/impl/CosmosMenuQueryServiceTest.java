@@ -1,22 +1,21 @@
 package com.amido.stacks.menu.service.impl;
 
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.repository.MenuRepository;
-import com.amido.stacks.menu.service.MenuQueryService;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-
-import java.util.List;
-
 import static com.amido.stacks.menu.domain.MenuHelper.createMenus;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+
+import com.amido.stacks.menu.domain.Menu;
+import com.amido.stacks.menu.repository.MenuRepository;
+import com.amido.stacks.menu.service.MenuQueryService;
+import java.util.List;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 @Tag("Unit")
 public class CosmosMenuQueryServiceTest {

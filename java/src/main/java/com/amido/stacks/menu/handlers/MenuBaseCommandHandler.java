@@ -8,7 +8,6 @@ import com.amido.stacks.menu.domain.Menu;
 import com.amido.stacks.menu.events.MenuEvent;
 import com.amido.stacks.menu.exception.MenuNotFoundException;
 import com.amido.stacks.menu.repository.MenuRepository;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

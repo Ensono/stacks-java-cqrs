@@ -1,7 +1,6 @@
 package com.amido.stacks.menu.events;
 
 import com.amido.stacks.menu.commands.MenuCommand;
-
 import java.util.UUID;
 
 public abstract class MenuItemEvent extends CategoryEvent {

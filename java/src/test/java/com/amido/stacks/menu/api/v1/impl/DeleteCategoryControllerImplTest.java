@@ -1,11 +1,24 @@
 package com.amido.stacks.menu.api.v1.impl;
 
-import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
-import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
+import static com.amido.stacks.menu.domain.CategoryHelper.createCategories;
+import static com.amido.stacks.menu.domain.CategoryHelper.createCategory;
+import static com.amido.stacks.menu.domain.ItemHelper.createItem;
+import static com.amido.stacks.menu.domain.MenuHelper.createMenu;
+import static com.amido.stacks.util.TestHelper.getBaseURL;
+import static com.amido.stacks.util.TestHelper.getRequestHttpEntity;
+import static org.assertj.core.api.BDDAssertions.then;
+import static org.mockito.Mockito.*;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.OK;
+
 import com.amido.stacks.core.api.dto.ErrorResponse;
 import com.amido.stacks.menu.domain.Category;
 import com.amido.stacks.menu.domain.Menu;
 import com.amido.stacks.menu.repository.MenuRepository;
+import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
+import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
+import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -18,20 +31,6 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.util.List;
-import java.util.Optional;
-
-import static com.amido.stacks.menu.domain.CategoryHelper.createCategories;
-import static com.amido.stacks.menu.domain.CategoryHelper.createCategory;
-import static com.amido.stacks.menu.domain.ItemHelper.createItem;
-import static com.amido.stacks.menu.domain.MenuHelper.createMenu;
-import static com.amido.stacks.util.TestHelper.getBaseURL;
-import static com.amido.stacks.util.TestHelper.getRequestHttpEntity;
-import static org.assertj.core.api.BDDAssertions.then;
-import static org.mockito.Mockito.*;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.OK;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration(

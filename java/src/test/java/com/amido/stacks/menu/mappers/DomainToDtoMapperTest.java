@@ -1,5 +1,8 @@
 package com.amido.stacks.menu.mappers;
 
+import static java.util.UUID.randomUUID;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.amido.stacks.menu.api.v1.dto.response.CategoryDTO;
 import com.amido.stacks.menu.api.v1.dto.response.ItemDTO;
 import com.amido.stacks.menu.api.v1.dto.response.MenuDTO;
@@ -7,15 +10,11 @@ import com.amido.stacks.menu.api.v1.dto.response.SearchMenuResultItem;
 import com.amido.stacks.menu.domain.Category;
 import com.amido.stacks.menu.domain.Item;
 import com.amido.stacks.menu.domain.Menu;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.UUID;
-
-import static java.util.UUID.randomUUID;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 @Tag("Unit")
 class DomainToDtoMapperTest {
