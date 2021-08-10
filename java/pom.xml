@@ -9,12 +9,12 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.xxAMIDOxx</groupId>
-    <artifactId>xxSTACKSxx-api</artifactId>
+    <groupId>com.amido</groupId>
+    <artifactId>stacks-api-cqrs</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
-    <name>xxSTACKSxx-api</name>
-    <description>Demo project for Java</description>
+    <name>stacks-api-cqrs</name>
+    <description>Demo project for Java with CQRS</description>
 
     <properties>
         <java.version>11</java.version>
@@ -23,7 +23,6 @@
         <applicationinsights.version>2.6.3</applicationinsights.version>
         <cosmosdb.version>3.6.0</cosmosdb.version>
         <azure.springboot.version>3.6.0</azure.springboot.version>
-        <azure.servicebus.version>3.6.4</azure.servicebus.version>
         <jackson.version>2.12.3</jackson.version>
         <mockito.version>3.11.2</mockito.version>
         <lombok.version>1.18.20</lombok.version>
@@ -37,7 +36,7 @@
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <owasp-dependency-check-plugin.version>6.2.2</owasp-dependency-check-plugin.version>
         <auth0-spring-security-api.version>1.4.1</auth0-spring-security-api.version>
-        <io-projectreactor-netty.version>1.0.8</io-projectreactor-netty.version>
+        <io-projectreactor-netty.version>1.0.10</io-projectreactor-netty.version>
 
         <fmt-maven-plugin.version>2.11</fmt-maven-plugin.version>
         <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
@@ -154,30 +153,6 @@
             <artifactId>applicationinsights-spring-boot-starter</artifactId>
             <version>${applicationinsights.version}</version>
             <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-servicebus</artifactId>
-            <version>${azure.servicebus.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.nimbusds</groupId>
-                    <artifactId>oauth2-oidc-sdk</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>net.minidev</groupId>
-                    <artifactId>json-smart</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-codec-http</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.beust</groupId>
-                    <artifactId>jcommander</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -403,7 +378,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.xxAMIDOxx.xxSTACKSxx.Application</mainClass>
+                    <mainClass>com.amido.stacks.Application</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -486,7 +461,7 @@
                 <artifactId>fmt-maven-plugin</artifactId>
                 <version>${fmt-maven-plugin.version}</version>
                 <configuration>
-                    <displayFiles>false</displayFiles>
+                    <displayFiles>true</displayFiles>
                     <verbose>true</verbose>
                     <filesNamePattern>.*\.java</filesNamePattern>
                     <additionalSourceDirectories/>
