@@ -42,7 +42,7 @@ function fn() {
     } else if (env == 'prod') {
         config.base_url = 'https://prod-java-api.prod.amidostacks.com/api/menu';
     } else if (env == 'system') {
-        config.base_url = java.lang.System.getenv('BASE_URL');
+        config.base_url = 'http://localhost:9001';
     }
 
     if (config.generate_auth0_token) {
