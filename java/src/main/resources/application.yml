@@ -23,7 +23,8 @@ springdoc:
   swagger-ui:
     disable-swagger-default-url: true
     display-operation-id: true
-    path: /swagger/index.html # TODO: Swagger keeps redirecting, it'd be good to stop it if possible
+    # TODO: Swagger keeps redirecting, it'd be good to stop it if possible
+    path: /swagger/index.html
   packagesToScan: com.amido.stacks.menu.api
   api-docs:
     groups:
