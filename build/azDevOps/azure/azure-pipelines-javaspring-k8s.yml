@@ -58,7 +58,7 @@ variables:
   # SelfConfig
   # If you haven't specified source_repo at cli runtime please ensure you replace it here
   # It is case sensitive for TFS based repos
-  self_repo: stacks-java
+  self_repo: stacks-java-cqrs
   self_remote_repo: "amido/$(self_repo)"
   self_repo_src: java
   self_post_deploy_test_src: "api-tests"
@@ -81,7 +81,7 @@ variables:
   # **`terraform_state_workspace: `**
   # avoid running anything past dev that is not on master
   # sample value: company-webapp
-  tf_state_key: "stacks-api-java"
+  tf_state_key: "java-api-cqrs"
   # Environment
   # Name of the resource group for DNS
   dns_zone_resource_group: "Stacks-Ancillary-Resources"
