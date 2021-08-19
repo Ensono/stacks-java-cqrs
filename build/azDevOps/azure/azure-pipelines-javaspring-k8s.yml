@@ -51,7 +51,7 @@ resources:
 variables:
   company: amido
   project: stacks
-  domain: java-api
+  domain: java-api-cqrs
   component: api
   role: backend
   #
