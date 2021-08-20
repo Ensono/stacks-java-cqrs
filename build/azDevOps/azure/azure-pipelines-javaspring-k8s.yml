@@ -51,7 +51,7 @@ resources:
 variables:
   company: amido
   project: stacks
-  domain: java-api
+  domain: java-api-cqrs
   component: api
   role: backend
   #
@@ -81,7 +81,7 @@ variables:
   # **`terraform_state_workspace: `**
   # avoid running anything past dev that is not on master
   # sample value: company-webapp
-  tf_state_key: "stacks-api-java"
+  tf_state_key: "java-api-cqrs"
   # Environment
   # Name of the resource group for DNS
   dns_zone_resource_group: "Stacks-Ancillary-Resources"
@@ -280,7 +280,7 @@ stages:
       - group: stacks-credentials-nonprod-kv
       - group: amido-stacks-java-api
       - name: dns_name
-        value: "$(Environment.ShortName)-java-api"
+        value: "$(Environment.ShortName)-java-api-cqrs"
       - name: core_resource_group
         value: "amido-stacks-nonprod-euw-core"
       - name: Environment.ShortName
@@ -503,7 +503,7 @@ stages:
       - group: stacks-credentials-prod-kv
       - group: amido-stacks-java-api
       - name: dns_name
-        value: "$(Environment.ShortName)-java-api"
+        value: "$(Environment.ShortName)-java-api-cqrs"
       - name: core_resource_group
         value: "amido-stacks-prod-euw-core"
       - name: Environment.ShortName
