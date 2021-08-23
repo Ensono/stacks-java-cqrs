@@ -400,7 +400,7 @@ stages:
           - name: resource_def_name
             value: "stacks-java-api"
           - name: namespace
-            value: "$(Environment.ShortName)-java-api"
+            value: "$(Environment.ShortName)-java-api-cqrs"
           - name: k8s_app_path
             value: "/api/menu"
           - name: dns_pointer
@@ -662,7 +662,7 @@ stages:
           - name: resource_def_name
             value: "stacks-java-api"
           - name: namespace
-            value: "$(Environment.ShortName)-java-api"
+            value: "$(Environment.ShortName)-java-api-cqrs"
           - name: k8s_app_path
             value: "/api/menu"
           - name: dns_pointer
