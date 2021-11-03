@@ -289,7 +289,7 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-codec-http</artifactId>
-            <version>4.1.65.Final</version>
+            <version>4.1.70.Final</version>
         </dependency>
 
         <dependency>
@@ -377,9 +377,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>com.amido.stacks.Application</mainClass>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
