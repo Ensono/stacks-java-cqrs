@@ -36,7 +36,7 @@ azure:
   cosmos:
     uri: https://localhost:8081
     database: Stacks
-    key: xxxxxx
+    key: ${COSMOSDB_KEY}
   application-insights:
     instrumentation-key: xxxxxx
     enabled: false
