@@ -20,6 +20,15 @@
     <name>stacks-api-cqrs</name>
     <description>Demo project for Java with CQRS</description>
 
+    <repositories>
+        <repository>
+            <snapshots />
+            <id>snapshots</id>
+            <name>default-maven-virtual</name>
+            <url>https://amidostacks.jfrog.io/artifactory/default-maven-virtual</url>
+        </repository>
+    </repositories>
+
     <properties>
         <java.version>11</java.version>
         <org.projectlombok.version>1.18.0</org.projectlombok.version>
