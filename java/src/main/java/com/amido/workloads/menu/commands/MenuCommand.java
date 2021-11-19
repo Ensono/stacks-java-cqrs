@@ -1,4 +1,4 @@
-package com.amido.stacks.menu.commands;
+package com.amido.workloads.menu.commands;
 
 import com.amido.stacks.core.cqrs.command.ApplicationCommand;
 import java.util.UUID;

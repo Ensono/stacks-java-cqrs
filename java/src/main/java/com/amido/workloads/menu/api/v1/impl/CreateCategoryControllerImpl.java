@@ -1,11 +1,11 @@
-package com.amido.stacks.menu.api.v1.impl;
+package com.amido.workloads.menu.api.v1.impl;
 
-import static com.amido.stacks.menu.mappers.RequestToCommandMapper.map;
+import static com.amido.workloads.menu.mappers.RequestToCommandMapper.map;
 
-import com.amido.stacks.menu.api.v1.CreateCategoryController;
-import com.amido.stacks.menu.api.v1.dto.request.CreateCategoryRequest;
-import com.amido.stacks.menu.api.v1.dto.response.ResourceCreatedResponse;
-import com.amido.stacks.menu.handlers.CreateCategoryHandler;
+import com.amido.workloads.menu.api.v1.CreateCategoryController;
+import com.amido.workloads.menu.api.v1.dto.request.CreateCategoryRequest;
+import com.amido.workloads.menu.api.v1.dto.response.ResourceCreatedResponse;
+import com.amido.workloads.menu.handlers.CreateCategoryHandler;
 import java.util.UUID;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;

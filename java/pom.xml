@@ -109,16 +109,6 @@
             <artifactId>stacks-core-cqrs</artifactId>
             <version>${stacks.core.cqrs.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.amido.stacks.modules</groupId>-->
-<!--            <artifactId>stacks-azure-servicebus</artifactId>-->
-<!--            <version>${stacks.azure-servicebus.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.amido.stacks.modules</groupId>-->
-<!--            <artifactId>stacks-core-messaging</artifactId>-->
-<!--            <version>${stacks.core.messaging.version}</version>-->
-<!--        </dependency>-->
 
         <!-- Spring dependencies -->
         <dependency>

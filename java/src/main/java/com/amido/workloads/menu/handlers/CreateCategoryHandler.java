@@ -1,14 +1,14 @@
-package com.amido.stacks.menu.handlers;
+package com.amido.workloads.menu.handlers;
 
-import com.amido.stacks.menu.commands.CreateCategoryCommand;
-import com.amido.stacks.menu.domain.Category;
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.events.CategoryCreatedEvent;
-import com.amido.stacks.menu.events.MenuEvent;
-import com.amido.stacks.menu.events.MenuUpdatedEvent;
-import com.amido.stacks.menu.exception.CategoryAlreadyExistsException;
-import com.amido.stacks.menu.repository.MenuRepository;
-import java.util.*;
+import com.amido.workloads.menu.commands.CreateCategoryCommand;
+import com.amido.workloads.menu.domain.Category;
+import com.amido.workloads.menu.domain.Menu;
+import com.amido.workloads.menu.exception.CategoryAlreadyExistsException;
+import com.amido.workloads.menu.repository.MenuRepository;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,12 +24,6 @@ public class CreateCategoryHandler extends MenuBaseCommandHandler<CreateCategory
     menu.setCategories(addCategory(menu, command));
     menuRepository.save(menu);
     return Optional.of(command.getCategoryId());
-  }
-
-  @Override
-  List<MenuEvent> raiseApplicationEvents(Menu menu, CreateCategoryCommand command) {
-    return Arrays.asList(
-        new MenuUpdatedEvent(command), new CategoryCreatedEvent(command, command.getCategoryId()));
   }
 
   List<Category> addCategory(Menu menu, CreateCategoryCommand command) {

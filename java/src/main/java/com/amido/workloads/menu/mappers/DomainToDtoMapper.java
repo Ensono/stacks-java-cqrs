@@ -1,12 +1,12 @@
-package com.amido.stacks.menu.mappers;
+package com.amido.workloads.menu.mappers;
 
-import com.amido.stacks.menu.api.v1.dto.response.CategoryDTO;
-import com.amido.stacks.menu.api.v1.dto.response.ItemDTO;
-import com.amido.stacks.menu.api.v1.dto.response.MenuDTO;
-import com.amido.stacks.menu.api.v1.dto.response.SearchMenuResultItem;
-import com.amido.stacks.menu.domain.Category;
-import com.amido.stacks.menu.domain.Item;
-import com.amido.stacks.menu.domain.Menu;
+import com.amido.workloads.menu.api.v1.dto.response.CategoryDTO;
+import com.amido.workloads.menu.api.v1.dto.response.ItemDTO;
+import com.amido.workloads.menu.api.v1.dto.response.MenuDTO;
+import com.amido.workloads.menu.api.v1.dto.response.SearchMenuResultItem;
+import com.amido.workloads.menu.domain.Category;
+import com.amido.workloads.menu.domain.Item;
+import com.amido.workloads.menu.domain.Menu;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;

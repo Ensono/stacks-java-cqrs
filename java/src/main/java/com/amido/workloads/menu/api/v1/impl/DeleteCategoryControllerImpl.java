@@ -1,10 +1,10 @@
-package com.amido.stacks.menu.api.v1.impl;
+package com.amido.workloads.menu.api.v1.impl;
 
 import static org.springframework.http.HttpStatus.OK;
 
-import com.amido.stacks.menu.api.v1.DeleteCategoryController;
-import com.amido.stacks.menu.commands.DeleteCategoryCommand;
-import com.amido.stacks.menu.handlers.DeleteCategoryHandler;
+import com.amido.workloads.menu.api.v1.DeleteCategoryController;
+import com.amido.workloads.menu.commands.DeleteCategoryCommand;
+import com.amido.workloads.menu.handlers.DeleteCategoryHandler;
 import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

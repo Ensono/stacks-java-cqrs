@@ -1,6 +1,6 @@
-package com.amido.stacks.menu.repository;
+package com.amido.workloads.menu.repository;
 
-import com.amido.stacks.menu.domain.Menu;
+import com.amido.workloads.menu.domain.Menu;
 import com.azure.spring.data.cosmos.repository.CosmosRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

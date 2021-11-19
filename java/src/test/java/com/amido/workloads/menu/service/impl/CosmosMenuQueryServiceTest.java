@@ -1,15 +1,15 @@
-package com.amido.stacks.menu.service.impl;
+package com.amido.workloads.menu.service.impl;
 
-import static com.amido.stacks.menu.domain.MenuHelper.createMenus;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.repository.MenuRepository;
-import com.amido.stacks.menu.service.MenuQueryService;
+import com.amido.workloads.menu.domain.Menu;
+import com.amido.workloads.menu.repository.MenuRepository;
+import com.amido.workloads.menu.service.MenuQueryService;
+import com.amido.workloads.menu.domain.MenuHelper;
 import java.util.List;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ public class CosmosMenuQueryServiceTest {
 
     Pageable pageable = mock(Pageable.class);
 
-    List<Menu> results = createMenus(2);
+    List<Menu> results = MenuHelper.createMenus(2);
     Page<Menu> page1 = new PageImpl<>(results, pageable, 2);
     Page<Menu> page2 = new PageImpl<>(results, pageable, 2);
 

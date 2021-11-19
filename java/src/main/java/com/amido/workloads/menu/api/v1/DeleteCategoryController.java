@@ -1,4 +1,4 @@
-package com.amido.stacks.menu.api.v1;
+package com.amido.workloads.menu.api.v1;
 
 import com.amido.stacks.core.api.dto.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;

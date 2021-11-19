@@ -1,20 +1,20 @@
-package com.amido.stacks.menu.api.v1.impl;
+package com.amido.workloads.menu.api.v1.impl;
 
-import static com.amido.stacks.menu.domain.CategoryHelper.createCategories;
-import static com.amido.stacks.menu.domain.CategoryHelper.createCategory;
-import static com.amido.stacks.menu.domain.ItemHelper.createItem;
-import static com.amido.stacks.menu.domain.MenuHelper.createMenu;
-import static com.amido.stacks.util.TestHelper.getBaseURL;
-import static com.amido.stacks.util.TestHelper.getRequestHttpEntity;
+import static com.amido.workloads.menu.domain.CategoryHelper.createCategories;
+import static com.amido.workloads.menu.domain.CategoryHelper.createCategory;
+import static com.amido.workloads.menu.domain.ItemHelper.createItem;
+import static com.amido.workloads.menu.domain.MenuHelper.createMenu;
+import static com.amido.workloads.util.TestHelper.getBaseURL;
+import static com.amido.workloads.util.TestHelper.getRequestHttpEntity;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.Mockito.*;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
 import com.amido.stacks.core.api.dto.ErrorResponse;
-import com.amido.stacks.menu.domain.Category;
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.repository.MenuRepository;
+import com.amido.workloads.menu.domain.Category;
+import com.amido.workloads.menu.domain.Menu;
+import com.amido.workloads.menu.repository.MenuRepository;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import java.util.List;

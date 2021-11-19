@@ -1,4 +1,4 @@
-package com.amido.stacks.menu.exception;
+package com.amido.workloads.menu.exception;
 
 import com.amido.stacks.core.api.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;

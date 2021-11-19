@@ -1,9 +1,9 @@
-package com.amido.stacks.actuator;
+package com.amido.workloads.actuator;
 
-import static com.amido.stacks.util.TestHelper.getBaseURL;
+import static com.amido.workloads.util.TestHelper.getBaseURL;
 import static org.assertj.core.api.BDDAssertions.then;
 
-import com.amido.stacks.menu.repository.MenuRepository;
+import com.amido.workloads.menu.repository.MenuRepository;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import java.util.Map;

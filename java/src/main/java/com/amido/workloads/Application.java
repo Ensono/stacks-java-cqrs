@@ -1,4 +1,4 @@
-package com.amido.stacks;
+package com.amido.workloads;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @PropertySource("classpath:auth.properties")
-@ComponentScan(basePackages = "com.amido.stacks")
+@ComponentScan(basePackages = {"com.amido.workloads", "com.amido.stacks"})
 public class Application {
   public static void main(String[] args) {
     SpringApplication.run(Application.class, args);

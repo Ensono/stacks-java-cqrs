@@ -1,16 +1,11 @@
-package com.amido.stacks.menu.handlers;
+package com.amido.workloads.menu.handlers;
 
-import com.amido.stacks.menu.commands.UpdateCategoryCommand;
-import com.amido.stacks.menu.domain.Category;
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.events.CategoryUpdatedEvent;
-import com.amido.stacks.menu.events.MenuEvent;
-import com.amido.stacks.menu.events.MenuUpdatedEvent;
-import com.amido.stacks.menu.exception.CategoryAlreadyExistsException;
-import com.amido.stacks.menu.exception.CategoryDoesNotExistException;
-import com.amido.stacks.menu.repository.MenuRepository;
-import java.util.Arrays;
-import java.util.List;
+import com.amido.workloads.menu.commands.UpdateCategoryCommand;
+import com.amido.workloads.menu.domain.Category;
+import com.amido.workloads.menu.domain.Menu;
+import com.amido.workloads.menu.exception.CategoryAlreadyExistsException;
+import com.amido.workloads.menu.exception.CategoryDoesNotExistException;
+import com.amido.workloads.menu.repository.MenuRepository;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
@@ -58,12 +53,6 @@ public class UpdateCategoryHandler extends MenuBaseCommandHandler<UpdateCategory
             });
 
     return category;
-  }
-
-  @Override
-  List<MenuEvent> raiseApplicationEvents(Menu menu, UpdateCategoryCommand command) {
-    return Arrays.asList(
-        new MenuUpdatedEvent(command), new CategoryUpdatedEvent(command, command.getCategoryId()));
   }
 
   Category getCategory(Menu menu, UpdateCategoryCommand command) {

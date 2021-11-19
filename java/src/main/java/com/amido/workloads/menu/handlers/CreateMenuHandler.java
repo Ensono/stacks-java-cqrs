@@ -1,10 +1,10 @@
-package com.amido.stacks.menu.handlers;
+package com.amido.workloads.menu.handlers;
 
 import com.amido.stacks.core.cqrs.handler.CommandHandler;
-import com.amido.stacks.menu.commands.CreateMenuCommand;
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.exception.MenuAlreadyExistsException;
-import com.amido.stacks.menu.repository.MenuRepository;
+import com.amido.workloads.menu.commands.CreateMenuCommand;
+import com.amido.workloads.menu.domain.Menu;
+import com.amido.workloads.menu.exception.MenuAlreadyExistsException;
+import com.amido.workloads.menu.repository.MenuRepository;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;

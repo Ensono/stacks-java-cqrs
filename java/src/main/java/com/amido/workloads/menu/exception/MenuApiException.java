@@ -1,7 +1,7 @@
-package com.amido.stacks.menu.exception;
+package com.amido.workloads.menu.exception;
 
 import com.amido.stacks.core.api.exception.ApiException;
-import com.amido.stacks.menu.commands.MenuCommand;
+import com.amido.workloads.menu.commands.MenuCommand;
 
 public class MenuApiException extends ApiException {
 

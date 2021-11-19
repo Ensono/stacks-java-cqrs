@@ -1,7 +1,17 @@
-package com.amido.stacks.menu.mappers;
+package com.amido.workloads.menu.mappers;
 
-import com.amido.stacks.menu.api.v1.dto.request.*;
-import com.amido.stacks.menu.commands.*;
+import com.amido.workloads.menu.api.v1.dto.request.CreateCategoryRequest;
+import com.amido.workloads.menu.api.v1.dto.request.CreateItemRequest;
+import com.amido.workloads.menu.api.v1.dto.request.CreateMenuRequest;
+import com.amido.workloads.menu.api.v1.dto.request.UpdateCategoryRequest;
+import com.amido.workloads.menu.api.v1.dto.request.UpdateItemRequest;
+import com.amido.workloads.menu.api.v1.dto.request.UpdateMenuRequest;
+import com.amido.workloads.menu.commands.CreateCategoryCommand;
+import com.amido.workloads.menu.commands.CreateItemCommand;
+import com.amido.workloads.menu.commands.CreateMenuCommand;
+import com.amido.workloads.menu.commands.UpdateCategoryCommand;
+import com.amido.workloads.menu.commands.UpdateItemCommand;
+import com.amido.workloads.menu.commands.UpdateMenuCommand;
 import java.util.UUID;
 
 public class RequestToCommandMapper {

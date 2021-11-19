@@ -1,14 +1,12 @@
-package com.amido.stacks.menu.handlers;
+package com.amido.workloads.menu.handlers;
 
 import com.amido.stacks.core.cqrs.handler.CommandHandler;
-import com.amido.stacks.menu.commands.MenuCommand;
-import com.amido.stacks.menu.domain.Category;
-import com.amido.stacks.menu.domain.Item;
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.events.MenuEvent;
-import com.amido.stacks.menu.exception.MenuNotFoundException;
-import com.amido.stacks.menu.repository.MenuRepository;
-import java.util.List;
+import com.amido.workloads.menu.commands.MenuCommand;
+import com.amido.workloads.menu.domain.Category;
+import com.amido.workloads.menu.domain.Item;
+import com.amido.workloads.menu.domain.Menu;
+import com.amido.workloads.menu.exception.MenuNotFoundException;
+import com.amido.workloads.menu.repository.MenuRepository;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,8 +30,6 @@ public abstract class MenuBaseCommandHandler<T extends MenuCommand> implements C
   }
 
   abstract Optional<UUID> handleCommand(Menu menu, T command);
-
-  abstract List<MenuEvent> raiseApplicationEvents(Menu menu, T command);
 
   /**
    * find a category for the id provided

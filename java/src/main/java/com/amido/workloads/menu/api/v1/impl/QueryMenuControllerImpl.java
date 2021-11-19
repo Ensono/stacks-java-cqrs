@@ -1,16 +1,16 @@
-package com.amido.stacks.menu.api.v1.impl;
+package com.amido.workloads.menu.api.v1.impl;
 
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
-import com.amido.stacks.menu.api.v1.QueryMenuController;
-import com.amido.stacks.menu.api.v1.dto.response.MenuDTO;
-import com.amido.stacks.menu.api.v1.dto.response.SearchMenuResult;
-import com.amido.stacks.menu.commands.MenuCommand;
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.exception.MenuNotFoundException;
-import com.amido.stacks.menu.mappers.DomainToDtoMapper;
-import com.amido.stacks.menu.service.MenuQueryService;
+import com.amido.workloads.menu.api.v1.QueryMenuController;
+import com.amido.workloads.menu.api.v1.dto.response.MenuDTO;
+import com.amido.workloads.menu.api.v1.dto.response.SearchMenuResult;
+import com.amido.workloads.menu.commands.MenuCommand;
+import com.amido.workloads.menu.domain.Menu;
+import com.amido.workloads.menu.exception.MenuNotFoundException;
+import com.amido.workloads.menu.mappers.DomainToDtoMapper;
+import com.amido.workloads.menu.service.MenuQueryService;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;

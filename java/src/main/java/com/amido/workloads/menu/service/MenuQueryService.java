@@ -1,6 +1,6 @@
-package com.amido.stacks.menu.service;
+package com.amido.workloads.menu.service;
 
-import com.amido.stacks.menu.domain.Menu;
+import com.amido.workloads.menu.domain.Menu;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

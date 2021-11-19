@@ -1,8 +1,8 @@
-package com.amido.stacks.menu.api.v1;
+package com.amido.workloads.menu.api.v1;
 
 import com.amido.stacks.core.api.dto.ErrorResponse;
-import com.amido.stacks.menu.api.v1.dto.response.MenuDTO;
-import com.amido.stacks.menu.api.v1.dto.response.SearchMenuResult;
+import com.amido.workloads.menu.api.v1.dto.response.MenuDTO;
+import com.amido.workloads.menu.api.v1.dto.response.SearchMenuResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

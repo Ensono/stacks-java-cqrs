@@ -1,17 +1,17 @@
-package com.amido.stacks.menu.handlers;
+package com.amido.workloads.menu.handlers;
 
-import com.amido.stacks.menu.commands.DeleteItemCommand;
-import com.amido.stacks.menu.domain.Category;
-import com.amido.stacks.menu.domain.Item;
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.events.CategoryUpdatedEvent;
-import com.amido.stacks.menu.events.ItemDeletedEvent;
-import com.amido.stacks.menu.events.MenuEvent;
-import com.amido.stacks.menu.events.MenuUpdatedEvent;
-import com.amido.stacks.menu.exception.CategoryDoesNotExistException;
-import com.amido.stacks.menu.exception.ItemDoesNotExistsException;
-import com.amido.stacks.menu.repository.MenuRepository;
-import java.util.*;
+import com.amido.workloads.menu.commands.DeleteItemCommand;
+import com.amido.workloads.menu.domain.Category;
+import com.amido.workloads.menu.domain.Item;
+import com.amido.workloads.menu.domain.Menu;
+import com.amido.workloads.menu.exception.CategoryDoesNotExistException;
+import com.amido.workloads.menu.exception.ItemDoesNotExistsException;
+import com.amido.workloads.menu.repository.MenuRepository;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
@@ -37,15 +37,6 @@ public class DeleteItemHandler extends MenuBaseCommandHandler<DeleteItemCommand>
     menuRepository.save(menu.addOrUpdateCategory(category));
 
     return Optional.empty();
-  }
-
-  @Override
-  List<MenuEvent> raiseApplicationEvents(Menu menu, DeleteItemCommand command) {
-
-    return Arrays.asList(
-        new ItemDeletedEvent(command, command.getCategoryId(), command.getItemId()),
-        new CategoryUpdatedEvent(command, command.getCategoryId()),
-        new MenuUpdatedEvent(command));
   }
 
   Category getCategory(Menu menu, DeleteItemCommand command) {

@@ -1,12 +1,12 @@
-package com.amido.stacks.menu.api.v2.impl;
+package com.amido.workloads.menu.api.v2.impl;
 
-import com.amido.stacks.menu.api.v1.dto.response.MenuDTO;
-import com.amido.stacks.menu.api.v2.QueryMenuControllerV2;
-import com.amido.stacks.menu.commands.MenuCommand;
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.exception.MenuNotFoundException;
-import com.amido.stacks.menu.mappers.DomainToDtoMapper;
-import com.amido.stacks.menu.service.MenuQueryService;
+import com.amido.workloads.menu.api.v1.dto.response.MenuDTO;
+import com.amido.workloads.menu.domain.Menu;
+import com.amido.workloads.menu.api.v2.QueryMenuControllerV2;
+import com.amido.workloads.menu.commands.MenuCommand;
+import com.amido.workloads.menu.exception.MenuNotFoundException;
+import com.amido.workloads.menu.mappers.DomainToDtoMapper;
+import com.amido.workloads.menu.service.MenuQueryService;
 import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

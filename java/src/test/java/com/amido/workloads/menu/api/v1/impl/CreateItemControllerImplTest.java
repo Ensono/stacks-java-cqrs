@@ -1,8 +1,6 @@
-package com.amido.stacks.menu.api.v1.impl;
+package com.amido.workloads.menu.api.v1.impl;
 
-import static com.amido.stacks.menu.domain.CategoryHelper.createCategory;
-import static com.amido.stacks.menu.domain.MenuHelper.createMenu;
-import static com.amido.stacks.util.TestHelper.getBaseURL;
+import static com.amido.workloads.util.TestHelper.getBaseURL;
 import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
@@ -10,12 +8,14 @@ import static org.mockito.Mockito.*;
 import static org.springframework.http.HttpStatus.*;
 
 import com.amido.stacks.core.api.dto.ErrorResponse;
-import com.amido.stacks.menu.api.v1.dto.request.CreateItemRequest;
-import com.amido.stacks.menu.api.v1.dto.response.ResourceCreatedResponse;
-import com.amido.stacks.menu.domain.Category;
-import com.amido.stacks.menu.domain.Item;
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.repository.MenuRepository;
+import com.amido.workloads.menu.api.v1.dto.request.CreateItemRequest;
+import com.amido.workloads.menu.api.v1.dto.response.ResourceCreatedResponse;
+import com.amido.workloads.menu.domain.Category;
+import com.amido.workloads.menu.domain.Item;
+import com.amido.workloads.menu.domain.Menu;
+import com.amido.workloads.menu.repository.MenuRepository;
+import com.amido.workloads.menu.domain.CategoryHelper;
+import com.amido.workloads.menu.domain.MenuHelper;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ class CreateItemControllerImplTest {
   @Test
   void testAddItem() {
     // Given
-    Menu menu = createMenu(1);
+    Menu menu = MenuHelper.createMenu(1);
     Category category =
         new Category(randomUUID().toString(), "cat name", "cat description", new ArrayList<>());
     menu.addOrUpdateCategory(category);
@@ -118,7 +118,7 @@ class CreateItemControllerImplTest {
   void testAddItemWhenInvalidCategoryIdGiven() {
 
     // Given
-    Menu menu = createMenu(1);
+    Menu menu = MenuHelper.createMenu(1);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     CreateItemRequest request =
@@ -142,7 +142,7 @@ class CreateItemControllerImplTest {
   @Test
   void testCannotAddItemWhichAlreadyExists() {
     // Given
-    Menu menu = createMenu(1);
+    Menu menu = MenuHelper.createMenu(1);
     Item item = new Item(randomUUID().toString(), "item name", "item description", 5.99d, true);
     Category category =
         new Category(
@@ -172,8 +172,8 @@ class CreateItemControllerImplTest {
   @Test
   void testNoItemNameReturnsBadRequest() {
     // Given
-    Menu menu = createMenu(1);
-    Category category = createCategory(1);
+    Menu menu = MenuHelper.createMenu(1);
+    Category category = CategoryHelper.createCategory(1);
     menu.addOrUpdateCategory(category);
 
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
@@ -197,8 +197,8 @@ class CreateItemControllerImplTest {
   @Test
   void testNoItemDescriptionReturnsBadRequest() {
     // Given
-    Menu menu = createMenu(1);
-    Category category = createCategory(1);
+    Menu menu = MenuHelper.createMenu(1);
+    Category category = CategoryHelper.createCategory(1);
     menu.addOrUpdateCategory(category);
 
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
@@ -222,8 +222,8 @@ class CreateItemControllerImplTest {
   @Test
   void testInvalidPriceDescriptionReturnsBadRequest() {
     // Given
-    Menu menu = createMenu(1);
-    Category category = createCategory(1);
+    Menu menu = MenuHelper.createMenu(1);
+    Category category = CategoryHelper.createCategory(1);
     menu.addOrUpdateCategory(category);
 
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));

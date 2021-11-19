@@ -1,4 +1,4 @@
-package com.amido.stacks.menu.domain;
+package com.amido.workloads.menu.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,16 +1,16 @@
-package com.amido.stacks.menu.api.v2.impl;
+package com.amido.workloads.menu.api.v2.impl;
 
-import static com.amido.stacks.menu.domain.MenuHelper.createMenu;
-import static com.amido.stacks.util.TestHelper.getBaseURL;
+import static com.amido.workloads.util.TestHelper.getBaseURL;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
-import com.amido.stacks.menu.api.v1.dto.response.MenuDTO;
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.mappers.DomainToDtoMapper;
-import com.amido.stacks.menu.repository.MenuRepository;
+import com.amido.workloads.menu.api.v1.dto.response.MenuDTO;
+import com.amido.workloads.menu.domain.Menu;
+import com.amido.workloads.menu.mappers.DomainToDtoMapper;
+import com.amido.workloads.menu.repository.MenuRepository;
+import com.amido.workloads.menu.domain.MenuHelper;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import java.util.Optional;
@@ -43,7 +43,7 @@ class QueryMenuControllerImplV2Test {
   @Test
   void getMenuById() {
     // Given
-    Menu menu = createMenu(0);
+    Menu menu = MenuHelper.createMenu(0);
     MenuDTO expectedResponse = DomainToDtoMapper.toMenuDto(menu);
 
     when(menuRepository.findById(menu.getId())).thenReturn(Optional.of(menu));
@@ -60,7 +60,7 @@ class QueryMenuControllerImplV2Test {
   @Test
   void getMenuByInvalidId() {
     // Given
-    Menu menu = createMenu(0);
+    Menu menu = MenuHelper.createMenu(0);
 
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 

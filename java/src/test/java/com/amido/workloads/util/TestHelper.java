@@ -1,4 +1,4 @@
-package com.amido.stacks.util;
+package com.amido.workloads.util;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

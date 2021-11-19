@@ -1,4 +1,4 @@
-package com.amido.stacks.menu.domain;
+package com.amido.workloads.menu.domain;
 
 import java.util.ArrayList;
 import java.util.List;

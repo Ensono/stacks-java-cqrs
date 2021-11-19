@@ -1,12 +1,8 @@
-package com.amido.stacks.menu.handlers;
+package com.amido.workloads.menu.handlers;
 
-import com.amido.stacks.menu.commands.UpdateMenuCommand;
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.events.MenuEvent;
-import com.amido.stacks.menu.events.MenuUpdatedEvent;
-import com.amido.stacks.menu.repository.MenuRepository;
-import java.util.Collections;
-import java.util.List;
+import com.amido.workloads.menu.commands.UpdateMenuCommand;
+import com.amido.workloads.menu.domain.Menu;
+import com.amido.workloads.menu.repository.MenuRepository;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
@@ -27,8 +23,4 @@ public class UpdateMenuHandler extends MenuBaseCommandHandler<UpdateMenuCommand>
     return Optional.of(command.getMenuId());
   }
 
-  @Override
-  List<MenuEvent> raiseApplicationEvents(Menu menu, UpdateMenuCommand command) {
-    return Collections.singletonList(new MenuUpdatedEvent(command));
-  }
 }

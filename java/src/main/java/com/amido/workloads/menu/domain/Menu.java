@@ -1,4 +1,4 @@
-package com.amido.stacks.menu.domain;
+package com.amido.workloads.menu.domain;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;

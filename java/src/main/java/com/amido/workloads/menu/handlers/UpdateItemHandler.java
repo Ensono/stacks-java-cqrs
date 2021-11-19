@@ -1,19 +1,13 @@
-package com.amido.stacks.menu.handlers;
+package com.amido.workloads.menu.handlers;
 
-import com.amido.stacks.menu.commands.UpdateItemCommand;
-import com.amido.stacks.menu.domain.Category;
-import com.amido.stacks.menu.domain.Item;
-import com.amido.stacks.menu.domain.Menu;
-import com.amido.stacks.menu.events.CategoryUpdatedEvent;
-import com.amido.stacks.menu.events.MenuEvent;
-import com.amido.stacks.menu.events.MenuItemUpdatedEvent;
-import com.amido.stacks.menu.events.MenuUpdatedEvent;
-import com.amido.stacks.menu.exception.CategoryDoesNotExistException;
-import com.amido.stacks.menu.exception.ItemAlreadyExistsException;
-import com.amido.stacks.menu.exception.ItemDoesNotExistsException;
-import com.amido.stacks.menu.repository.MenuRepository;
-import java.util.Arrays;
-import java.util.List;
+import com.amido.workloads.menu.commands.UpdateItemCommand;
+import com.amido.workloads.menu.domain.Category;
+import com.amido.workloads.menu.domain.Item;
+import com.amido.workloads.menu.domain.Menu;
+import com.amido.workloads.menu.exception.CategoryDoesNotExistException;
+import com.amido.workloads.menu.exception.ItemAlreadyExistsException;
+import com.amido.workloads.menu.exception.ItemDoesNotExistsException;
+import com.amido.workloads.menu.repository.MenuRepository;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
@@ -68,14 +62,6 @@ public class UpdateItemHandler extends MenuBaseCommandHandler<UpdateItemCommand>
               }
             });
     return item;
-  }
-
-  @Override
-  List<MenuEvent> raiseApplicationEvents(Menu menu, UpdateItemCommand command) {
-    return Arrays.asList(
-        new MenuItemUpdatedEvent(command, command.getCategoryId(), command.getItemId()),
-        new CategoryUpdatedEvent(command, command.getCategoryId()),
-        new MenuUpdatedEvent(command));
   }
 
   Category getCategory(Menu menu, UpdateItemCommand command) {

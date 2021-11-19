@@ -1,4 +1,4 @@
-package com.amido.stacks.menu.api.v1.dto.response;
+package com.amido.workloads.menu.api.v1.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

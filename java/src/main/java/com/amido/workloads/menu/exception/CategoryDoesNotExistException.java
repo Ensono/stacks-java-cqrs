@@ -1,6 +1,6 @@
-package com.amido.stacks.menu.exception;
+package com.amido.workloads.menu.exception;
 
-import com.amido.stacks.menu.commands.MenuCommand;
+import com.amido.workloads.menu.commands.MenuCommand;
 import java.util.UUID;
 
 public class CategoryDoesNotExistException extends MenuApiException {

@@ -1,4 +1,4 @@
-package com.amido.stacks.menu.commands;
+package com.amido.workloads.menu.commands;
 
 import java.util.UUID;
 import lombok.Getter;
