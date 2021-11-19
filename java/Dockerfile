@@ -9,9 +9,7 @@ COPY mvnw .m2* /root/.m2/repository/
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
-COPY sample-cqrs/src src
-
-RUN ls -la /root/.m2/repository
+COPY src src
 
 RUN ./mvnw dependency:go-offline \
 	&& ./mvnw process-resources \

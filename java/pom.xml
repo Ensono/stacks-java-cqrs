@@ -2,10 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
-    <modules>
-        <module>sample-cqrs</module>
-    </modules>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -13,29 +10,28 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.amido</groupId>
+    <groupId>com.amido.stacks.workloads</groupId>
     <artifactId>stacks-api-cqrs</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-
     <name>stacks-api-cqrs</name>
     <description>Demo project for Java with CQRS</description>
 
-    <repositories>
-        <repository>
-            <snapshots />
-            <id>snapshots</id>
-            <name>default-maven-virtual</name>
-            <url>https://amidostacks.jfrog.io/artifactory/default-maven-virtual</url>
-        </repository>
-    </repositories>
-
     <properties>
+        <!-- Stacks versions -->
+        <stacks.core.commons.version>0.0.24-main</stacks.core.commons.version>
+        <stacks.core.api.version>0.0.18-main</stacks.core.api.version>
+        <stacks.azure.cosmos.version>0.0.16-main</stacks.azure.cosmos.version>
+        <stacks.core.cqrs.version>0.0.22-main</stacks.core.cqrs.version>
+        <stacks.azure-servicebus.version>0.0.16-main</stacks.azure-servicebus.version>
+        <stacks.core.messaging.version>0.0.78-main</stacks.core.messaging.version>
+
         <java.version>11</java.version>
         <org.projectlombok.version>1.18.0</org.projectlombok.version>
         <org.springdoc-openapi.version>1.5.9</org.springdoc-openapi.version>
         <applicationinsights.version>2.6.3</applicationinsights.version>
         <cosmosdb.version>3.6.0</cosmosdb.version>
         <azure.springboot.version>3.6.0</azure.springboot.version>
+        <azure.messaging-servicebus.version>7.3.0</azure.messaging-servicebus.version>
         <jackson.version>2.12.3</jackson.version>
         <mockito.version>3.11.2</mockito.version>
         <lombok.version>1.18.20</lombok.version>
@@ -57,16 +53,27 @@
         <spotbugs-maven-plugin.version>4.2.3</spotbugs-maven-plugin.version>
         <spotbugs.version>4.2.3</spotbugs.version>
 
-        <pact.version>3.5.24</pact.version>
-
         <!-- Set 'pact.broker.url' and 'pact.broker.token' -->
-        <pact.broker.url></pact.broker.url>
-        <pact.broker.token></pact.broker.token>
-        <pact.api.name>JavaMenuAPI</pact.api.name>
-        <pact.api.protocol>http</pact.api.protocol>
-        <pact.api.host>localhost</pact.api.host>
-        <pact.api.port>9000</pact.api.port>
+        <!--        <pact.broker.url></pact.broker.url>-->
+        <!--        <pact.broker.token></pact.broker.token>-->
+        <!--        <pact.api.name>JavaMenuAPI</pact.api.name>-->
+        <!--        <pact.api.protocol>http</pact.api.protocol>-->
+        <!--        <pact.api.host>localhost</pact.api.host>-->
+        <!--        <pact.api.port>9000</pact.api.port>-->
+        <!--        <pact.version>3.5.24</pact.version>-->
+        <pact.provider.spring.version>4.0.10</pact.provider.spring.version>
+        <pact.consumer.version>4.2.7</pact.consumer.version>
+
     </properties>
+
+    <repositories>
+        <repository>
+            <snapshots />
+            <id>snapshots</id>
+            <name>default-maven-virtual</name>
+            <url>https://amidostacks.jfrog.io/artifactory/default-maven-virtual</url>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -81,234 +88,63 @@
 
     <dependencies>
 
+        <!-- STACKS dependencies -->
+        <dependency>
+            <groupId>com.amido.stacks.modules</groupId>
+            <artifactId>stacks-core-commons</artifactId>
+            <version>${stacks.core.commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amido.stacks.modules</groupId>
+            <artifactId>stacks-azure-cosmos</artifactId>
+            <version>${stacks.azure.cosmos.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amido.stacks.modules</groupId>
+            <artifactId>stacks-core-api</artifactId>
+            <version>${stacks.core.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amido.stacks.modules</groupId>
+            <artifactId>stacks-core-cqrs</artifactId>
+            <version>${stacks.core.cqrs.version}</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.amido.stacks.modules</groupId>-->
+<!--            <artifactId>stacks-azure-servicebus</artifactId>-->
+<!--            <version>${stacks.azure-servicebus.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.amido.stacks.modules</groupId>-->
+<!--            <artifactId>stacks-core-messaging</artifactId>-->
+<!--            <version>${stacks.core.messaging.version}</version>-->
+<!--        </dependency>-->
+
+        <!-- Spring dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>${org.springdoc-openapi.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-data-rest</artifactId>
-            <version>${org.springdoc-openapi.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>net.minidev</groupId>
-                    <artifactId>json-smart</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.azure.spring</groupId>
-            <artifactId>azure-spring-boot</artifactId>
-            <version>${azure.springboot.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>net.minidev</groupId>
-                    <artifactId>json-smart</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.azure.spring</groupId>
-            <artifactId>azure-spring-boot-starter-cosmos</artifactId>
-            <version>${cosmosdb.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>net.minidev</groupId>
-                    <artifactId>json-smart</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-codec-http</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>applicationinsights-spring-boot-starter</artifactId>
-            <version>${applicationinsights.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>applicationinsights-logging-logback</artifactId>
-            <version>${applicationinsights.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.projectreactor.netty</groupId>
-            <artifactId>reactor-netty-core</artifactId>
-            <version>${io-projectreactor-netty.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-codec-http</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!--
-        <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-keyvault-secrets-spring-boot-starter</artifactId>
-            <version>${azure.springboot.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        -->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.vaadin.external.google</groupId>
-                    <artifactId>android-json</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit-jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-            <version>${hamcrest.version}</version>
-            <scope>test</scope>
-        </dependency>
-
+        <!-- Other dependencies -->
+        <!-- TODO: to be moved to a common workloads parent -->
         <dependency>
             <groupId>nl.jqno.equalsverifier</groupId>
             <artifactId>equalsverifier</artifactId>
             <version>${equals-verifier.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Registering the Auth0 Dependency-->
-        <dependency>
-            <groupId>com.auth0</groupId>
-            <artifactId>auth0-spring-security-api</artifactId>
-            <version>${auth0-spring-security-api.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>au.com.dius</groupId>
             <artifactId>pact-jvm-provider-spring</artifactId>
-            <version>4.0.10</version>
+            <version>${pact.provider.spring.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>au.com.dius.pact</groupId>
             <artifactId>consumer</artifactId>
-            <version>4.2.7</version>
+            <version>${pact.consumer.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.pitest</groupId>
-            <artifactId>pitest-parent</artifactId>
-            <version>${pitest.version}</version>
-            <type>pom</type>
-        </dependency>
-
-        <dependency>
-            <groupId>com.nimbusds</groupId>
-            <artifactId>oauth2-oidc-sdk</artifactId>
-            <version>9.9</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>net.minidev</groupId>
-            <artifactId>json-smart</artifactId>
-            <version>2.4.7</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-codec-http</artifactId>
-            <version>4.1.65.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beust</groupId>
-            <artifactId>jcommander</artifactId>
-            <version>1.81</version>
         </dependency>
 
     </dependencies>
@@ -323,40 +159,9 @@
         </plugins>
     </reporting>
 
-    <profiles>
-        <profile>
-            <id>owasp-dependency-check</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.owasp</groupId>
-                        <artifactId>dependency-check-maven</artifactId>
-                        <version>${owasp-dependency-check-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>test</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-                <property>
-                    <name>spring.profiles.active</name>
-                    <value>test</value>
-                </property>
-            </activation>
-        </profile>
-    </profiles>
-
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -374,6 +179,7 @@
                     <forceJavacCompilerUse>true</forceJavacCompilerUse>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -387,10 +193,12 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -436,36 +244,38 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>au.com.dius.pact.provider</groupId>
-                <artifactId>maven</artifactId>
-                <version>4.2.7</version>
-                <configuration>
-                    <pactBrokerUrl>${pact.broker.url}</pactBrokerUrl>
-                    <pactBrokerToken>${pact.broker.token}</pactBrokerToken>
-                    <systemPropertyVariables>
-                        <pact.verifier.publishResults>true</pact.verifier.publishResults>
-                    </systemPropertyVariables>
 
-                    <serviceProviders>
-                        <serviceProvider>
-                            <name>${pact.api.name}</name>
-                            <protocol>${pact.api.protocol}</protocol>
-                            <host>${pact.api.host}</host>
-                            <port>${pact.api.port}</port>
-                        </serviceProvider>
-                    </serviceProviders>
+<!--            <plugin>-->
+<!--                <groupId>au.com.dius.pact.provider</groupId>-->
+<!--                <artifactId>maven</artifactId>-->
+<!--                <version>4.2.7</version>-->
+<!--                <configuration>-->
+<!--                    <pactBrokerUrl>${pact.broker.url}</pactBrokerUrl>-->
+<!--                    <pactBrokerToken>${pact.broker.token}</pactBrokerToken>-->
+<!--                    <systemPropertyVariables>-->
+<!--                        <pact.verifier.publishResults>true</pact.verifier.publishResults>-->
+<!--                    </systemPropertyVariables>-->
 
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+<!--                    <serviceProviders>-->
+<!--                        <serviceProvider>-->
+<!--                            <name>${pact.api.name}</name>-->
+<!--                            <protocol>${pact.api.protocol}</protocol>-->
+<!--                            <host>${pact.api.host}</host>-->
+<!--                            <port>${pact.api.port}</port>-->
+<!--                        </serviceProvider>-->
+<!--                    </serviceProviders>-->
+
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>integration-test</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>verify</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+
             <plugin>
                 <groupId>com.coveo</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
@@ -480,6 +290,7 @@
                     <style>google</style>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -506,6 +317,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
@@ -519,6 +331,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
@@ -554,6 +367,57 @@
                 </configuration>
             </plugin>
         </plugins>
+
     </build>
+
+    <profiles>
+
+        <profile>
+            <id>owasp-dependency-check</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <version>${owasp-dependency-check-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>test</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>spring.profiles.active</name>
+                    <value>test</value>
+                </property>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>local</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources/local</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+
+    </profiles>
+
 
 </project>
