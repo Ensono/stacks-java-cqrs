@@ -62,5 +62,5 @@ public class RequestToCommandMapper {
         r.getAvailable());
   }
 
-  private RequestToCommandMapper(){}
+  private RequestToCommandMapper() {}
 }

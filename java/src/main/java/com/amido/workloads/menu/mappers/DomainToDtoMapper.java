@@ -54,5 +54,5 @@ public class DomainToDtoMapper {
         menu.getEnabled());
   }
 
-  private DomainToDtoMapper(){}
+  private DomainToDtoMapper() {}
 }
