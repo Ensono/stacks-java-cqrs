@@ -61,4 +61,6 @@ public class RequestToCommandMapper {
         r.getPrice(),
         r.getAvailable());
   }
+
+  private RequestToCommandMapper(){}
 }

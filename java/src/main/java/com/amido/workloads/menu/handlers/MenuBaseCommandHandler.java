@@ -14,7 +14,7 @@ public abstract class MenuBaseCommandHandler<T extends MenuCommand> implements C
 
   protected MenuRepository menuRepository;
 
-  public MenuBaseCommandHandler(MenuRepository menuRepository) {
+  protected MenuBaseCommandHandler(MenuRepository menuRepository) {
     this.menuRepository = menuRepository;
   }
 
