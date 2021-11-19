@@ -24,5 +24,4 @@ public class DeleteMenuHandler extends MenuBaseCommandHandler<DeleteMenuCommand>
     menuRepository.delete(menu);
     return Optional.empty();
   }
-
 }

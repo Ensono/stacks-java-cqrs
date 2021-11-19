@@ -22,5 +22,4 @@ public class UpdateMenuHandler extends MenuBaseCommandHandler<UpdateMenuCommand>
     menuRepository.save(menu);
     return Optional.of(command.getMenuId());
   }
-
 }

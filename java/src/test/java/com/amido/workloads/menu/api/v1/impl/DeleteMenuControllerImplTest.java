@@ -9,8 +9,8 @@ import static org.springframework.http.HttpStatus.OK;
 
 import com.amido.stacks.core.api.dto.ErrorResponse;
 import com.amido.workloads.menu.domain.Menu;
-import com.amido.workloads.menu.repository.MenuRepository;
 import com.amido.workloads.menu.domain.MenuHelper;
+import com.amido.workloads.menu.repository.MenuRepository;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import java.util.Optional;

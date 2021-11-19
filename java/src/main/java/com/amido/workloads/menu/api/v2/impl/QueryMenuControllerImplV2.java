@@ -1,9 +1,9 @@
 package com.amido.workloads.menu.api.v2.impl;
 
 import com.amido.workloads.menu.api.v1.dto.response.MenuDTO;
-import com.amido.workloads.menu.domain.Menu;
 import com.amido.workloads.menu.api.v2.QueryMenuControllerV2;
 import com.amido.workloads.menu.commands.MenuCommand;
+import com.amido.workloads.menu.domain.Menu;
 import com.amido.workloads.menu.exception.MenuNotFoundException;
 import com.amido.workloads.menu.mappers.DomainToDtoMapper;
 import com.amido.workloads.menu.service.MenuQueryService;

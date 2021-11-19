@@ -1,8 +1,8 @@
 package com.amido.workloads.menu.service.impl;
 
 import com.amido.workloads.menu.domain.Menu;
-import com.amido.workloads.menu.service.MenuQueryService;
 import com.amido.workloads.menu.repository.MenuRepository;
+import com.amido.workloads.menu.service.MenuQueryService;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
