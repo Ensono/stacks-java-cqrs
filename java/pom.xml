@@ -22,7 +22,6 @@
         <stacks.core.api.version>0.0.18-main</stacks.core.api.version>
         <stacks.azure.cosmos.version>0.0.16-main</stacks.azure.cosmos.version>
         <stacks.core.cqrs.version>0.0.22-main</stacks.core.cqrs.version>
-        <stacks.azure-servicebus.version>0.0.16-main</stacks.azure-servicebus.version>
         <stacks.core.messaging.version>0.0.78-main</stacks.core.messaging.version>
 
         <java.version>11</java.version>
