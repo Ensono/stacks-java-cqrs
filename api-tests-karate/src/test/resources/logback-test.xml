@@ -14,7 +14,8 @@
         </encoder>
     </appender>    
    
-    <logger name="com.intuit" level="DEBUG"/>
+    <logger name="com.intuit" level="ERROR"/>
+    <logger name="com.jayway.jsonpath" level="ERROR"/>
    
     <root level="info">
         <appender-ref ref="STDOUT" />
