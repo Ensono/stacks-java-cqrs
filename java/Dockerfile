@@ -11,11 +11,9 @@ COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 
-RUN ls -la /root/.m2/repository
-
 RUN ./mvnw dependency:go-offline \
 	&& ./mvnw process-resources \
-	&& ./mvnw package -Dmaven.default-test.skip=true -Dmaven.test.skip=true -DskipTests --no-transfer-progress \
+	&& ./mvnw clean package -Dmaven.default-test.skip=true -Dmaven.test.skip=true -DskipTests --no-transfer-progress \
   && mkdir -p extracted && java -Djarmode=layertools -jar target/*.jar extract --destination extracted
 
 FROM azul/zulu-openjdk-alpine:11-jre

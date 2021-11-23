@@ -7,9 +7,9 @@
       </pattern>
     </encoder>
   </appender>
-<!--  <appender class="com.microsoft.applicationinsights.logback.ApplicationInsightsAppender"-->
-<!--    name="aiAppender">-->
-<!--  </appender>-->
+  <appender class="com.microsoft.applicationinsights.logback.ApplicationInsightsAppender"
+    name="aiAppender">
+  </appender>
   <root level="debug">
     <appender-ref ref="console"/>
   </root>
