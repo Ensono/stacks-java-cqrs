@@ -11,8 +11,8 @@ COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 
-RUN ./mvnw dependency:go-offline \
-	&& ./mvnw process-resources \
+RUN ./mvnw dependency:go-offline --quiet\
+	&& ./mvnw process-resources --quiet\
 	&& ./mvnw clean package -Dmaven.default-test.skip=true -Dmaven.test.skip=true -DskipTests --no-transfer-progress \
   && mkdir -p extracted && java -Djarmode=layertools -jar target/*.jar extract --destination extracted
 
