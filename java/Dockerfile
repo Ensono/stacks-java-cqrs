@@ -13,7 +13,7 @@ COPY src src
 
 RUN ./mvnw dependency:go-offline --quiet\
 	&& ./mvnw process-resources --quiet\
-	&& ./mvnw clean package -Dmaven.default-test.skip=true -Dmaven.test.skip=true -DskipTests --no-transfer-progress \
+	&& ./mvnw clean package -Dmaven.default-test.skip=true -Dmaven.test.skip=true -DskipTests --no-transfer-progress --quiet\
   && mkdir -p extracted && java -Djarmode=layertools -jar target/*.jar extract --destination extracted
 
 FROM azul/zulu-openjdk-alpine:11-jre
