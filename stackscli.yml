@@ -50,7 +50,7 @@ init:
               -f ./java/pom.xml
               -DpropertyFile=./java/archetype.properties
               --quiet
-      desc: Creating the archetype resources using the web-api source code
+      desc: Creating the archetype resources using the cqrs component
 
     - action: cmd
       cmd: mvn
@@ -72,7 +72,7 @@ init:
               -Dpackage=com.{{ .Input.Business.Company}}.{{ .Input.Business.Domain }}.{{.Input.Business.Component}}
               --quiet
               -B
-      desc: Generating the web-api project
+      desc: Generating the cqrs project
 
     - action: cmd
       cmd: mvn
@@ -97,7 +97,7 @@ init:
       args: dependency:resolve
               -f {{ .Project.Directory.WorkingDir }}/java/pom.xml
               --quiet
-      desc: Downloading maven dependencies for the web-api project
+      desc: Downloading maven dependencies for the cqrs component
 
     # Build archetype for the serenity tests
     - action: cmd

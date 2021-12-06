@@ -59,6 +59,7 @@
         <maven-pmd-plugin.version>3.14.0</maven-pmd-plugin.version>
         <findbugs-maven-plugin.version>3.0.5</findbugs-maven-plugin.version>
         <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
+        <copy-rename-maven-plugin.version>1.0.1</copy-rename-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -299,7 +300,7 @@
                     <plugin>
                         <groupId>com.coderplus.maven.plugins</groupId>
                         <artifactId>copy-rename-maven-plugin</artifactId>
-                        <version>1.0.1</version>
+                            <version>${copy-rename-maven-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>rename-file</id>
