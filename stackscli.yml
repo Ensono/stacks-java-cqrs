@@ -94,6 +94,13 @@ init:
 
     - action: cmd
       cmd: mvn
+      args: fmt:format
+              -f {{ .Project.Directory.WorkingDir }}/java/pom.xml
+              --quiet
+      desc: Formating the crqs java code to meet the fmt standards
+
+    - action: cmd
+      cmd: mvn
       args: dependency:resolve
               -f {{ .Project.Directory.WorkingDir }}/java/pom.xml
               --quiet
@@ -153,6 +160,13 @@ init:
               -P update-permissions
               --quiet
       desc: Updating file permissions
+
+    - action: cmd
+      cmd: mvn
+      args: fmt:format
+              -f {{ .Project.Directory.WorkingDir }}/api-tests/pom.xml
+              --quiet
+      desc: Formating the web-api serenity functional tests to meet the fmt standards
 
     - action: cmd
       cmd: mvn
