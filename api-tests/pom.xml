@@ -37,7 +37,7 @@
         <byte.buddy.version>1.11.5</byte.buddy.version>
         <springfox.swagger2.version>3.0.0</springfox.swagger2.version>
         <springfox.swagger-ui.version>3.0.0</springfox.swagger-ui.version>
-        <json.version>20210307</json.version>
+        <json.version>20211205</json.version>
         <netty.transport.native.epoll.version>4.1.72.Final</netty.transport.native.epoll.version>
         <netty.codec.http.version>4.1.71.Final</netty.codec.http.version>
         <netty.codec.http2.version>4.1.71.Final</netty.codec.http2.version>
