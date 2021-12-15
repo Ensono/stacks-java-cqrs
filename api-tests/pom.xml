@@ -16,7 +16,7 @@
         <serenity.maven.version>2.4.34</serenity.maven.version>
         <serenity.cucumber.version>2.4.34</serenity.cucumber.version>
         <cucumber.version>6.10.4</cucumber.version>
-        <logback.version>1.2.7</logback.version>
+        <logback.version>1.2.8</logback.version>
         <encoding>UTF-8</encoding>
         <parallel.tests>4</parallel.tests>
         <webdriver.base.url/>
@@ -49,7 +49,7 @@
 
         <!-- Maven plugins -->
         <spotbugs-maven-plugin.version>4.2.3</spotbugs-maven-plugin.version>
-        <owasp-dependency-check-plugin.version>6.2.2</owasp-dependency-check-plugin.version>
+        <owasp-dependency-check-plugin.version>6.5.0</owasp-dependency-check-plugin.version>
         <fmt-maven-plugin.version>2.13</fmt-maven-plugin.version>
         <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
