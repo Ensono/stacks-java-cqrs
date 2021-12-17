@@ -792,7 +792,7 @@ stages:
                         BASE_URL: "${{ variables.dns_pointer }}",
                       }
 
- - stage: Release
+  - stage: Release
     dependsOn:
       - Build
       - Prod
