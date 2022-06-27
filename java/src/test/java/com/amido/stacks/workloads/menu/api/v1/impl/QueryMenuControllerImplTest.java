@@ -10,7 +10,9 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.amido.stacks.workloads.menu.api.v1.dto.response.MenuDTO;
 import com.amido.stacks.workloads.menu.api.v1.dto.response.SearchMenuResult;
@@ -21,8 +23,13 @@ import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.mappers.DomainToDtoMapper;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
+import com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -39,16 +46,20 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration(
-    exclude = {CosmosRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class})
+    exclude = {CosmosRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class,
+        CosmosHealthConfiguration.class})
 @Tag("Integration")
 @ActiveProfiles("test")
 public class QueryMenuControllerImplTest {
 
-  @LocalServerPort private int port;
+  @LocalServerPort
+  private int port;
 
-  @Autowired private TestRestTemplate testRestTemplate;
+  @Autowired
+  private TestRestTemplate testRestTemplate;
 
-  @MockBean private MenuRepository menuRepository;
+  @MockBean
+  private MenuRepository menuRepository;
 
   final int DEFAULT_PAGE_NUMBER = 1;
   final int DEFAULT_PAGE_SIZE = 20;
@@ -83,7 +94,7 @@ public class QueryMenuControllerImplTest {
   public void listMenusFilteredByRestaurantId() {
 
     // Given
-    final UUID restaurantId = randomUUID();
+    UUID restaurantId = randomUUID();
 
     List<Menu> menuList = createMenus(3);
     Menu match = menuList.get(0);
@@ -117,11 +128,11 @@ public class QueryMenuControllerImplTest {
   @Test
   public void listMenusFilteredByRestaurantIdAndSearchTerm() {
     // Given
-    final UUID restaurantId = randomUUID();
+    UUID restaurantId = randomUUID();
     final String searchTerm = "searchTermString";
 
     when(menuRepository.findAllByRestaurantIdAndNameContaining(
-            eq(restaurantId.toString()), eq(searchTerm), any(Pageable.class)))
+        eq(restaurantId.toString()), eq(searchTerm), any(Pageable.class)))
         .thenReturn(new PageImpl<>(Collections.emptyList()));
 
     // When

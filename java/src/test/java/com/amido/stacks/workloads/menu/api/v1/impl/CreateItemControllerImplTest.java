@@ -4,8 +4,14 @@ import static com.amido.stacks.workloads.util.TestHelper.getBaseURL;
 import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-import static org.springframework.http.HttpStatus.*;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.CONFLICT;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 import com.amido.stacks.core.api.dto.ErrorResponse;
 import com.amido.stacks.workloads.menu.api.v1.dto.request.CreateItemRequest;
@@ -17,6 +23,7 @@ import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.domain.MenuHelper;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
+import com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,17 +43,21 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration(
-    exclude = {CosmosRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class})
+    exclude = {CosmosRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class,
+        CosmosHealthConfiguration.class})
 @Tag("Integration")
 @ActiveProfiles("test")
 class CreateItemControllerImplTest {
 
   public static final String CREATE_ITEM = "%s/v1/menu/%s/category/%s/items";
-  @LocalServerPort private int port;
+  @LocalServerPort
+  private int port;
 
-  @Autowired private TestRestTemplate testRestTemplate;
+  @Autowired
+  private TestRestTemplate testRestTemplate;
 
-  @MockBean private MenuRepository menuRepository;
+  @MockBean
+  private MenuRepository menuRepository;
 
   @Test
   void testAddItem() {

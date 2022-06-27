@@ -8,7 +8,10 @@ import static com.amido.stacks.workloads.util.TestHelper.getBaseURL;
 import static com.amido.stacks.workloads.util.TestHelper.getRequestHttpEntity;
 import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.BDDAssertions.then;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -20,6 +23,7 @@ import com.amido.stacks.workloads.menu.domain.Item;
 import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
+import com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import java.util.List;
 import java.util.Optional;
@@ -37,21 +41,27 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 
-/** @author ArathyKrishna */
+/**
+ * @author ArathyKrishna
+ */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration(
-    exclude = {CosmosRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class})
+    exclude = {CosmosRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class,
+        CosmosHealthConfiguration.class})
 @Tag("Integration")
 @ActiveProfiles("test")
 class UpdateItemControllerImplTest {
 
   public static final String UPDATE_ITEM = "%s/v1/menu/%s/category/%s/items/%s";
 
-  @LocalServerPort private int port;
+  @LocalServerPort
+  private int port;
 
-  @Autowired private TestRestTemplate testRestTemplate;
+  @Autowired
+  private TestRestTemplate testRestTemplate;
 
-  @MockBean private MenuRepository menuRepository;
+  @MockBean
+  private MenuRepository menuRepository;
 
   @Test
   void testUpdateItemSuccess() {

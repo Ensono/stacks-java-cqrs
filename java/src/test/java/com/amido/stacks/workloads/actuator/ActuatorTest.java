@@ -5,6 +5,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
+import com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import java.util.Map;
 import org.junit.jupiter.api.Tag;
@@ -21,16 +22,19 @@ import org.springframework.test.context.TestPropertySource;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = {"management.port=0"})
 @EnableAutoConfiguration(
-    exclude = {CosmosRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class})
+    exclude = {CosmosRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class,
+        CosmosHealthConfiguration.class})
 @Tag("Component")
 class ActuatorTest {
 
   @Value("${local.management.port}")
   private int mgt;
 
-  @Autowired private TestRestTemplate testRestTemplate;
+  @Autowired
+  private TestRestTemplate testRestTemplate;
 
-  @MockBean private MenuRepository menuRepository;
+  @MockBean
+  private MenuRepository menuRepository;
 
   @Test
   void shouldReturn200WhenSendingRequestToHealthEndpoint() {
