@@ -34,22 +34,22 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration(
-    exclude = {CosmosRepositoriesAutoConfiguration.class, CosmosAutoConfiguration.class,
-        CosmosHealthConfiguration.class})
+    exclude = {
+      CosmosRepositoriesAutoConfiguration.class,
+      CosmosAutoConfiguration.class,
+      CosmosHealthConfiguration.class
+    })
 @Tag("Integration")
 @ActiveProfiles("test")
 class CreateMenuControllerImplTest {
 
   public static final String CREATE_MENU = "/v1/menu";
 
-  @LocalServerPort
-  private int port;
+  @LocalServerPort private int port;
 
-  @Autowired
-  private TestRestTemplate testRestTemplate;
+  @Autowired private TestRestTemplate testRestTemplate;
 
-  @MockBean
-  private MenuRepository menuRepository;
+  @MockBean private MenuRepository menuRepository;
 
   @Test
   void testCreateNewMenu() {
@@ -60,7 +60,7 @@ class CreateMenuControllerImplTest {
             m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
 
     when(menuRepository.findAllByRestaurantIdAndName(
-        eq(m.getRestaurantId()), eq(m.getName()), any(Pageable.class)))
+            eq(m.getRestaurantId()), eq(m.getName()), any(Pageable.class)))
         .thenReturn(new PageImpl<>(Collections.emptyList()));
     when(menuRepository.save(any(Menu.class))).thenReturn(m);
 
@@ -82,7 +82,7 @@ class CreateMenuControllerImplTest {
             m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
 
     when(menuRepository.findAllByRestaurantIdAndName(
-        eq(m.getRestaurantId()), eq(m.getName()), any(Pageable.class)))
+            eq(m.getRestaurantId()), eq(m.getName()), any(Pageable.class)))
         .thenReturn(new PageImpl<>(Arrays.asList(m)));
 
     // When
