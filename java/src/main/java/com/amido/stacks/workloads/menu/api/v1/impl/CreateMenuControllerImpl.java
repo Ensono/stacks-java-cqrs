@@ -27,7 +27,9 @@ public class CreateMenuControllerImpl implements CreateMenuController {
       @Valid CreateMenuRequest body, String correlationId) {
     return new ResponseEntity<>(
         new ResourceCreatedResponse(
-            createMenuHandler.handle(requestToCommandMapper.map(correlationId, body)).get()),
+            createMenuHandler
+                .handle(requestToCommandMapper.map(correlationId, body))
+                .orElseThrow()),
         HttpStatus.CREATED);
   }
 }

@@ -29,6 +29,7 @@ public class UpdateMenuControllerImpl implements UpdateMenuController {
       UUID menuId, @Valid UpdateMenuRequest body, String correlationId) {
     UpdateMenuCommand command = requestToCommandMapper.map(correlationId, menuId, body);
     return new ResponseEntity<>(
-        new ResourceUpdatedResponse(updateMenuHandler.handle(command).get()), HttpStatus.OK);
+        new ResourceUpdatedResponse(updateMenuHandler.handle(command).orElseThrow()),
+        HttpStatus.OK);
   }
 }

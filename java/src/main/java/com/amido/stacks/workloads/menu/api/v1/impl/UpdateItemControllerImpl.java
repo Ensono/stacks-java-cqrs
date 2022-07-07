@@ -34,7 +34,7 @@ public class UpdateItemControllerImpl implements UpdateItemController {
         new ResourceUpdatedResponse(
             handler
                 .handle(requestToCommandMapper.map(correlationId, menuId, categoryId, itemId, body))
-                .get()),
+                .orElseThrow()),
         HttpStatus.OK);
   }
 }

@@ -30,7 +30,7 @@ public class CreateItemControllerImpl implements CreateItemController {
         new ResourceCreatedResponse(
             createItemHandler
                 .handle(requestToCommandMapper.map(correlationId, menuId, categoryId, body))
-                .get()),
+                .orElseThrow()),
         HttpStatus.CREATED);
   }
 }

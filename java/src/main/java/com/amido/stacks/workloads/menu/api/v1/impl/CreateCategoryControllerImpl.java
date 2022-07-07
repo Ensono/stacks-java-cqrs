@@ -31,7 +31,7 @@ public class CreateCategoryControllerImpl implements CreateCategoryController {
         new ResourceCreatedResponse(
             createCategoryHandler
                 .handle(requestToCommandMapper.map(correlationId, menuId, body))
-                .get()),
+                .orElseThrow()),
         HttpStatus.CREATED);
   }
 }

@@ -36,7 +36,7 @@ public class UpdateCategoryControllerImpl implements UpdateCategoryController {
         new ResourceUpdatedResponse(
             handler
                 .handle(requestToCommandMapper.map(correlationId, menuId, categoryId, body))
-                .get()),
+                .orElseThrow()),
         OK);
   }
 }
