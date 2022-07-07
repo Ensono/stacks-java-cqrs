@@ -9,7 +9,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import com.amido.stacks.workloads.menu.api.v1.dto.response.MenuDTO;
 import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.domain.MenuHelper;
-import com.amido.stacks.workloads.menu.mappers.DomainToDtoMapper;
+import com.amido.stacks.workloads.menu.mappers.MenuMapper;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration;
@@ -45,11 +45,13 @@ class QueryMenuControllerImplV2Test {
 
   @MockBean private MenuRepository menuRepository;
 
+  @Autowired private MenuMapper menuMapper;
+
   @Test
   void getMenuById() {
     // Given
     Menu menu = MenuHelper.createMenu(0);
-    MenuDTO expectedResponse = DomainToDtoMapper.toMenuDto(menu);
+    MenuDTO expectedResponse = menuMapper.toDto(menu);
 
     when(menuRepository.findById(menu.getId())).thenReturn(Optional.of(menu));
 
