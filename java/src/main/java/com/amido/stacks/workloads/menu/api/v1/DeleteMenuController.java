@@ -4,6 +4,7 @@ import com.amido.stacks.core.api.annotations.DeleteAPIResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import java.util.UUID;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @RequestMapping(
     path = "/v1/menu/{id}",
-    produces = "application/json; charset=utf-8",
+    produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8",
     method = RequestMethod.DELETE)
 public interface DeleteMenuController {
 
-  @DeleteMapping()
+  @DeleteMapping
   @Operation(
       tags = "Menu",
       summary = "Removes a Menu with all it's Categories and Items",

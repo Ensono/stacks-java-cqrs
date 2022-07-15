@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import java.util.UUID;
 import javax.validation.Valid;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @RequestMapping(
     path = "/v1/menu/{id}/category/{categoryId}/items",
-    consumes = "application/json",
-    produces = "application/json; charset=utf-8",
+    consumes = MediaType.APPLICATION_JSON_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8",
     method = RequestMethod.POST)
 public interface CreateItemController {
 
-  @PostMapping()
+  @PostMapping
   @Operation(
       tags = "Item",
       summary = "Add an item to an existing category in a menu",

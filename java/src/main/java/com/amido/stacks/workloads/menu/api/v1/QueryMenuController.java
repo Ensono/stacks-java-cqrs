@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.io.IOException;
 import java.util.UUID;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RequestMapping(
     path = "/v1/menu",
-    produces = "application/json; charset=utf-8",
+    produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8",
     method = RequestMethod.GET)
 public interface QueryMenuController {
 
