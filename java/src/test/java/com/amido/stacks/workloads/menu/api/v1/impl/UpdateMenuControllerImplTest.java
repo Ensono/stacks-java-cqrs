@@ -11,8 +11,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.amido.stacks.core.api.dto.ErrorResponse;
+import com.amido.stacks.core.api.dto.response.ResourceUpdatedResponse;
 import com.amido.stacks.workloads.menu.api.v1.dto.request.UpdateMenuRequest;
-import com.amido.stacks.workloads.menu.api.v1.dto.response.ResourceUpdatedResponse;
 import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
@@ -37,9 +37,9 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration(
     exclude = {
-      CosmosRepositoriesAutoConfiguration.class,
-      CosmosAutoConfiguration.class,
-      CosmosHealthConfiguration.class
+        CosmosRepositoriesAutoConfiguration.class,
+        CosmosAutoConfiguration.class,
+        CosmosHealthConfiguration.class
     })
 @Tag("Integration")
 @ActiveProfiles("test")
@@ -47,11 +47,14 @@ class UpdateMenuControllerImplTest {
 
   public static final String UPDATE_MENU = "%s/v1/menu/%s";
 
-  @LocalServerPort private int port;
+  @LocalServerPort
+  private int port;
 
-  @Autowired private TestRestTemplate testRestTemplate;
+  @Autowired
+  private TestRestTemplate testRestTemplate;
 
-  @MockBean private MenuRepository menuRepository;
+  @MockBean
+  private MenuRepository menuRepository;
 
   @Test
   void testUpdateSuccess() {
@@ -113,7 +116,7 @@ class UpdateMenuControllerImplTest {
     UpdateMenuRequest request = new UpdateMenuRequest("", "new description", false);
 
     // When
-    var response =
+    var responsegit =
         this.testRestTemplate.exchange(
             String.format(UPDATE_MENU, getBaseURL(port), menu.getId()),
             HttpMethod.PUT,

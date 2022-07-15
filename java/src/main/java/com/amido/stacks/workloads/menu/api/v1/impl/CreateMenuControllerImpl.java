@@ -1,8 +1,8 @@
 package com.amido.stacks.workloads.menu.api.v1.impl;
 
+import com.amido.stacks.core.api.dto.response.ResourceCreatedResponse;
 import com.amido.stacks.workloads.menu.api.v1.CreateMenuController;
 import com.amido.stacks.workloads.menu.api.v1.dto.request.CreateMenuRequest;
-import com.amido.stacks.workloads.menu.api.v1.dto.response.ResourceCreatedResponse;
 import com.amido.stacks.workloads.menu.handlers.CreateMenuHandler;
 import com.amido.stacks.workloads.menu.mappers.RequestToCommandMapper;
 import javax.validation.Valid;
