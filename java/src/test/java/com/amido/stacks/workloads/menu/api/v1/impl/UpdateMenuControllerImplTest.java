@@ -113,7 +113,7 @@ class UpdateMenuControllerImplTest {
     UpdateMenuRequest request = new UpdateMenuRequest("", "new description", false);
 
     // When
-    var responsegit =
+    var response =
         this.testRestTemplate.exchange(
             String.format(UPDATE_MENU, getBaseURL(port), menu.getId()),
             HttpMethod.PUT,
