@@ -15,13 +15,13 @@
   <groupId>com.amido.stacks.workloads</groupId>
   <artifactId>stacks-api-cqrs</artifactId>
   <version>1.0.0</version>
-  <name>stacks-api-cqrs</name>
+  <name>${project.groupId}:${project.artifactId}</name>
   <description>Demo project for Java with CQRS</description>
 
   <properties>
     <!-- Stacks versions -->
     <stacks.core.commons.version>1.0.3</stacks.core.commons.version>
-    <stacks.core.api.version>1.0.0</stacks.core.api.version>
+    <stacks.core.api.version>1.0.2.2-RELEASE</stacks.core.api.version>
     <stacks.azure.cosmos.version>1.0.0</stacks.azure.cosmos.version>
     <stacks.core.cqrs.version>1.0.0</stacks.core.cqrs.version>
 
@@ -68,15 +68,6 @@
     <pact.consumer.version>4.3.2</pact.consumer.version>
 
   </properties>
-
-  <repositories>
-    <repository>
-      <snapshots/>
-      <id>snapshots</id>
-      <name>default-maven-virtual</name>
-      <url>https://amidostacks.jfrog.io/artifactory/default-maven-virtual</url>
-    </repository>
-  </repositories>
 
   <dependencyManagement>
     <dependencies>
