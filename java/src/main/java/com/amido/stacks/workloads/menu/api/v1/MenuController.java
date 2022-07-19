@@ -36,7 +36,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,23 +48,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping(path = "/v1/menu", produces = MediaType.APPLICATION_JSON_VALUE + " ; charset=utf-8")
+@RequestMapping(path = "/v1/menu")
 @RestController
 public class MenuController {
 
-  private CreateMenuHandler createMenuHandler;
+  private final CreateMenuHandler createMenuHandler;
 
-  private RequestToCommandMapper requestToCommandMapper;
+  private final RequestToCommandMapper requestToCommandMapper;
 
-  private MenuQueryService menuQueryService;
+  private final MenuQueryService menuQueryService;
 
-  private SearchMenuResultItemMapper searchMenuResultItemMapper;
+  private final SearchMenuResultItemMapper searchMenuResultItemMapper;
 
-  private MenuMapper menuMapper;
+  private final MenuMapper menuMapper;
 
-  private UpdateMenuHandler updateMenuHandler;
+  private final UpdateMenuHandler updateMenuHandler;
 
-  private DeleteMenuHandler deleteMenuHandler;
+  private final DeleteMenuHandler deleteMenuHandler;
 
   public MenuController(
       CreateMenuHandler createMenuHandler,
@@ -140,9 +139,7 @@ public class MenuController {
         new SearchMenuResult(
             pageSize,
             pageNumber,
-            menuList.stream()
-                .map(m -> searchMenuResultItemMapper.toDto(m))
-                .collect(Collectors.toList())));
+            menuList.stream().map(searchMenuResultItemMapper::toDto).collect(Collectors.toList())));
   }
 
   @GetMapping(value = "/{id}")

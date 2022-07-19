@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.UUID;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,14 +20,17 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping(path = "/v2/menu", produces = "application/json; charset=utf-8")
+@RequestMapping(path = "/v2/menu")
 @RestController
 public class MenuControllerV2 {
 
-  @Autowired
   private MenuMapper menuMapper;
-  @Autowired
   private MenuQueryService menuQueryService;
+
+  public MenuControllerV2(MenuMapper menuMapper, MenuQueryService menuQueryService) {
+    this.menuMapper = menuMapper;
+    this.menuQueryService = menuQueryService;
+  }
 
   @GetMapping(value = "/{id}")
   @Operation(
@@ -41,9 +43,9 @@ public class MenuControllerV2 {
       responseCode = "200",
       description = "Menu",
       content =
-      @Content(
-          mediaType = "application/json",
-          schema = @Schema(implementation = MenuDTO.class)))
+          @Content(
+              mediaType = "application/json",
+              schema = @Schema(implementation = MenuDTO.class)))
   @ReadAPIResponses
   ResponseEntity<MenuDTO> getMenu(
       @PathVariable(name = "id") UUID id,

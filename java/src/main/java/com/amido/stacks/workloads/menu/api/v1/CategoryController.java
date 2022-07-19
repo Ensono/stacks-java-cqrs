@@ -19,7 +19,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import java.util.UUID;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,15 +30,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(
-    path = "/v1/menu/{id}/category",
-    produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8")
+@RequestMapping(path = "/v1/menu/{id}/category")
 public class CategoryController {
 
-  private CreateCategoryHandler createCategoryHandler;
-  private UpdateCategoryHandler updateCategoryHandler;
-  private DeleteCategoryHandler deleteCategoryHandler;
-  private RequestToCommandMapper requestToCommandMapper;
+  private final CreateCategoryHandler createCategoryHandler;
+  private final UpdateCategoryHandler updateCategoryHandler;
+  private final DeleteCategoryHandler deleteCategoryHandler;
+  private final RequestToCommandMapper requestToCommandMapper;
 
   public CategoryController(
       CreateCategoryHandler createCategoryHandler,
