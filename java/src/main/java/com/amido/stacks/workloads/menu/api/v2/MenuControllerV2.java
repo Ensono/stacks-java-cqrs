@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,14 +25,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MenuControllerV2 {
 
-  @Autowired private MenuMapper menuMapper;
-  @Autowired private MenuQueryService menuQueryService;
+  @Autowired
+  private MenuMapper menuMapper;
+  @Autowired
+  private MenuQueryService menuQueryService;
 
   @GetMapping(value = "/{id}")
   @Operation(
       tags = "Menu",
       summary = "Get a menu",
-      security = @SecurityRequirement(name = "bearerAuth"),
       description =
           "By passing the menu id, you can get access to available categories and items in the menu",
       operationId = "GetMenuV2")
@@ -41,9 +41,9 @@ public class MenuControllerV2 {
       responseCode = "200",
       description = "Menu",
       content =
-          @Content(
-              mediaType = "application/json",
-              schema = @Schema(implementation = MenuDTO.class)))
+      @Content(
+          mediaType = "application/json",
+          schema = @Schema(implementation = MenuDTO.class)))
   @ReadAPIResponses
   ResponseEntity<MenuDTO> getMenu(
       @PathVariable(name = "id") UUID id,
