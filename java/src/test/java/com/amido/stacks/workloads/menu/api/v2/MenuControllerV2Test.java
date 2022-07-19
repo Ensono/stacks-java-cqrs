@@ -1,4 +1,4 @@
-package com.amido.stacks.workloads.menu.api.v2.impl;
+package com.amido.stacks.workloads.menu.api.v2;
 
 import static com.amido.stacks.workloads.util.TestHelper.getBaseURL;
 import static org.assertj.core.api.BDDAssertions.then;
@@ -35,7 +35,7 @@ import org.springframework.test.context.ActiveProfiles;
     })
 @Tag("Integration")
 @ActiveProfiles("test")
-class QueryMenuControllerImplV2Test {
+class MenuControllerV2Test {
 
   private final String GET_MENU_BY_ID = "%s/v2/menu/%s";
 
