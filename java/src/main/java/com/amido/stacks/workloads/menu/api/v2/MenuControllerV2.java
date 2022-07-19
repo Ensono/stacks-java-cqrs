@@ -26,11 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MenuControllerV2 {
 
-  @Autowired
-  private MenuMapper menuMapper;
-  @Autowired
-  private MenuQueryService menuQueryService;
-
+  @Autowired private MenuMapper menuMapper;
+  @Autowired private MenuQueryService menuQueryService;
 
   @GetMapping(value = "/{id}")
   @Operation(
@@ -44,9 +41,9 @@ public class MenuControllerV2 {
       responseCode = "200",
       description = "Menu",
       content =
-      @Content(
-          mediaType = "application/json",
-          schema = @Schema(implementation = MenuDTO.class)))
+          @Content(
+              mediaType = "application/json",
+              schema = @Schema(implementation = MenuDTO.class)))
   @ReadAPIResponses
   ResponseEntity<MenuDTO> getMenu(
       @PathVariable(name = "id") UUID id,
