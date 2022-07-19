@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/** @author ArathyKrishna */
+/**
+ * @author ArathyKrishna
+ */
 public class MenuHelper {
 
   public static List<Menu> createMenus(int count) {
@@ -15,7 +17,7 @@ public class MenuHelper {
     return menuList;
   }
 
-  public static McreateMenu(int counter) {
+  public static Menu createMenu(int counter) {
     return new Menu(
         UUID.randomUUID().toString(),
         UUID.randomUUID().toString(),
