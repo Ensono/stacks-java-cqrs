@@ -5,14 +5,14 @@ import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.service.v1.MenuService;
 import java.util.Optional;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@RequiredArgsConstructor
 @Component
 public class UpdateMenuHandler extends MenuBaseCommandHandler<UpdateMenuCommand> {
 
-  protected MenuService menuService;
+  public UpdateMenuHandler(MenuService menuService) {
+    super(menuService);
+  }
 
   @Override
   Optional<UUID> handleCommand(Menu menu, UpdateMenuCommand command) {
@@ -22,8 +22,4 @@ public class UpdateMenuHandler extends MenuBaseCommandHandler<UpdateMenuCommand>
     return Optional.of(command.getMenuId());
   }
 
-  @Override
-  public Optional<UUID> handle(UpdateMenuCommand updateMenuCommand) {
-    return Optional.empty();
-  }
 }

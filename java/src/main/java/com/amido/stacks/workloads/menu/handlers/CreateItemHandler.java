@@ -3,16 +3,21 @@ package com.amido.stacks.workloads.menu.handlers;
 import com.amido.stacks.workloads.menu.commands.CreateItemCommand;
 import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.service.v1.ItemService;
+import com.amido.stacks.workloads.menu.service.v1.MenuService;
 import java.util.Optional;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@RequiredArgsConstructor
 @Component
 public class CreateItemHandler extends MenuBaseCommandHandler<CreateItemCommand> {
 
-  ItemService itemService;
+  public CreateItemHandler(MenuService menuService,
+      ItemService itemService) {
+    super(menuService);
+    this.itemService = itemService;
+  }
+
+  protected ItemService itemService;
 
   @Override
   Optional<UUID> handleCommand(Menu menu, CreateItemCommand command) {

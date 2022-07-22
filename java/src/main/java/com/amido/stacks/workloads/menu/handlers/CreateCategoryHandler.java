@@ -20,8 +20,4 @@ public class CreateCategoryHandler extends MenuBaseCommandHandler<CreateCategory
     return Optional.of(command.getCategoryId());
   }
 
-  @Override
-  public Optional<UUID> handle(CreateCategoryCommand createCategoryCommand) {
-    return Optional.empty();
-  }
 }
