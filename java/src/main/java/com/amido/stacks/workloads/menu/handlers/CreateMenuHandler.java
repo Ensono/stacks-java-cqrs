@@ -16,10 +16,6 @@ public class CreateMenuHandler implements CommandHandler<CreateMenuCommand> {
 
   protected MenuService menuService;
 
-  public CreateMenuHandler(MenuService menuService) {
-    this.menuService = menuService;
-  }
-
   @Override
   public Optional<UUID> handle(CreateMenuCommand command) {
 

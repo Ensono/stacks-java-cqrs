@@ -15,10 +15,6 @@ public class DeleteCategoryHandler extends MenuBaseCommandHandler<DeleteCategory
 
   protected CategoryService categoryService;
 
-  public DeleteCategoryHandler(CategoryService categoryService) {
-    this.categoryService = categoryService;
-  }
-
   Optional<UUID> handleCommand(Menu menu, DeleteCategoryCommand command) {
 
     categoryService.delete(menu, command);
