@@ -8,9 +8,7 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-/**
- * @author ArathyKrishna
- */
+/** @author ArathyKrishna */
 @RequiredArgsConstructor
 @Component
 public class DeleteItemHandler extends MenuBaseCommandHandler<DeleteItemCommand> {

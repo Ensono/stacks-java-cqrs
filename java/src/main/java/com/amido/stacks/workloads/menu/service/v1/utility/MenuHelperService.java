@@ -24,7 +24,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MenuHelperService {
 
-
   public Optional<Category> findCategory(Menu menu, UUID categoryId) {
     Optional<Category> existing = Optional.empty();
     if (menu.getCategories() != null && !menu.getCategories().isEmpty()) {
@@ -105,7 +104,7 @@ public class MenuHelperService {
    * exists com.amido.core.api.exception if a category with the same name doesn't exits then update
    * the requested category.
    *
-   * @param menu    menu
+   * @param menu menu
    * @param command update category request
    * @return category
    */
@@ -128,7 +127,6 @@ public class MenuHelperService {
 
     return category;
   }
-
 
   public Category getCategory(Menu menu, UpdateCategoryCommand command) {
     return findCategory(menu, command.getCategoryId())
@@ -166,7 +164,7 @@ public class MenuHelperService {
    * if the request is to update an item but an item with that name already exists then throw an
    * com.amido.core.api.exception if there are no item with the same name then allow that
    *
-   * @param command  update item request
+   * @param command update item request
    * @param category category
    * @return item
    */

@@ -23,11 +23,11 @@ public class ItemService {
   protected final MenuRepository menuRepository;
   private final MenuHelperService menuHelperService;
 
-
   public void create(Menu menu, CreateItemCommand createItemCommand) {
     createItemCommand.setItemId(UUID.randomUUID());
-    Category category = menuHelperService.addItem(
-        menuHelperService.getCategory(menu, createItemCommand), createItemCommand);
+    Category category =
+        menuHelperService.addItem(
+            menuHelperService.getCategory(menu, createItemCommand), createItemCommand);
     menuRepository.save(menu.addOrUpdateCategory(category));
   }
 
@@ -42,7 +42,6 @@ public class ItemService {
             .collect(Collectors.toList());
     category.setItems(!itemList.isEmpty() ? itemList : Collections.emptyList());
     menuRepository.save(menu.addOrUpdateCategory(category));
-
   }
 
   public void update(Menu menu, UpdateItemCommand command) {

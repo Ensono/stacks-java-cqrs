@@ -51,9 +51,9 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration(
     exclude = {
-        CosmosRepositoriesAutoConfiguration.class,
-        CosmosAutoConfiguration.class,
-        CosmosHealthConfiguration.class
+      CosmosRepositoriesAutoConfiguration.class,
+      CosmosAutoConfiguration.class,
+      CosmosHealthConfiguration.class
     })
 @Tag("Integration")
 @ActiveProfiles("test")
@@ -63,14 +63,11 @@ class CategoryControllerTest {
   public static final String UPDATE_CATEGORY = "%s/v1/menu/%s/category/%s";
   public static final String DELETE_CATEGORY = "%s/v1/menu/%s/category/%s";
 
-  @LocalServerPort
-  private int port;
+  @LocalServerPort private int port;
 
-  @Autowired
-  private TestRestTemplate testRestTemplate;
+  @Autowired private TestRestTemplate testRestTemplate;
 
-  @MockBean
-  private MenuService menuService;
+  @MockBean private MenuService menuService;
 
   @Test
   void testCanNotAddCategoryIfMenuNotPresent() {

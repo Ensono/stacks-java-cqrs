@@ -14,7 +14,6 @@ public class CreateItemHandler extends MenuBaseCommandHandler<CreateItemCommand>
 
   ItemService itemService;
 
-
   @Override
   Optional<UUID> handleCommand(Menu menu, CreateItemCommand command) {
 

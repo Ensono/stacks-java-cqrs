@@ -8,17 +8,14 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-/**
- * @author ArathyKrishna
- */
+/** @author ArathyKrishna */
 @RequiredArgsConstructor
 @Component
 public class DeleteCategoryHandler extends MenuBaseCommandHandler<DeleteCategoryCommand> {
 
   protected CategoryService categoryService;
 
-  public DeleteCategoryHandler(
-      CategoryService categoryService) {
+  public DeleteCategoryHandler(CategoryService categoryService) {
     this.categoryService = categoryService;
   }
 
@@ -27,7 +24,6 @@ public class DeleteCategoryHandler extends MenuBaseCommandHandler<DeleteCategory
     categoryService.delete(menu, command);
     return Optional.empty();
   }
-
 
   @Override
   public Optional<UUID> handle(DeleteCategoryCommand deleteCategoryCommand) {

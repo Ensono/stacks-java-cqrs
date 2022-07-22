@@ -24,11 +24,10 @@ public class MenuService {
     return Optional.of(menu);
   }
 
-
   public void verifyMenuNotAlreadyExisting(CreateMenuCommand command) {
     Page<Menu> existing =
-        menuRepository.findAllByRestaurantIdAndName(command.getRestaurantId().toString(),
-            command.getName(), PageRequest.of(0, 1));
+        menuRepository.findAllByRestaurantIdAndName(
+            command.getRestaurantId().toString(), command.getName(), PageRequest.of(0, 1));
     if (!existing.getContent().isEmpty()
         && existing.get().anyMatch(m -> m.getName().equals(command.getName()))) {
       throw new MenuAlreadyExistsException(command, command.getRestaurantId(), command.getName());
@@ -49,6 +48,4 @@ public class MenuService {
     menu.setEnabled(command.getEnabled());
     menuRepository.save(menu);
   }
-
-
 }

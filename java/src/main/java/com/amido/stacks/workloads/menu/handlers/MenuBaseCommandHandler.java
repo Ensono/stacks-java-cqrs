@@ -13,9 +13,8 @@ public abstract class MenuBaseCommandHandler<T extends MenuCommand> implements C
   /**
    * find a category for the id provided
    *
-   * @param menu       menu object
+   * @param menu menu object
    * @param categoryId category id
    * @return category if found else optional.empty
    */
-
 }
