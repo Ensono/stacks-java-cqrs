@@ -6,6 +6,7 @@ import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.exception.MenuAlreadyExistsException;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import java.util.Optional;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,13 +25,15 @@ public class MenuService {
     return Optional.of(menu);
   }
 
-  public void verifyMenuNotAlreadyExisting(CreateMenuCommand command) {
+  public void verifyMenuNotAlreadyExisting(Menu menu, CreateMenuCommand createMenuCommand) {
     Page<Menu> existing =
         menuRepository.findAllByRestaurantIdAndName(
-            command.getRestaurantId().toString(), command.getName(), PageRequest.of(0, 1));
+            menu.getRestaurantId(), menu.getName(), PageRequest.of(0, 1));
     if (!existing.getContent().isEmpty()
-        && existing.get().anyMatch(m -> m.getName().equals(command.getName()))) {
-      throw new MenuAlreadyExistsException(command, command.getRestaurantId(), command.getName());
+        && existing.get().anyMatch(m -> m.getName().equals(menu.getName()))) {
+      throw new MenuAlreadyExistsException(createMenuCommand,
+          UUID.fromString(menu.getRestaurantId()),
+          menu.getName());
     }
   }
 

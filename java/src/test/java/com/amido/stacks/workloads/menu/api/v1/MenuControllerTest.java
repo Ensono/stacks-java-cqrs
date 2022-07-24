@@ -24,7 +24,7 @@ import com.amido.stacks.workloads.menu.api.v1.dto.request.UpdateMenuRequest;
 import com.amido.stacks.workloads.menu.commands.CreateMenuCommand;
 import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.domain.MenuHelper;
-import com.amido.stacks.workloads.menu.mappers.RequestToCommandMapper;
+import com.amido.stacks.workloads.menu.mappers.cqrs.CreateMenuCommandMapper;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.amido.stacks.workloads.menu.service.v1.MenuService;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
@@ -78,7 +78,7 @@ class MenuControllerTest {
   @MockBean
   private MenuService menuService;
   @Autowired
-  private RequestToCommandMapper requestToCommandMapper;
+  private CreateMenuCommandMapper createMenuCommandMapper;
 
 
   @Test
@@ -89,8 +89,10 @@ class MenuControllerTest {
     CreateMenuRequest request =
         new CreateMenuRequest(
             m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
-
-    doNothing().when(menuService).verifyMenuNotAlreadyExisting(any(CreateMenuCommand.class));
+    CreateMenuCommand createMenuCommand = new CreateMenuCommand(UUID.randomUUID().toString(),
+        m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
+    doNothing().when(menuService)
+        .verifyMenuNotAlreadyExisting(any(Menu.class), any(CreateMenuCommand.class));
     when(menuRepository.findAllByRestaurantIdAndName(
         eq(m.getRestaurantId()), eq(m.getName()), any(Pageable.class)))
         .thenReturn(new PageImpl<>(Collections.emptyList()));
@@ -113,7 +115,8 @@ class MenuControllerTest {
     CreateMenuRequest request =
         new CreateMenuRequest(
             m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
-    doNothing().when(menuService).verifyMenuNotAlreadyExisting(any(CreateMenuCommand.class));
+    doNothing().when(menuService)
+        .verifyMenuNotAlreadyExisting(any(Menu.class), any(CreateMenuCommand.class));
 
     // When
     var response =

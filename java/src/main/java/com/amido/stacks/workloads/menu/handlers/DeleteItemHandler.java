@@ -6,13 +6,11 @@ import com.amido.stacks.workloads.menu.service.v1.ItemService;
 import com.amido.stacks.workloads.menu.service.v1.MenuService;
 import java.util.Optional;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 /**
  * @author ArathyKrishna
  */
-@RequiredArgsConstructor
 @Component
 public class DeleteItemHandler extends MenuBaseCommandHandler<DeleteItemCommand> {
 
