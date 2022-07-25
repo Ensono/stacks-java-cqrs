@@ -26,8 +26,9 @@ import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.Tag;
@@ -74,10 +75,10 @@ class MenuControllerTest {
   void testCreateNewMenu() {
     // Given
     Menu m = createMenu(1);
+
     CreateMenuRequest request =
         new CreateMenuRequest(
             m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
-
     when(menuRepository.findAllByRestaurantIdAndName(
             eq(m.getRestaurantId()), eq(m.getName()), any(Pageable.class)))
         .thenReturn(new PageImpl<>(Collections.emptyList()));
@@ -87,7 +88,6 @@ class MenuControllerTest {
     var response =
         this.testRestTemplate.postForEntity(
             getBaseURL(port) + CREATE_MENU, request, ResourceCreatedResponse.class);
-
     // Then
     then(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
   }
@@ -100,9 +100,11 @@ class MenuControllerTest {
         new CreateMenuRequest(
             m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
 
-    when(menuRepository.findAllByRestaurantIdAndName(
-            eq(m.getRestaurantId()), eq(m.getName()), any(Pageable.class)))
-        .thenReturn(new PageImpl<>(Arrays.asList(m)));
+    List<Menu> found = new ArrayList<>();
+    found.add(m);
+
+    when(menuRepository.findAllByRestaurantIdAndName(any(), any(), any()))
+        .thenReturn(new PageImpl<>(found));
 
     // When
     var response =
@@ -179,7 +181,7 @@ class MenuControllerTest {
     then(updated.getRestaurantId()).isEqualTo(menu.getRestaurantId());
 
     then(response).isNotNull();
-    then(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    then(response.getStatusCode()).isEqualTo(OK);
   }
 
   @Test

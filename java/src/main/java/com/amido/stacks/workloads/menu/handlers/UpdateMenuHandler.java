@@ -2,7 +2,7 @@ package com.amido.stacks.workloads.menu.handlers;
 
 import com.amido.stacks.workloads.menu.commands.UpdateMenuCommand;
 import com.amido.stacks.workloads.menu.domain.Menu;
-import com.amido.stacks.workloads.menu.repository.MenuRepository;
+import com.amido.stacks.workloads.menu.service.v1.MenuService;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
@@ -10,16 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class UpdateMenuHandler extends MenuBaseCommandHandler<UpdateMenuCommand> {
 
-  public UpdateMenuHandler(MenuRepository menuRepository) {
-    super(menuRepository);
+  public UpdateMenuHandler(MenuService menuService) {
+    super(menuService);
   }
 
   @Override
   Optional<UUID> handleCommand(Menu menu, UpdateMenuCommand command) {
-    menu.setName(command.getName());
-    menu.setDescription(command.getDescription());
-    menu.setEnabled(command.getEnabled());
-    menuRepository.save(menu);
+
+    menuService.update(menu, command);
+
     return Optional.of(command.getMenuId());
   }
 }

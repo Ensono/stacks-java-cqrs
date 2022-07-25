@@ -3,31 +3,24 @@ package com.amido.stacks.workloads.menu.handlers;
 import com.amido.stacks.core.cqrs.handler.CommandHandler;
 import com.amido.stacks.workloads.menu.commands.CreateMenuCommand;
 import com.amido.stacks.workloads.menu.domain.Menu;
-import com.amido.stacks.workloads.menu.exception.MenuAlreadyExistsException;
-import com.amido.stacks.workloads.menu.repository.MenuRepository;
+import com.amido.stacks.workloads.menu.service.v1.MenuService;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+@RequiredArgsConstructor
 @Component
 public class CreateMenuHandler implements CommandHandler<CreateMenuCommand> {
 
-  protected MenuRepository menuRepository;
-
-  public CreateMenuHandler(MenuRepository menuRepository) {
-    this.menuRepository = menuRepository;
-  }
+  private final MenuService menuService;
 
   @Override
   public Optional<UUID> handle(CreateMenuCommand command) {
+    UUID id = UUID.randomUUID();
 
-    verifyMenuNotAlreadyExisting(command);
-
-    final UUID id = UUID.randomUUID();
-    final Menu menu =
+    Menu menu =
         new Menu(
             id.toString(),
             command.getRestaurantId().toString(),
@@ -36,18 +29,9 @@ public class CreateMenuHandler implements CommandHandler<CreateMenuCommand> {
             new ArrayList<>(),
             command.getEnabled());
 
-    menuRepository.save(menu);
+    menuService.verifyMenuNotAlreadyExisting(command);
 
+    menuService.create(menu);
     return Optional.of(id);
-  }
-
-  protected void verifyMenuNotAlreadyExisting(CreateMenuCommand command) {
-    Page<Menu> existing =
-        menuRepository.findAllByRestaurantIdAndName(
-            command.getRestaurantId().toString(), command.getName(), PageRequest.of(0, 1));
-    if (!existing.getContent().isEmpty()
-        && existing.get().anyMatch(m -> m.getName().equals(command.getName()))) {
-      throw new MenuAlreadyExistsException(command, command.getRestaurantId(), command.getName());
-    }
   }
 }

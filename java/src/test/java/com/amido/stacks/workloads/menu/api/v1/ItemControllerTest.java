@@ -72,6 +72,8 @@ class ItemControllerTest {
 
   @Autowired private TestRestTemplate testRestTemplate;
 
+  // @MockBean private ItemService itemService;
+
   @MockBean private MenuRepository menuRepository;
 
   @Test
@@ -83,6 +85,8 @@ class ItemControllerTest {
     menu.addOrUpdateCategory(category);
 
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    // when(menuRepository.create(any(Menu.class), any(CreateItemCommand.class)))
+    //    .thenReturn(Optional.of(menu));
     when(menuRepository.save(any(Menu.class))).thenReturn(menu);
 
     CreateItemRequest request =

@@ -1,54 +1,29 @@
 package com.amido.stacks.workloads.menu.handlers;
 
 import com.amido.stacks.workloads.menu.commands.DeleteItemCommand;
-import com.amido.stacks.workloads.menu.domain.Category;
-import com.amido.stacks.workloads.menu.domain.Item;
 import com.amido.stacks.workloads.menu.domain.Menu;
-import com.amido.stacks.workloads.menu.exception.CategoryDoesNotExistException;
-import com.amido.stacks.workloads.menu.exception.ItemDoesNotExistsException;
-import com.amido.stacks.workloads.menu.repository.MenuRepository;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import com.amido.stacks.workloads.menu.service.v1.ItemService;
+import com.amido.stacks.workloads.menu.service.v1.MenuService;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 /** @author ArathyKrishna */
 @Component
 public class DeleteItemHandler extends MenuBaseCommandHandler<DeleteItemCommand> {
 
-  public DeleteItemHandler(MenuRepository menuRepository) {
-    super(menuRepository);
+  protected ItemService itemService;
+
+  public DeleteItemHandler(MenuService menuService, ItemService itemService) {
+    super(menuService);
+    this.itemService = itemService;
   }
 
   @Override
   Optional<UUID> handleCommand(Menu menu, DeleteItemCommand command) {
-    Category category = getCategory(menu, command);
-    Item item = getItem(category, command);
 
-    List<Item> itemList =
-        category.getItems().stream()
-            .filter(t -> !Objects.equals(t, item))
-            .collect(Collectors.toList());
-    category.setItems(!itemList.isEmpty() ? itemList : Collections.emptyList());
-
-    menuRepository.save(menu.addOrUpdateCategory(category));
+    itemService.delete(menu, command);
 
     return Optional.empty();
-  }
-
-  Category getCategory(Menu menu, DeleteItemCommand command) {
-    return findCategory(menu, command.getCategoryId())
-        .orElseThrow(() -> new CategoryDoesNotExistException(command, command.getCategoryId()));
-  }
-
-  Item getItem(Category category, DeleteItemCommand command) {
-    return findItem(category, command.getItemId())
-        .orElseThrow(
-            () ->
-                new ItemDoesNotExistsException(
-                    command, command.getCategoryId(), command.getItemId()));
   }
 }
