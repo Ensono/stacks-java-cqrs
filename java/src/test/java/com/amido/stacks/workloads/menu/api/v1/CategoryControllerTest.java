@@ -70,8 +70,6 @@ class CategoryControllerTest {
 
   @Autowired private TestRestTemplate testRestTemplate;
 
-  // @MockBean private CategoryService categoryService;
-
   @MockBean private MenuRepository menuRepository;
 
   @Test

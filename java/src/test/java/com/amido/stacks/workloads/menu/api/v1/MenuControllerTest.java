@@ -70,7 +70,6 @@ class MenuControllerTest {
   @Autowired private TestRestTemplate testRestTemplate;
 
   @MockBean private MenuRepository menuRepository;
-  // @MockBean private MenuService menuService;
 
   @Test
   void testCreateNewMenu() {
@@ -80,12 +79,10 @@ class MenuControllerTest {
     CreateMenuRequest request =
         new CreateMenuRequest(
             m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
-    // doNothing().when(menuService).verifyMenuNotAlreadyExisting(any(CreateMenuCommand.class));
     when(menuRepository.findAllByRestaurantIdAndName(
             eq(m.getRestaurantId()), eq(m.getName()), any(Pageable.class)))
         .thenReturn(new PageImpl<>(Collections.emptyList()));
     when(menuRepository.save(any(Menu.class))).thenReturn(m);
-    // when(menuService.create(any(Menu.class))).thenReturn(Optional.of(m));
 
     // When
     var response =
@@ -102,7 +99,6 @@ class MenuControllerTest {
     CreateMenuRequest request =
         new CreateMenuRequest(
             m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
-    // doNothing().when(menuService).verifyMenuNotAlreadyExisting(any(CreateMenuCommand.class));
 
     List<Menu> found = new ArrayList<>();
     found.add(m);

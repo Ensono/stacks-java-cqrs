@@ -96,12 +96,14 @@ public class MenuHelperService {
     Optional<Category> optCategory =
         menu.getCategories().stream().filter(c -> c.getName().equals(name)).findFirst();
 
-    if (optCategory.isPresent()) {
+    if (optCategory.isPresent() && isCategoryNullOrPresent(categoryId, optCategory.get())) {
 
-      if (categoryId == null || !optCategory.get().getId().equals(categoryId.toString())) {
-        throw new CategoryAlreadyExistsException(command, name);
-      }
+      throw new CategoryAlreadyExistsException(command, name);
     }
+  }
+
+  public Boolean isCategoryNullOrPresent(UUID categoryId, Category category) {
+    return (categoryId == null || !category.getId().equals(categoryId.toString()));
   }
 
   public void verifyItemNameNotAlreadyExisting(
