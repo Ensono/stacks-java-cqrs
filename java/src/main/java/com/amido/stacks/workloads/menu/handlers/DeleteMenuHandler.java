@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  *
  * @author ArathyKrishna
  */
-
 @Component
 public class DeleteMenuHandler extends MenuBaseCommandHandler<DeleteMenuCommand> {
 

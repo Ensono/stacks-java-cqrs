@@ -13,16 +13,13 @@ public class CreateCategoryHandler extends MenuBaseCommandHandler<CreateCategory
 
   protected CategoryService categoryService;
 
-  public CreateCategoryHandler(MenuService menuService,
-      CategoryService categoryService) {
+  public CreateCategoryHandler(MenuService menuService, CategoryService categoryService) {
     super(menuService);
     this.categoryService = categoryService;
   }
 
   @Override
   Optional<UUID> handleCommand(Menu menu, CreateCategoryCommand command) {
-    categoryService.create(menu, command);
-    return Optional.of(command.getCategoryId());
+    return categoryService.create(menu, command);
   }
-
 }

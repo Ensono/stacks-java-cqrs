@@ -8,16 +8,13 @@ import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
 
-/**
- * @author ArathyKrishna
- */
+/** @author ArathyKrishna */
 @Component
 public class DeleteItemHandler extends MenuBaseCommandHandler<DeleteItemCommand> {
 
   protected ItemService itemService;
 
-  public DeleteItemHandler(MenuService menuService,
-      ItemService itemService) {
+  public DeleteItemHandler(MenuService menuService, ItemService itemService) {
     super(menuService);
     this.itemService = itemService;
   }

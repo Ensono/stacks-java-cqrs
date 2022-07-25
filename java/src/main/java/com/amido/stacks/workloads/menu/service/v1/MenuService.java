@@ -4,6 +4,7 @@ import com.amido.stacks.workloads.menu.commands.CreateMenuCommand;
 import com.amido.stacks.workloads.menu.commands.UpdateMenuCommand;
 import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.exception.MenuAlreadyExistsException;
+import com.amido.stacks.workloads.menu.mappers.cqrs.CreateMenuCommandMapper;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import java.util.Optional;
 import java.util.UUID;
@@ -18,6 +19,8 @@ public class MenuService {
 
   protected MenuRepository menuRepository;
 
+  protected CreateMenuCommandMapper createMenuCommandMapper;
+
   public Optional<Menu> create(Menu menu) {
 
     menuRepository.save(menu);
@@ -25,15 +28,16 @@ public class MenuService {
     return Optional.of(menu);
   }
 
-  public void verifyMenuNotAlreadyExisting(Menu menu, CreateMenuCommand createMenuCommand) {
+  public void verifyMenuNotAlreadyExisting(CreateMenuCommand command) {
+    final Menu menu = createMenuCommandMapper.fromDto(command);
+
     Page<Menu> existing =
         menuRepository.findAllByRestaurantIdAndName(
             menu.getRestaurantId(), menu.getName(), PageRequest.of(0, 1));
     if (!existing.getContent().isEmpty()
         && existing.get().anyMatch(m -> m.getName().equals(menu.getName()))) {
-      throw new MenuAlreadyExistsException(createMenuCommand,
-          UUID.fromString(menu.getRestaurantId()),
-          menu.getName());
+      throw new MenuAlreadyExistsException(
+          command, UUID.fromString(menu.getRestaurantId()), menu.getName());
     }
   }
 

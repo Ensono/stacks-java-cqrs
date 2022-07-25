@@ -22,11 +22,14 @@ import static org.springframework.http.HttpStatus.OK;
 import com.amido.stacks.core.api.dto.ErrorResponse;
 import com.amido.stacks.core.api.dto.response.ResourceCreatedResponse;
 import com.amido.stacks.core.api.dto.response.ResourceUpdatedResponse;
+import com.amido.stacks.workloads.Application;
 import com.amido.stacks.workloads.menu.api.v1.dto.request.CreateCategoryRequest;
 import com.amido.stacks.workloads.menu.api.v1.dto.request.UpdateCategoryRequest;
+import com.amido.stacks.workloads.menu.commands.CreateCategoryCommand;
 import com.amido.stacks.workloads.menu.domain.Category;
 import com.amido.stacks.workloads.menu.domain.Menu;
-import com.amido.stacks.workloads.menu.service.v1.MenuService;
+import com.amido.stacks.workloads.menu.repository.MenuRepository;
+import com.amido.stacks.workloads.menu.service.v1.CategoryService;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
@@ -48,7 +51,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+    classes = Application.class)
 @EnableAutoConfiguration(
     exclude = {
       CosmosRepositoriesAutoConfiguration.class,
@@ -67,13 +72,15 @@ class CategoryControllerTest {
 
   @Autowired private TestRestTemplate testRestTemplate;
 
-  @MockBean private MenuService menuService;
+  @MockBean private CategoryService categoryService;
+
+  @MockBean private MenuRepository menuRepository;
 
   @Test
   void testCanNotAddCategoryIfMenuNotPresent() {
     // Given
     UUID menuId = randomUUID();
-    when(menuService.findById(eq(menuId.toString()))).thenReturn(Optional.empty());
+    when(categoryService.findById(eq(menuId.toString()))).thenReturn(Optional.empty());
 
     CreateCategoryRequest request =
         new CreateCategoryRequest("test Category Name", "test Category Description");
@@ -128,8 +135,9 @@ class CategoryControllerTest {
   void testAddCategory() {
     // Given
     Menu menu = createMenu(1);
-    when(menuService.findById(menu.getId())).thenReturn(Optional.of(menu));
-    when(menuService.create(any(Menu.class))).thenReturn(Optional.of(menu));
+    when(categoryService.findById(menu.getId())).thenReturn(Optional.of(menu));
+    when(categoryService.create(any(Menu.class), any(CreateCategoryCommand.class)))
+        .thenReturn(Optional.of(UUID.fromString(menu.getId())));
 
     CreateCategoryRequest request =
         new CreateCategoryRequest("test Category Name", "test Category Description");
@@ -143,7 +151,7 @@ class CategoryControllerTest {
 
     // Then
     ArgumentCaptor<Menu> captor = ArgumentCaptor.forClass(Menu.class);
-    verify(menuService, times(1)).create(captor.capture());
+    verify(menuRepository, times(1)).save(captor.capture());
     Menu created = captor.getValue();
 
     then(created.getName()).isEqualTo(menu.getName());
@@ -167,7 +175,7 @@ class CategoryControllerTest {
             UUID.randomUUID().toString(), "cat name", "cat description", new ArrayList<>());
     menu.addOrUpdateCategory(category);
 
-    when(menuService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(categoryService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     CreateCategoryRequest request =
         new CreateCategoryRequest(category.getName(), "test Category Description");
@@ -209,7 +217,7 @@ class CategoryControllerTest {
     Menu menu = createMenu(0);
     Category category = createCategory(0);
     menu.addOrUpdateCategory(category);
-    when(menuService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(categoryService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     UpdateCategoryRequest request = new UpdateCategoryRequest("new Category", "new Description");
 
@@ -233,7 +241,7 @@ class CategoryControllerTest {
     then(response.getStatusCode()).isEqualTo(OK);
 
     ArgumentCaptor<Menu> captor = ArgumentCaptor.forClass(Menu.class);
-    verify(menuService, times(1)).create(captor.capture());
+    verify(menuRepository, times(1)).save(captor.capture());
     Menu updated = captor.getValue();
     then(updated.getCategories()).hasSize(1);
     Category updatedCategory = updated.getCategories().get(0);
@@ -245,7 +253,7 @@ class CategoryControllerTest {
   void testCannotUpdateCategoryIfNoMenuExists() {
     // Given
     UUID menuId = randomUUID();
-    when(menuService.findById(eq(menuId.toString()))).thenReturn(Optional.empty());
+    when(categoryService.findById(eq(menuId.toString()))).thenReturn(Optional.empty());
 
     UpdateCategoryRequest request = new UpdateCategoryRequest("new Category", "new Description");
 
@@ -268,7 +276,7 @@ class CategoryControllerTest {
     // Given
     Menu menu = createMenu(0);
     menu.setCategories(null);
-    when(menuService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(categoryService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     UpdateCategoryRequest request = new UpdateCategoryRequest("new Category", "new Description");
 
@@ -297,7 +305,7 @@ class CategoryControllerTest {
     categoryList.get(0).setName("new Category");
 
     menu.setCategories(categoryList);
-    when(menuService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(categoryService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     UpdateCategoryRequest request = new UpdateCategoryRequest("new Category", "new Description");
 
@@ -326,7 +334,7 @@ class CategoryControllerTest {
     Menu menu = createMenu(0);
     List<Category> categories = createCategories(2);
     menu.setCategories(categories);
-    when(menuService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(categoryService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     UpdateCategoryRequest request = new UpdateCategoryRequest("new Category", "new Description");
 
@@ -346,7 +354,7 @@ class CategoryControllerTest {
     then(response.getStatusCode()).isEqualTo(OK);
 
     ArgumentCaptor<Menu> captor = ArgumentCaptor.forClass(Menu.class);
-    verify(menuService, times(1)).create(captor.capture());
+    verify(menuRepository, times(1)).save(captor.capture());
     Menu updated = captor.getValue();
     then(updated.getCategories()).hasSize(2);
     Optional<Category> updatedCategory =
@@ -363,7 +371,7 @@ class CategoryControllerTest {
     Menu menu = createMenu(0);
     List<Category> categoryList = createCategories(2);
     menu.setCategories(categoryList);
-    when(menuService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(categoryService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     UpdateCategoryRequest request =
         new UpdateCategoryRequest(categoryList.get(1).getName(), "new Description");
@@ -387,7 +395,7 @@ class CategoryControllerTest {
     then(response.getStatusCode()).isEqualTo(OK);
 
     ArgumentCaptor<Menu> captor = ArgumentCaptor.forClass(Menu.class);
-    verify(menuService, times(1)).create(captor.capture());
+    verify(menuRepository, times(1)).save(captor.capture());
     Menu updated = captor.getValue();
     then(updated.getCategories()).hasSize(2);
 
@@ -406,7 +414,7 @@ class CategoryControllerTest {
     Menu menu = createMenu(0);
     Category category = createCategory(0);
     menu.addOrUpdateCategory(category);
-    when(menuService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(categoryService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     UpdateCategoryRequest request = new UpdateCategoryRequest("", "new Description");
 
@@ -433,7 +441,7 @@ class CategoryControllerTest {
     Menu menu = createMenu(0);
     Category category = createCategory(0);
     menu.addOrUpdateCategory(category);
-    when(menuService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(categoryService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     UpdateCategoryRequest request = new UpdateCategoryRequest("Updated Name", "");
 
@@ -460,7 +468,7 @@ class CategoryControllerTest {
     Menu menu = createMenu(1);
     Category category = createCategory(0);
     menu.setCategories(List.of(category));
-    when(menuService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(categoryService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     // When
     String requestUrl =
@@ -473,9 +481,9 @@ class CategoryControllerTest {
             ErrorResponse.class);
 
     // Then
-    verify(menuService, times(1)).create(menu);
+    verify(menuRepository, times(1)).save(menu);
     then(response.getStatusCode()).isEqualTo(OK);
-    Optional<Menu> optMenu = menuService.findById(menu.getId());
+    Optional<Menu> optMenu = categoryService.findById(menu.getId());
     Menu updated = optMenu.get();
     then(updated.getCategories()).isNotNull();
   }
@@ -488,7 +496,7 @@ class CategoryControllerTest {
     category.addOrUpdateItem(createItem(0));
     menu.addOrUpdateCategory(category);
 
-    when(menuService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(categoryService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     // When
     String requestUrl =
@@ -503,7 +511,7 @@ class CategoryControllerTest {
     // Then
     then(response.getStatusCode()).isEqualTo(OK);
     ArgumentCaptor<Menu> captor = ArgumentCaptor.forClass(Menu.class);
-    verify(menuService, times(1)).create(captor.capture());
+    verify(menuRepository, times(1)).save(captor.capture());
     Menu updatedMenu = captor.getValue();
     then(updatedMenu.getCategories()).isNotNull();
   }
@@ -514,7 +522,7 @@ class CategoryControllerTest {
     Menu menu = createMenu(1);
     Category category = createCategory(0);
     menu.setCategories(List.of(category));
-    when(menuService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(categoryService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     // When
     String requestUrl =
@@ -527,7 +535,7 @@ class CategoryControllerTest {
             ErrorResponse.class);
 
     // Then
-    verify(menuService, times(0)).create(menu);
+    verify(menuRepository, times(0)).save(menu);
     then(response.getStatusCode()).isEqualTo(NOT_FOUND);
   }
 
@@ -537,7 +545,7 @@ class CategoryControllerTest {
     Menu menu = createMenu(1);
     List<Category> categories = createCategories(2);
     menu.setCategories(categories);
-    when(menuService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(categoryService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     // When
     String requestUrl =
@@ -550,9 +558,9 @@ class CategoryControllerTest {
             ErrorResponse.class);
 
     // Then
-    verify(menuService, times(1)).create(menu);
+    verify(menuRepository, times(1)).save(menu);
     then(response.getStatusCode()).isEqualTo(OK);
-    Optional<Menu> byId = menuService.findById(menu.getId());
+    Optional<Menu> byId = categoryService.findById(menu.getId());
     Menu updatedMenu = byId.get();
     then(updatedMenu.getCategories()).hasSize(1);
   }

@@ -24,7 +24,6 @@ import com.amido.stacks.workloads.menu.api.v1.dto.request.UpdateMenuRequest;
 import com.amido.stacks.workloads.menu.commands.CreateMenuCommand;
 import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.domain.MenuHelper;
-import com.amido.stacks.workloads.menu.mappers.cqrs.CreateMenuCommandMapper;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.amido.stacks.workloads.menu.service.v1.MenuService;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
@@ -55,9 +54,9 @@ import org.springframework.test.context.ActiveProfiles;
     classes = Application.class)
 @EnableAutoConfiguration(
     exclude = {
-        CosmosRepositoriesAutoConfiguration.class,
-        CosmosAutoConfiguration.class,
-        CosmosHealthConfiguration.class
+      CosmosRepositoriesAutoConfiguration.class,
+      CosmosAutoConfiguration.class,
+      CosmosHealthConfiguration.class
     })
 @Tag("Integration")
 @ActiveProfiles("test")
@@ -67,19 +66,12 @@ class MenuControllerTest {
   public static final String UPDATE_MENU = "%s/v1/menu/%s";
   public static final String DELETE_MENU = "%s/v1/menu/%s";
 
-  @LocalServerPort
-  private int port;
+  @LocalServerPort private int port;
 
-  @Autowired
-  private TestRestTemplate testRestTemplate;
+  @Autowired private TestRestTemplate testRestTemplate;
 
-  @MockBean
-  private MenuRepository menuRepository;
-  @MockBean
-  private MenuService menuService;
-  @Autowired
-  private CreateMenuCommandMapper createMenuCommandMapper;
-
+  @MockBean private MenuRepository menuRepository;
+  @MockBean private MenuService menuService;
 
   @Test
   void testCreateNewMenu() {
@@ -89,16 +81,12 @@ class MenuControllerTest {
     CreateMenuRequest request =
         new CreateMenuRequest(
             m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
-    CreateMenuCommand createMenuCommand = new CreateMenuCommand(UUID.randomUUID().toString(),
-        m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
-    doNothing().when(menuService)
-        .verifyMenuNotAlreadyExisting(any(Menu.class), any(CreateMenuCommand.class));
+    doNothing().when(menuService).verifyMenuNotAlreadyExisting(any(CreateMenuCommand.class));
     when(menuRepository.findAllByRestaurantIdAndName(
-        eq(m.getRestaurantId()), eq(m.getName()), any(Pageable.class)))
+            eq(m.getRestaurantId()), eq(m.getName()), any(Pageable.class)))
         .thenReturn(new PageImpl<>(Collections.emptyList()));
     when(menuRepository.save(any(Menu.class))).thenReturn(m);
-    when(menuService.create(any(Menu.class))).thenReturn(
-        Optional.of(m));
+    when(menuService.create(any(Menu.class))).thenReturn(Optional.of(m));
 
     // When
     var response =
@@ -115,8 +103,7 @@ class MenuControllerTest {
     CreateMenuRequest request =
         new CreateMenuRequest(
             m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
-    doNothing().when(menuService)
-        .verifyMenuNotAlreadyExisting(any(Menu.class), any(CreateMenuCommand.class));
+    doNothing().when(menuService).verifyMenuNotAlreadyExisting(any(CreateMenuCommand.class));
 
     // When
     var response =

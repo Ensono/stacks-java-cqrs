@@ -10,6 +10,7 @@ import com.amido.stacks.workloads.menu.mappers.cqrs.CreateItemCommandMapper;
 import com.amido.stacks.workloads.menu.mappers.cqrs.UpdateItemCommandMapper;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.amido.stacks.workloads.menu.service.v1.utility.MenuHelperService;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,28 +24,28 @@ public class ItemService {
   private final CreateItemCommandMapper createItemCommandMapper;
   private final UpdateItemCommandMapper updateItemCommandMapper;
 
-  public void create(Menu menu, CreateItemCommand createItemCommand) {
+  public Optional<Menu> create(Menu menu, CreateItemCommand createItemCommand) {
 
-    Category category = menuHelperService.checkCategoryExistsById(createItemCommand, menu,
-        createItemCommand.getCategoryId());
+    Category category =
+        menuHelperService.checkCategoryExistsById(
+            createItemCommand, menu, createItemCommand.getCategoryId());
 
     UUID itemId = UUID.randomUUID();
 
-    menuHelperService.verifyItemNameNotAlreadyExisting(createItemCommand,
-        createItemCommand.getMenuId(), category,
-        itemId, createItemCommand.getName());
+    menuHelperService.verifyItemNameNotAlreadyExisting(
+        createItemCommand, category, itemId, createItemCommand.getName());
     Item item = createItemCommandMapper.fromDto(createItemCommand);
     item.setId(itemId.toString());
     menuHelperService.addOrUpdateItem(category, item);
     menuRepository.save(menu.addOrUpdateCategory(category));
+    return Optional.of(menu);
   }
 
   public void delete(Menu menu, DeleteItemCommand command) {
 
-    Category category = menuHelperService.checkCategoryExistsById(command, menu,
-        command.getCategoryId());
-    menuHelperService.checkItemExistsById(command,UUID.fromString(menu.getId()), category,
-        command.getItemId());
+    Category category =
+        menuHelperService.checkCategoryExistsById(command, menu, command.getCategoryId());
+    menuHelperService.checkItemExistsById(command, category, command.getItemId());
 
     menuHelperService.removeItem(category, command.getItemId());
     menuRepository.save(menu.addOrUpdateCategory(category));
@@ -52,17 +53,20 @@ public class ItemService {
 
   public void update(Menu menu, UpdateItemCommand command) {
 
-    Category category = menuHelperService.checkCategoryExistsById(command,menu, command.getCategoryId());
+    Category category =
+        menuHelperService.checkCategoryExistsById(command, menu, command.getCategoryId());
 
-    Item item = menuHelperService.checkItemExistsById(command,UUID.fromString(menu.getId()), category,
-        command.getItemId());
+    menuHelperService.checkItemExistsById(command, category, command.getItemId());
 
-    menuHelperService.verifyItemNameNotAlreadyExisting(command,UUID.fromString(menu.getId()), category,
-        command.getItemId(), command.getName());
+    menuHelperService.verifyItemNameNotAlreadyExisting(
+        command, category, command.getItemId(), command.getName());
 
     Item updated = updateItemCommandMapper.fromDto(command);
-    updated.setId(item.getId());
     menuHelperService.addOrUpdateItem(category, updated);
     menuRepository.save(menu);
+  }
+
+  public Optional<Menu> findById(String id) {
+    return menuRepository.findById(id);
   }
 }

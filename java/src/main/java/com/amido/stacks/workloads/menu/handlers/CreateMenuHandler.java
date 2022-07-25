@@ -3,8 +3,8 @@ package com.amido.stacks.workloads.menu.handlers;
 import com.amido.stacks.core.cqrs.handler.CommandHandler;
 import com.amido.stacks.workloads.menu.commands.CreateMenuCommand;
 import com.amido.stacks.workloads.menu.domain.Menu;
-import com.amido.stacks.workloads.menu.mappers.cqrs.CreateMenuCommandMapper;
 import com.amido.stacks.workloads.menu.service.v1.MenuService;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -15,14 +15,21 @@ import org.springframework.stereotype.Component;
 public class CreateMenuHandler implements CommandHandler<CreateMenuCommand> {
 
   protected MenuService menuService;
-  protected CreateMenuCommandMapper createMenuCommandMapper;
 
   @Override
   public Optional<UUID> handle(CreateMenuCommand command) {
-    final Menu menu = createMenuCommandMapper.fromDto(command);
-
-    menuService.verifyMenuNotAlreadyExisting(menu, command);
     final UUID id = UUID.randomUUID();
+
+    final Menu menu =
+        new Menu(
+            id.toString(),
+            command.getRestaurantId().toString(),
+            command.getName(),
+            command.getDescription(),
+            new ArrayList<>(),
+            command.getEnabled());
+
+    menuService.verifyMenuNotAlreadyExisting(command);
 
     menuService.create(menu);
     return Optional.of(id);

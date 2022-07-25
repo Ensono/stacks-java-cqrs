@@ -8,7 +8,6 @@ import com.amido.stacks.workloads.menu.exception.CategoryAlreadyExistsException;
 import com.amido.stacks.workloads.menu.exception.CategoryDoesNotExistException;
 import com.amido.stacks.workloads.menu.exception.ItemAlreadyExistsException;
 import com.amido.stacks.workloads.menu.exception.ItemDoesNotExistsException;
-import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,9 +20,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MenuHelperService {
 
-  private final MenuRepository menuRepository;
-
   public void addOrUpdateCategory(Menu menu, Category category) {
+
     if (menu.getCategories() == null) {
       menu.setCategories(new ArrayList<>());
     }
@@ -67,8 +65,7 @@ public class MenuHelperService {
     return optCategory.get();
   }
 
-  public Item checkItemExistsById(MenuCommand command, UUID menuId, Category category,
-      UUID itemId) {
+  public Item checkItemExistsById(MenuCommand command, Category category, UUID itemId) {
     Optional<Item> optItem =
         category.getItems().stream().filter(i -> itemId.toString().equals(i.getId())).findFirst();
 
@@ -79,8 +76,8 @@ public class MenuHelperService {
     return optItem.get();
   }
 
-  public void verifyCategoryNameNotAlreadyExisting(MenuCommand command, Menu menu, UUID categoryId,
-      String name) {
+  public void verifyCategoryNameNotAlreadyExisting(
+      MenuCommand command, Menu menu, UUID categoryId, String name) {
     Optional<Category> optCategory =
         menu.getCategories().stream().filter(c -> c.getName().equals(name)).findFirst();
 
@@ -89,8 +86,8 @@ public class MenuHelperService {
     }
   }
 
-  public void verifyItemNameNotAlreadyExisting(MenuCommand command,
-      UUID menuId, Category category, UUID itemId, String name) {
+  public void verifyItemNameNotAlreadyExisting(
+      MenuCommand command, Category category, UUID itemId, String name) {
     Optional<Item> optItem =
         category.getItems().stream().filter(c -> c.getName().equals(name)).findFirst();
 

@@ -8,16 +8,13 @@ import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
 
-/**
- * @author ArathyKrishna
- */
+/** @author ArathyKrishna */
 @Component
 public class UpdateItemHandler extends MenuBaseCommandHandler<UpdateItemCommand> {
 
   protected ItemService itemService;
 
-  public UpdateItemHandler(MenuService menuService,
-      ItemService itemService) {
+  public UpdateItemHandler(MenuService menuService, ItemService itemService) {
     super(menuService);
     this.itemService = itemService;
   }

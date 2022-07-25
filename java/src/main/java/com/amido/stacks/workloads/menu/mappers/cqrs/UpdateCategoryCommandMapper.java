@@ -11,6 +11,4 @@ import org.mapstruct.NullValueCheckStrategy;
     componentModel = "spring",
     uses = {MapperUtils.class},
     nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
-public interface UpdateCategoryCommandMapper extends BaseMapper<UpdateCategoryCommand, Category> {
-
-}
+public interface UpdateCategoryCommandMapper extends BaseMapper<UpdateCategoryCommand, Category> {}

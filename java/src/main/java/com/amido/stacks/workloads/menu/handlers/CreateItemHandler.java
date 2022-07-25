@@ -11,8 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CreateItemHandler extends MenuBaseCommandHandler<CreateItemCommand> {
 
-  public CreateItemHandler(MenuService menuService,
-      ItemService itemService) {
+  public CreateItemHandler(MenuService menuService, ItemService itemService) {
     super(menuService);
     this.itemService = itemService;
   }

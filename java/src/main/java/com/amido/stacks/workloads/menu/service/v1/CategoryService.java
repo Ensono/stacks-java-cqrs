@@ -19,16 +19,19 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CategoryService {
 
-  private final MenuHelperService menuHelperServiceV1;
+  private final MenuHelperService menuHelperService;
   protected final MenuRepository menuRepository;
-  private CreateCategoryCommandMapper createCategoryCommandMapper;
-  private UpdateCategoryCommandMapper updateCategoryCommandMapper;
+  protected CreateCategoryCommandMapper createCategoryCommandMapper;
+  protected UpdateCategoryCommandMapper updateCategoryCommandMapper;
 
-  public void create(Menu menu, CreateCategoryCommand command) {
+  public Optional<UUID> create(Menu menu, CreateCategoryCommand command) {
+    menuHelperService.verifyCategoryNameNotAlreadyExisting(
+        command, menu, command.getCategoryId(), command.getName());
     Category category = createCategoryCommandMapper.fromDto(command);
     category.setId(UUID.randomUUID().toString());
-    menuHelperServiceV1.addOrUpdateCategory(menu, category);
+    menuHelperService.addOrUpdateCategory(menu, category);
     menuRepository.save(menu);
+    return Optional.of(command.getCategoryId());
   }
 
   public void delete(Menu menu, DeleteCategoryCommand command) {
@@ -41,24 +44,26 @@ public class CategoryService {
       throw new CategoryDoesNotExistException(command, command.getCategoryId());
     }
 
-    menuHelperServiceV1.removeCategory(menu, command.getCategoryId());
+    menuHelperService.removeCategory(menu, command.getCategoryId());
     menuRepository.save(menu);
-
   }
 
   public void update(Menu menu, UpdateCategoryCommand command) {
 
-//check by Id
-    Category category = menuHelperServiceV1.checkCategoryExistsById(command, menu,
-        command.getCategoryId());
-    //Check By name
-    menuHelperServiceV1.verifyCategoryNameNotAlreadyExisting(command, menu, command.getCategoryId(),
-        command.getName());
+    // check by Id
+    Category category =
+        menuHelperService.checkCategoryExistsById(command, menu, command.getCategoryId());
+    // Check By name
+    menuHelperService.verifyCategoryNameNotAlreadyExisting(
+        command, menu, command.getCategoryId(), command.getName());
 
     Category updatedCategory = updateCategoryCommandMapper.fromDto(command);
     updatedCategory.setItems(category.getItems());
-    menuHelperServiceV1.addOrUpdateCategory(menu, updatedCategory);
+    menuHelperService.addOrUpdateCategory(menu, category);
     menuRepository.save(menu);
+  }
 
+  public Optional<Menu> findById(String id) {
+    return menuRepository.findById(id);
   }
 }
