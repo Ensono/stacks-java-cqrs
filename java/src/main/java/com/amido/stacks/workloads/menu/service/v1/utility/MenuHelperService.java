@@ -96,13 +96,13 @@ public class MenuHelperService {
     Optional<Category> optCategory =
         menu.getCategories().stream().filter(c -> c.getName().equals(name)).findFirst();
 
-    if (optCategory.isPresent() && isCategoryNullOrPresent(categoryId, optCategory.get())) {
+    if (optCategory.isPresent() && isCategoryIdNullOrMatchesId(categoryId, optCategory.get())) {
 
       throw new CategoryAlreadyExistsException(command, name);
     }
   }
 
-  public Boolean isCategoryNullOrPresent(UUID categoryId, Category category) {
+  public boolean isCategoryIdNullOrMatchesId(UUID categoryId, Category category) {
     return (categoryId == null || !category.getId().equals(categoryId.toString()));
   }
 
