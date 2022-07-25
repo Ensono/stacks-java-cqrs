@@ -20,21 +20,29 @@ import org.springframework.stereotype.Service;
 public class CategoryService {
 
   private final MenuHelperService menuHelperService;
-  protected final MenuRepository menuRepository;
-  protected CreateCategoryCommandMapper createCategoryCommandMapper;
-  protected UpdateCategoryCommandMapper updateCategoryCommandMapper;
+  private final MenuRepository menuRepository;
+  private final CreateCategoryCommandMapper createCategoryCommandMapper;
+  private final UpdateCategoryCommandMapper updateCategoryCommandMapper;
 
   public Optional<UUID> create(Menu menu, CreateCategoryCommand command) {
+
     menuHelperService.verifyCategoryNameNotAlreadyExisting(
         command, menu, command.getCategoryId(), command.getName());
+
+    UUID id = UUID.randomUUID();
+
     Category category = createCategoryCommandMapper.fromDto(command);
-    category.setId(UUID.randomUUID().toString());
+    category.setId(id.toString());
+    command.setCategoryId(id);
+
     menuHelperService.addOrUpdateCategory(menu, category);
     menuRepository.save(menu);
+
     return Optional.of(command.getCategoryId());
   }
 
   public void delete(Menu menu, DeleteCategoryCommand command) {
+
     Optional<Category> optCategory =
         menu.getCategories().stream()
             .filter(c -> command.getCategoryId().toString().equals(c.getId()))
@@ -53,13 +61,15 @@ public class CategoryService {
     // check by Id
     Category category =
         menuHelperService.checkCategoryExistsById(command, menu, command.getCategoryId());
+
     // Check By name
     menuHelperService.verifyCategoryNameNotAlreadyExisting(
         command, menu, command.getCategoryId(), command.getName());
 
     Category updatedCategory = updateCategoryCommandMapper.fromDto(command);
     updatedCategory.setItems(category.getItems());
-    menuHelperService.addOrUpdateCategory(menu, category);
+
+    menuHelperService.addOrUpdateCategory(menu, updatedCategory);
     menuRepository.save(menu);
   }
 

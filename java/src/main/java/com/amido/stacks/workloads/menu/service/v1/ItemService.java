@@ -34,10 +34,15 @@ public class ItemService {
 
     menuHelperService.verifyItemNameNotAlreadyExisting(
         createItemCommand, category, itemId, createItemCommand.getName());
+
     Item item = createItemCommandMapper.fromDto(createItemCommand);
     item.setId(itemId.toString());
+
+    createItemCommand.setItemId(itemId);
+
     menuHelperService.addOrUpdateItem(category, item);
     menuRepository.save(menu.addOrUpdateCategory(category));
+
     return Optional.of(menu);
   }
 
@@ -45,6 +50,7 @@ public class ItemService {
 
     Category category =
         menuHelperService.checkCategoryExistsById(command, menu, command.getCategoryId());
+
     menuHelperService.checkItemExistsById(command, category, command.getItemId());
 
     menuHelperService.removeItem(category, command.getItemId());
@@ -63,6 +69,7 @@ public class ItemService {
 
     Item updated = updateItemCommandMapper.fromDto(command);
     menuHelperService.addOrUpdateItem(category, updated);
+
     menuRepository.save(menu);
   }
 

@@ -53,6 +53,11 @@ public class MenuHelperService {
   }
 
   public Category checkCategoryExistsById(MenuCommand command, Menu menu, UUID categoryId) {
+
+    if (menu.getCategories() == null) {
+      menu.setCategories(new ArrayList<>());
+    }
+
     Optional<Category> optCategory =
         menu.getCategories().stream()
             .filter(c -> categoryId.toString().equals(c.getId()))
@@ -66,6 +71,11 @@ public class MenuHelperService {
   }
 
   public Item checkItemExistsById(MenuCommand command, Category category, UUID itemId) {
+
+    if (category.getItems() == null) {
+      category.setItems(new ArrayList<>());
+    }
+
     Optional<Item> optItem =
         category.getItems().stream().filter(i -> itemId.toString().equals(i.getId())).findFirst();
 
@@ -78,16 +88,29 @@ public class MenuHelperService {
 
   public void verifyCategoryNameNotAlreadyExisting(
       MenuCommand command, Menu menu, UUID categoryId, String name) {
+
+    if (menu.getCategories() == null) {
+      menu.setCategories(new ArrayList<>());
+    }
+
     Optional<Category> optCategory =
         menu.getCategories().stream().filter(c -> c.getName().equals(name)).findFirst();
 
-    if (optCategory.isPresent() && !optCategory.get().getId().equals(categoryId.toString())) {
-      throw new CategoryAlreadyExistsException(command, name);
+    if (optCategory.isPresent()) {
+
+      if (categoryId == null || !optCategory.get().getId().equals(categoryId.toString())) {
+        throw new CategoryAlreadyExistsException(command, name);
+      }
     }
   }
 
   public void verifyItemNameNotAlreadyExisting(
       MenuCommand command, Category category, UUID itemId, String name) {
+
+    if (category.getItems() == null) {
+      category.setItems(new ArrayList<>());
+    }
+
     Optional<Item> optItem =
         category.getItems().stream().filter(c -> c.getName().equals(name)).findFirst();
 

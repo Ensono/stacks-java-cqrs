@@ -17,9 +17,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MenuService {
 
-  protected MenuRepository menuRepository;
+  private final MenuRepository menuRepository;
 
-  protected CreateMenuCommandMapper createMenuCommandMapper;
+  private final CreateMenuCommandMapper createMenuCommandMapper;
 
   public Optional<Menu> create(Menu menu) {
 
@@ -29,11 +29,12 @@ public class MenuService {
   }
 
   public void verifyMenuNotAlreadyExisting(CreateMenuCommand command) {
-    final Menu menu = createMenuCommandMapper.fromDto(command);
+    Menu menu = createMenuCommandMapper.fromDto(command);
 
     Page<Menu> existing =
         menuRepository.findAllByRestaurantIdAndName(
             menu.getRestaurantId(), menu.getName(), PageRequest.of(0, 1));
+
     if (!existing.getContent().isEmpty()
         && existing.get().anyMatch(m -> m.getName().equals(menu.getName()))) {
       throw new MenuAlreadyExistsException(
@@ -50,9 +51,11 @@ public class MenuService {
   }
 
   public void update(Menu menu, UpdateMenuCommand command) {
+
     menu.setName(command.getName());
     menu.setDescription(command.getDescription());
     menu.setEnabled(command.getEnabled());
+
     menuRepository.save(menu);
   }
 }

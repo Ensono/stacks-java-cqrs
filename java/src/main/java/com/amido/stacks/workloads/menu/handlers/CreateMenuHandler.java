@@ -14,13 +14,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class CreateMenuHandler implements CommandHandler<CreateMenuCommand> {
 
-  protected MenuService menuService;
+  private final MenuService menuService;
 
   @Override
   public Optional<UUID> handle(CreateMenuCommand command) {
-    final UUID id = UUID.randomUUID();
+    UUID id = UUID.randomUUID();
 
-    final Menu menu =
+    Menu menu =
         new Menu(
             id.toString(),
             command.getRestaurantId().toString(),

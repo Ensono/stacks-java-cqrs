@@ -8,7 +8,6 @@ import static java.util.UUID.fromString;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -21,15 +20,15 @@ import com.amido.stacks.core.api.dto.response.ResourceUpdatedResponse;
 import com.amido.stacks.workloads.Application;
 import com.amido.stacks.workloads.menu.api.v1.dto.request.CreateMenuRequest;
 import com.amido.stacks.workloads.menu.api.v1.dto.request.UpdateMenuRequest;
-import com.amido.stacks.workloads.menu.commands.CreateMenuCommand;
 import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.domain.MenuHelper;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
-import com.amido.stacks.workloads.menu.service.v1.MenuService;
 import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration;
 import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.Tag;
@@ -71,7 +70,7 @@ class MenuControllerTest {
   @Autowired private TestRestTemplate testRestTemplate;
 
   @MockBean private MenuRepository menuRepository;
-  @MockBean private MenuService menuService;
+  // @MockBean private MenuService menuService;
 
   @Test
   void testCreateNewMenu() {
@@ -81,12 +80,12 @@ class MenuControllerTest {
     CreateMenuRequest request =
         new CreateMenuRequest(
             m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
-    doNothing().when(menuService).verifyMenuNotAlreadyExisting(any(CreateMenuCommand.class));
+    // doNothing().when(menuService).verifyMenuNotAlreadyExisting(any(CreateMenuCommand.class));
     when(menuRepository.findAllByRestaurantIdAndName(
             eq(m.getRestaurantId()), eq(m.getName()), any(Pageable.class)))
         .thenReturn(new PageImpl<>(Collections.emptyList()));
     when(menuRepository.save(any(Menu.class))).thenReturn(m);
-    when(menuService.create(any(Menu.class))).thenReturn(Optional.of(m));
+    // when(menuService.create(any(Menu.class))).thenReturn(Optional.of(m));
 
     // When
     var response =
@@ -103,7 +102,13 @@ class MenuControllerTest {
     CreateMenuRequest request =
         new CreateMenuRequest(
             m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
-    doNothing().when(menuService).verifyMenuNotAlreadyExisting(any(CreateMenuCommand.class));
+    // doNothing().when(menuService).verifyMenuNotAlreadyExisting(any(CreateMenuCommand.class));
+
+    List<Menu> found = new ArrayList<>();
+    found.add(m);
+
+    when(menuRepository.findAllByRestaurantIdAndName(any(), any(), any()))
+        .thenReturn(new PageImpl<>(found));
 
     // When
     var response =
@@ -180,7 +185,7 @@ class MenuControllerTest {
     then(updated.getRestaurantId()).isEqualTo(menu.getRestaurantId());
 
     then(response).isNotNull();
-    then(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    then(response.getStatusCode()).isEqualTo(OK);
   }
 
   @Test
@@ -252,7 +257,7 @@ class MenuControllerTest {
   void testDeleteMenuSuccess() {
     // Given
     Menu menu = MenuHelper.createMenu(1);
-    when(menuService.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     var response =
         this.testRestTemplate.exchange(
@@ -261,7 +266,7 @@ class MenuControllerTest {
             new HttpEntity<>(getRequestHttpEntity()),
             ResponseEntity.class);
     // Then
-    verify(menuService, times(1)).delete(menu);
+    verify(menuRepository, times(1)).delete(menu);
     then(response.getStatusCode()).isEqualTo(OK);
   }
 
