@@ -26,9 +26,4 @@ public class DeleteItemHandler extends MenuBaseCommandHandler<DeleteItemCommand>
 
     return Optional.empty();
   }
-
-  @Override
-  public Optional<UUID> handle(DeleteItemCommand deleteItemCommand) {
-    return Optional.empty();
-  }
 }

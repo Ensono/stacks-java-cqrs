@@ -24,10 +24,4 @@ public class CreateItemHandler extends MenuBaseCommandHandler<CreateItemCommand>
     itemService.create(menu, command);
     return Optional.of(command.getItemId());
   }
-
-  @Override
-  public Optional<UUID> handle(CreateItemCommand createItemCommand) {
-
-    return Optional.empty();
-  }
 }

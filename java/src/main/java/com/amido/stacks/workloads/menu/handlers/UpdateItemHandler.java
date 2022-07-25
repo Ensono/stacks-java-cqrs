@@ -25,9 +25,4 @@ public class UpdateItemHandler extends MenuBaseCommandHandler<UpdateItemCommand>
     itemService.update(menu, command);
     return Optional.of(command.getItemId());
   }
-
-  @Override
-  public Optional<UUID> handle(UpdateItemCommand updateItemCommand) {
-    return Optional.empty();
-  }
 }

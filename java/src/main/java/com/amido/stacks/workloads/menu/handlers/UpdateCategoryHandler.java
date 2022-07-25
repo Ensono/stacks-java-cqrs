@@ -24,9 +24,4 @@ public class UpdateCategoryHandler extends MenuBaseCommandHandler<UpdateCategory
     categoryService.update(menu, command);
     return Optional.of(command.getCategoryId());
   }
-
-  @Override
-  public Optional<UUID> handle(UpdateCategoryCommand updateCategoryCommand) {
-    return Optional.empty();
-  }
 }

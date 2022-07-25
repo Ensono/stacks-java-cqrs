@@ -24,9 +24,4 @@ public class DeleteCategoryHandler extends MenuBaseCommandHandler<DeleteCategory
     categoryService.delete(menu, command);
     return Optional.empty();
   }
-
-  @Override
-  public Optional<UUID> handle(DeleteCategoryCommand deleteCategoryCommand) {
-    return Optional.empty();
-  }
 }
