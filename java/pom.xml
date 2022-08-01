@@ -353,6 +353,19 @@
         <aws.profile.name>aws</aws.profile.name>
       </properties>
       <dependencies>
+        <dependency>
+          <groupId>org.aspectj</groupId>
+          <artifactId>aspectjweaver</artifactId>
+          <version>1.9.9</version>
+          <scope>runtime</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+        <dependency>
+          <groupId>org.aspectj</groupId>
+          <artifactId>aspectjrt</artifactId>
+          <version>1.9.9</version>
+          <scope>runtime</scope>
+        </dependency>
       </dependencies>
     </profile>
 
