@@ -1,0 +1,11 @@
+azure:
+  application-insights:
+    instrumentation-key: xxxxxx
+    enabled: false
+  keyvault:
+    enabled: false
+    uri: https://amido-stacks-tmp.vault.azure.net/
+    client-id: xxxxxx
+    client-key: xxxxxx
+    tenant-id: xxxxxx
+
