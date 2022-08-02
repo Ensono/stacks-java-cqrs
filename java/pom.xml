@@ -20,8 +20,14 @@
 
   <properties>
     <!-- Stacks versions -->
+    <!-- Stacks features -->
+    <aws.profile.name>no-aws</aws.profile.name>
+    <azure.profile.name>no-azure</azure.profile.name>
+    <cosmosdb.profile.name>no-cosmosdb</cosmosdb.profile.name>
+    <dynamodb.profile.name>no-dynamodb</dynamodb.profile.name>
+
     <stacks.core.commons.version>1.0.3</stacks.core.commons.version>
-    <stacks.core.api.version>1.0.2.2-RELEASE</stacks.core.api.version>
+    <stacks.core.api.version>1.0.3.2-RELEASE</stacks.core.api.version>
     <stacks.azure.cosmos.version>1.0.0</stacks.azure.cosmos.version>
     <stacks.core.cqrs.version>1.0.0</stacks.core.cqrs.version>
 
@@ -31,10 +37,9 @@
     <applicationinsights.version>2.6.3</applicationinsights.version>
     <cosmosdb.version>3.6.0</cosmosdb.version>
     <azure.springboot.version>3.6.0</azure.springboot.version>
-    <azure.messaging-servicebus.version>7.3.0</azure.messaging-servicebus.version>
     <jackson.version>2.12.3</jackson.version>
     <mockito.version>3.11.2</mockito.version>
-    <lombok.version>1.18.20</lombok.version>
+    <lombok.version>1.18.24</lombok.version>
     <hamcrest.version>2.2</hamcrest.version>
     <pitest.version>1.6.7</pitest.version>
     <jacoco.version>0.8.7</jacoco.version>
@@ -56,14 +61,6 @@
     <spotbugs.version>4.5.2</spotbugs.version>
     <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
 
-    <!-- Set 'pact.broker.url' and 'pact.broker.token' -->
-    <!--        <pact.broker.url></pact.broker.url>-->
-    <!--        <pact.broker.token></pact.broker.token>-->
-    <!--        <pact.api.name>JavaMenuAPI</pact.api.name>-->
-    <!--        <pact.api.protocol>http</pact.api.protocol>-->
-    <!--        <pact.api.host>localhost</pact.api.host>-->
-    <!--        <pact.api.port>9000</pact.api.port>-->
-    <!--        <pact.version>3.5.24</pact.version>-->
     <pact.provider.spring.version>4.0.10</pact.provider.spring.version>
     <pact.consumer.version>4.3.2</pact.consumer.version>
 
@@ -94,11 +91,7 @@
       <artifactId>stacks-core-commons</artifactId>
       <version>${stacks.core.commons.version}</version>
     </dependency>
-    <dependency>
-      <groupId>com.amido.stacks.modules</groupId>
-      <artifactId>stacks-azure-cosmos</artifactId>
-      <version>${stacks.azure.cosmos.version}</version>
-    </dependency>
+
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-api</artifactId>
@@ -252,36 +245,6 @@
         </executions>
       </plugin>
 
-      <!--            <plugin>-->
-      <!--                <groupId>au.com.dius.pact.provider</groupId>-->
-      <!--                <artifactId>maven</artifactId>-->
-      <!--                <version>4.2.7</version>-->
-      <!--                <configuration>-->
-      <!--                    <pactBrokerUrl>${pact.broker.url}</pactBrokerUrl>-->
-      <!--                    <pactBrokerToken>${pact.broker.token}</pactBrokerToken>-->
-      <!--                    <systemPropertyVariables>-->
-      <!--                        <pact.verifier.publishResults>true</pact.verifier.publishResults>-->
-      <!--                    </systemPropertyVariables>-->
-
-      <!--                    <serviceProviders>-->
-      <!--                        <serviceProvider>-->
-      <!--                            <name>${pact.api.name}</name>-->
-      <!--                            <protocol>${pact.api.protocol}</protocol>-->
-      <!--                            <host>${pact.api.host}</host>-->
-      <!--                            <port>${pact.api.port}</port>-->
-      <!--                        </serviceProvider>-->
-      <!--                    </serviceProviders>-->
-
-      <!--                </configuration>-->
-      <!--                <executions>-->
-      <!--                    <execution>-->
-      <!--                        <phase>integration-test</phase>-->
-      <!--                        <goals>-->
-      <!--                            <goal>verify</goal>-->
-      <!--                        </goals>-->
-      <!--                    </execution>-->
-      <!--                </executions>-->
-      <!--            </plugin>-->
 
       <plugin>
         <groupId>com.coveo</groupId>
@@ -378,6 +341,64 @@
   </build>
 
   <profiles>
+    <!-- START FEATURE PROFILES -->
+    <profile>
+      <id>aws</id>
+      <activation>
+        <file>
+          <exists>.</exists>
+        </file>
+      </activation>
+      <properties>
+        <aws.profile.name>aws</aws.profile.name>
+      </properties>
+      <dependencies>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>azure</id>
+      <activation>
+        <file>
+          <exists>.</exists>
+        </file>
+      </activation>
+      <properties>
+        <azure.profile.name>azure</azure.profile.name>
+      </properties>
+      <dependencies>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>cosmosdb</id>
+      <activation>
+        <file>
+          <exists>.</exists>
+        </file>
+      </activation>
+      <properties>
+        <cosmosdb.profile.name>cosmosdb</cosmosdb.profile.name>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.amido.stacks.modules</groupId>
+          <artifactId>stacks-azure-cosmos</artifactId>
+          <version>${stacks.azure.cosmos.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>dynamodb</id>
+      <properties>
+        <dynamodb.profile.name>dynamodb</dynamodb.profile.name>
+      </properties>
+      <dependencies>
+      </dependencies>
+    </profile>
+
+    <!-- END FEATURE PROFILES -->
 
     <profile>
       <id>owasp-dependency-check</id>
