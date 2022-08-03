@@ -26,7 +26,7 @@ public interface MenuRepository extends StacksCosmosRepository<Menu> {
    * searchTerm. Pagination and sorting is done by spring data JPA.
    *
    * @param searchTerm Menu name
-   * @param pageable   pagination
+   * @param pageable pagination
    * @return page of menu
    */
   Page<Menu> findAllByNameContaining(String searchTerm, Pageable pageable);
@@ -36,8 +36,8 @@ public interface MenuRepository extends StacksCosmosRepository<Menu> {
    * restaurantId and searchTerm. Pagination and sorting is done by spring data JPA.
    *
    * @param restaurantId tenantID/RestaurantId
-   * @param searchTerm   Menu name
-   * @param pageable     pagination
+   * @param searchTerm Menu name
+   * @param pageable pagination
    * @return page of menu
    */
   Page<Menu> findAllByRestaurantIdAndNameContaining(
