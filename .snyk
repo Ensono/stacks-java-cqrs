@@ -21,3 +21,12 @@ ignore:
         - '*':
             reason: Use of the library is consistent with commercial use as we are not making changes, only consuming it as part of commercial work.
             expires: '2030-01-01T00:00:00.000Z'
+    SNYK:LIC:MAVEN:ORG.ASPECTJ:ASPECTJWEAVER:EPL-1.0:
+        - '*':
+            reason: Use of the library is consistent with commercial use as we are not making changes, only consuming it as part of commercial work.
+            expires: '2030-01-01T00:00:00.000Z'
+    SNYK:LIC:MAVEN:ORG.ASPECTJ:ASPECTJRT:EPL-1.0:
+        - '*':
+            reason: Use of the library is consistent with commercial use as we are not making changes, only consuming it as part of commercial work.
+            expires: '2030-01-01T00:00:00.000Z'
+
