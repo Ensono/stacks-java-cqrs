@@ -88,12 +88,6 @@
 
   <dependencies>
 
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjrt</artifactId>
-      <version>1.9.9.1</version>
-    </dependency>
-
     <!-- https://security.snyk.io/vuln/SNYK-JAVA-COMGOOGLECODEGSON-1730327 -->
     <dependency>
       <groupId>com.google.code.gson</groupId>
