@@ -1,6 +1,13 @@
 spring:
+  profiles:
+    include:
+      - "@aws.profile.name@"
+      - "@azure.profile.name@"
+      - "@cosmosdb.profile.name@"
+      - "@dynamodb.profile.name@"
+
   application:
-    name: stacks-api-cqrs
+    name: com.amido.stacks-api-cqrs-events
   data:
     rest:
       detection-strategy: annotated
@@ -31,18 +38,3 @@ springdoc:
       enabled: true
     enabled: true
     path: /swagger/oas-json
-
-azure:
-  cosmos:
-    uri: https://localhost:8081
-    database: Stacks
-    key: ${COSMOSDB_KEY}
-  application-insights:
-    instrumentation-key: xxxxxx
-    enabled: false
-  keyvault:
-    enabled: false
-    uri: https://amido-stacks-tmp.vault.azure.net/
-    client-id: xxxxxx
-    client-key: xxxxxx
-    tenant-id: xxxxxx
