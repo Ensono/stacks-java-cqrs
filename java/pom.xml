@@ -23,7 +23,7 @@
     <!-- Stacks versions -->
     <stacks.core.commons.version>1.0.3</stacks.core.commons.version>
     <stacks.core.api.version>1.0.3.2-RELEASE</stacks.core.api.version>
-    <stacks.azure.cosmos.version>1.0.0</stacks.azure.cosmos.version>
+    <stacks.azure.cosmos.version>2.0.0</stacks.azure.cosmos.version>
     <stacks.core.cqrs.version>1.0.0</stacks.core.cqrs.version>
     <aws-java-sdk-s3.version>1.12.273</aws-java-sdk-s3.version>
 
@@ -100,7 +100,6 @@
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-azure-cosmos</artifactId>
       <version>${stacks.azure.cosmos.version}</version>
-
     </dependency>
 
     <dependency>
@@ -162,6 +161,17 @@
       <artifactId>aspectjweaver</artifactId>
       <version>1.9.9.1</version>
     </dependency>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-s3</artifactId>
+      <version>1.12.275</version>
+    </dependency>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-s3</artifactId>
+      <version>1.12.275</version>
+    </dependency>
+
 
   </dependencies>
 
