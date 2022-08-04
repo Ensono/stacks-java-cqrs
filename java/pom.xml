@@ -98,13 +98,6 @@
 
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
-      <artifactId>stacks-azure-cosmos</artifactId>
-      <version>${stacks.azure.cosmos.version}</version>
-
-    </dependency>
-
-    <dependency>
-      <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-api</artifactId>
       <version>${stacks.core.api.version}</version>
     </dependency>
