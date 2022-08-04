@@ -89,7 +89,7 @@
     </dependency>
 
     <!-- STACKS dependencies -->
-    
+
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-commons</artifactId>
@@ -100,12 +100,7 @@
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-azure-cosmos</artifactId>
       <version>${stacks.azure.cosmos.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.aspectj</groupId>
-          <artifactId>aspectjweaver</artifactId>
-        </exclusion>
-      </exclusions>
+
     </dependency>
 
     <dependency>
@@ -151,10 +146,18 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.amazonaws</groupId>
-      <artifactId>aws-java-sdk-s3</artifactId>
-      <version>${aws-java-sdk-s3.version}</version>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>1.9.9.1</version>
+      <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.9.9.1</version>
+      <scope>test</scope>
+    </dependency>
+
 
   </dependencies>
 
