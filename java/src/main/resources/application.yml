@@ -7,7 +7,7 @@ spring:
       - "@dynamodb.profile.name@"
 
   application:
-    name: com.amido.stacks-api-cqrs-events
+    name: com.amido.stacks-api-cqrs
   data:
     rest:
       detection-strategy: annotated
