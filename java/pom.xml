@@ -107,11 +107,18 @@
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-api</artifactId>
       <version>${stacks.core.api.version}</version>
+
     </dependency>
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-cqrs</artifactId>
       <version>${stacks.core.cqrs.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.aspectj</groupId>
+          <artifactId>aspectjweaver</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- Spring dependencies -->
