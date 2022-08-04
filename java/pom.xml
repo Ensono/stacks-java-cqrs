@@ -19,12 +19,19 @@
   <description>Demo project for Java with CQRS</description>
 
   <properties>
+
     <!-- Stacks versions -->
     <stacks.core.commons.version>1.0.3</stacks.core.commons.version>
     <stacks.core.api.version>1.0.3.2-RELEASE</stacks.core.api.version>
     <stacks.azure.cosmos.version>2.0.0</stacks.azure.cosmos.version>
     <stacks.core.cqrs.version>1.0.0</stacks.core.cqrs.version>
     <aws-java-sdk-s3.version>1.12.273</aws-java-sdk-s3.version>
+
+    <!-- Stacks features -->
+    <aws.profile.name>no-aws</aws.profile.name>
+    <azure.profile.name>no-azure</azure.profile.name>
+    <cosmosdb.profile.name>no-cosmosdb</cosmosdb.profile.name>
+    <dynamodb.profile.name>no-dynamodb</dynamodb.profile.name>
 
     <java.version>11</java.version>
     <org.projectlombok.version>1.18.24</org.projectlombok.version>
@@ -57,23 +64,8 @@
     <spotbugs.version>4.5.2</spotbugs.version>
     <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
 
-    <!-- Set 'pact.broker.url' and 'pact.broker.token' -->
-    <!--        <pact.broker.url></pact.broker.url>-->
-    <!--        <pact.broker.token></pact.broker.token>-->
-    <!--        <pact.api.name>JavaMenuAPI</pact.api.name>-->
-    <!--        <pact.api.protocol>http</pact.api.protocol>-->
-    <!--        <pact.api.host>localhost</pact.api.host>-->
-    <!--        <pact.api.port>9000</pact.api.port>-->
-    <!--        <pact.version>3.5.24</pact.version>-->
     <pact.provider.spring.version>4.0.10</pact.provider.spring.version>
     <pact.consumer.version>4.3.2</pact.consumer.version>
-    <!-- Stacks versions -->
-
-    <!-- Stacks features -->
-    <aws.profile.name>no-aws</aws.profile.name>
-    <azure.profile.name>no-azure</azure.profile.name>
-    <cosmosdb.profile.name>no-cosmosdb</cosmosdb.profile.name>
-    <dynamodb.profile.name>no-dynamodb</dynamodb.profile.name>
 
   </properties>
 
@@ -97,26 +89,29 @@
     </dependency>
 
     <!-- STACKS dependencies -->
+    
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-commons</artifactId>
       <version>${stacks.core.commons.version}</version>
     </dependency>
+
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-azure-cosmos</artifactId>
       <version>${stacks.azure.cosmos.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.amido.stacks.modules</groupId>
-      <artifactId>stacks-core-api</artifactId>
-      <version>${stacks.core.api.version}</version>
       <exclusions>
         <exclusion>
           <groupId>org.aspectj</groupId>
           <artifactId>aspectjweaver</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>com.amido.stacks.modules</groupId>
+      <artifactId>stacks-core-api</artifactId>
+      <version>${stacks.core.api.version}</version>
     </dependency>
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
@@ -270,37 +265,6 @@
           </execution>
         </executions>
       </plugin>
-
-      <!--            <plugin>-->
-      <!--                <groupId>au.com.dius.pact.provider</groupId>-->
-      <!--                <artifactId>maven</artifactId>-->
-      <!--                <version>4.2.7</version>-->
-      <!--                <configuration>-->
-      <!--                    <pactBrokerUrl>${pact.broker.url}</pactBrokerUrl>-->
-      <!--                    <pactBrokerToken>${pact.broker.token}</pactBrokerToken>-->
-      <!--                    <systemPropertyVariables>-->
-      <!--                        <pact.verifier.publishResults>true</pact.verifier.publishResults>-->
-      <!--                    </systemPropertyVariables>-->
-
-      <!--                    <serviceProviders>-->
-      <!--                        <serviceProvider>-->
-      <!--                            <name>${pact.api.name}</name>-->
-      <!--                            <protocol>${pact.api.protocol}</protocol>-->
-      <!--                            <host>${pact.api.host}</host>-->
-      <!--                            <port>${pact.api.port}</port>-->
-      <!--                        </serviceProvider>-->
-      <!--                    </serviceProviders>-->
-
-      <!--                </configuration>-->
-      <!--                <executions>-->
-      <!--                    <execution>-->
-      <!--                        <phase>integration-test</phase>-->
-      <!--                        <goals>-->
-      <!--                            <goal>verify</goal>-->
-      <!--                        </goals>-->
-      <!--                    </execution>-->
-      <!--                </executions>-->
-      <!--            </plugin>-->
 
       <plugin>
         <groupId>com.coveo</groupId>
