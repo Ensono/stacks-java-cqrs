@@ -1,5 +1,6 @@
 package com.amido.stacks.workloads.menu.repository;
 
+import com.amido.stacks.cosmosdb.repository.StacksCosmosRepository;
 import com.amido.stacks.workloads.menu.domain.Menu;
 import com.azure.spring.data.cosmos.repository.CosmosRepository;
 import org.springframework.data.domain.Page;
@@ -7,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MenuRepository extends CosmosRepository<Menu, String> {
+public interface MenuRepository extends StacksCosmosRepository<Menu> {
 
   @Override
   Menu save(Menu menu);

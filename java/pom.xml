@@ -24,6 +24,7 @@
     <stacks.core.api.version>1.0.3.2-RELEASE</stacks.core.api.version>
     <stacks.azure.cosmos.version>2.0.0</stacks.azure.cosmos.version>
     <stacks.core.cqrs.version>1.0.0</stacks.core.cqrs.version>
+    <aws-java-sdk-s3.version>1.12.273</aws-java-sdk-s3.version>
 
     <java.version>11</java.version>
     <org.projectlombok.version>1.18.24</org.projectlombok.version>
@@ -110,6 +111,12 @@
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-api</artifactId>
       <version>${stacks.core.api.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.aspectj</groupId>
+          <artifactId>aspectjweaver</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
@@ -147,6 +154,11 @@
       <artifactId>consumer</artifactId>
       <version>${pact.consumer.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-s3</artifactId>
+      <version>${aws-java-sdk-s3.version}</version>
     </dependency>
 
   </dependencies>
