@@ -19,14 +19,21 @@
   <description>Demo project for Java with CQRS</description>
 
   <properties>
+
     <!-- Stacks versions -->
     <stacks.core.commons.version>1.0.3</stacks.core.commons.version>
-    <stacks.core.api.version>1.0.2.2-RELEASE</stacks.core.api.version>
-    <stacks.azure.cosmos.version>1.0.0</stacks.azure.cosmos.version>
+    <stacks.core.api.version>1.0.3.2-RELEASE</stacks.core.api.version>
+    <stacks.azure.cosmos.version>2.0.0</stacks.azure.cosmos.version>
     <stacks.core.cqrs.version>1.0.0</stacks.core.cqrs.version>
 
+    <!-- Stacks features -->
+    <aws.profile.name>no-aws</aws.profile.name>
+    <azure.profile.name>no-azure</azure.profile.name>
+    <cosmosdb.profile.name>no-cosmosdb</cosmosdb.profile.name>
+    <dynamodb.profile.name>no-dynamodb</dynamodb.profile.name>
+
     <java.version>11</java.version>
-    <org.projectlombok.version>1.18.0</org.projectlombok.version>
+    <org.projectlombok.version>1.18.24</org.projectlombok.version>
     <org.springdoc-openapi.version>1.5.9</org.springdoc-openapi.version>
     <applicationinsights.version>2.6.3</applicationinsights.version>
     <cosmosdb.version>3.6.0</cosmosdb.version>
@@ -48,6 +55,7 @@
     <io-projectreactor-netty.version>1.0.8</io-projectreactor-netty.version>
     <log4j-version>2.17.0</log4j-version>
     <org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
+    <aws-java-sdk-s3.version>1.12.273</aws-java-sdk-s3.version>
 
     <fmt-maven-plugin.version>2.11</fmt-maven-plugin.version>
     <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
@@ -56,14 +64,6 @@
     <spotbugs.version>4.5.2</spotbugs.version>
     <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
 
-    <!-- Set 'pact.broker.url' and 'pact.broker.token' -->
-    <!--        <pact.broker.url></pact.broker.url>-->
-    <!--        <pact.broker.token></pact.broker.token>-->
-    <!--        <pact.api.name>JavaMenuAPI</pact.api.name>-->
-    <!--        <pact.api.protocol>http</pact.api.protocol>-->
-    <!--        <pact.api.host>localhost</pact.api.host>-->
-    <!--        <pact.api.port>9000</pact.api.port>-->
-    <!--        <pact.version>3.5.24</pact.version>-->
     <pact.provider.spring.version>4.0.10</pact.provider.spring.version>
     <pact.consumer.version>4.3.2</pact.consumer.version>
 
@@ -77,7 +77,18 @@
         <version>2020.0.14</version>
         <type>pom</type>
       </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aspects</artifactId>
+        <exclusions>
+          <exclusion>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
     </dependencies>
+
   </dependencyManagement>
 
   <dependencies>
@@ -89,21 +100,19 @@
     </dependency>
 
     <!-- STACKS dependencies -->
+
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-commons</artifactId>
       <version>${stacks.core.commons.version}</version>
     </dependency>
-    <dependency>
-      <groupId>com.amido.stacks.modules</groupId>
-      <artifactId>stacks-azure-cosmos</artifactId>
-      <version>${stacks.azure.cosmos.version}</version>
-    </dependency>
+
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-api</artifactId>
       <version>${stacks.core.api.version}</version>
     </dependency>
+
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-cqrs</artifactId>
@@ -123,23 +132,39 @@
       <artifactId>log4j-api</artifactId>
       <version>${log4j-version}</version>
     </dependency>
+
     <dependency>
       <groupId>nl.jqno.equalsverifier</groupId>
       <artifactId>equalsverifier</artifactId>
       <version>${equals-verifier.version}</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>au.com.dius</groupId>
       <artifactId>pact-jvm-provider-spring</artifactId>
       <version>${pact.provider.spring.version}</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>au.com.dius.pact</groupId>
       <artifactId>consumer</artifactId>
       <version>${pact.consumer.version}</version>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>1.9.9.1</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-s3</artifactId>
+      <version>${aws-java-sdk-s3.version}</version>
     </dependency>
 
   </dependencies>
@@ -252,37 +277,6 @@
         </executions>
       </plugin>
 
-      <!--            <plugin>-->
-      <!--                <groupId>au.com.dius.pact.provider</groupId>-->
-      <!--                <artifactId>maven</artifactId>-->
-      <!--                <version>4.2.7</version>-->
-      <!--                <configuration>-->
-      <!--                    <pactBrokerUrl>${pact.broker.url}</pactBrokerUrl>-->
-      <!--                    <pactBrokerToken>${pact.broker.token}</pactBrokerToken>-->
-      <!--                    <systemPropertyVariables>-->
-      <!--                        <pact.verifier.publishResults>true</pact.verifier.publishResults>-->
-      <!--                    </systemPropertyVariables>-->
-
-      <!--                    <serviceProviders>-->
-      <!--                        <serviceProvider>-->
-      <!--                            <name>${pact.api.name}</name>-->
-      <!--                            <protocol>${pact.api.protocol}</protocol>-->
-      <!--                            <host>${pact.api.host}</host>-->
-      <!--                            <port>${pact.api.port}</port>-->
-      <!--                        </serviceProvider>-->
-      <!--                    </serviceProviders>-->
-
-      <!--                </configuration>-->
-      <!--                <executions>-->
-      <!--                    <execution>-->
-      <!--                        <phase>integration-test</phase>-->
-      <!--                        <goals>-->
-      <!--                            <goal>verify</goal>-->
-      <!--                        </goals>-->
-      <!--                    </execution>-->
-      <!--                </executions>-->
-      <!--            </plugin>-->
-
       <plugin>
         <groupId>com.coveo</groupId>
         <artifactId>fmt-maven-plugin</artifactId>
@@ -378,6 +372,63 @@
   </build>
 
   <profiles>
+    <!-- START FEATURE PROFILES -->
+    <profile>
+      <id>aws</id>
+      <activation>
+        <file>
+          <exists>.</exists>
+        </file>
+      </activation>
+      <properties>
+        <aws.profile.name>aws</aws.profile.name>
+      </properties>
+
+    </profile>
+
+    <profile>
+      <id>azure</id>
+      <activation>
+        <file>
+          <exists>.</exists>
+        </file>
+      </activation>
+      <properties>
+        <azure.profile.name>azure</azure.profile.name>
+      </properties>
+      <dependencies>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>cosmosdb</id>
+      <activation>
+        <file>
+          <exists>.</exists>
+        </file>
+      </activation>
+      <properties>
+        <cosmosdb.profile.name>cosmosdb</cosmosdb.profile.name>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.amido.stacks.modules</groupId>
+          <artifactId>stacks-azure-cosmos</artifactId>
+          <version>${stacks.azure.cosmos.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>dynamodb</id>
+      <properties>
+        <dynamodb.profile.name>dynamodb</dynamodb.profile.name>
+      </properties>
+      <dependencies>
+      </dependencies>
+    </profile>
+
+    <!-- END FEATURE PROFILES -->
 
     <profile>
       <id>owasp-dependency-check</id>
