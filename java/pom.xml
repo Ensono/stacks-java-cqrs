@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.5.2</version>
+    <version>2.6.1</version>
     <relativePath/>
     <!-- lookup parent from repository -->
   </parent>
@@ -62,14 +62,6 @@
     <spotbugs.version>4.5.2</spotbugs.version>
     <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
 
-    <!-- Set 'pact.broker.url' and 'pact.broker.token' -->
-    <!--        <pact.broker.url></pact.broker.url>-->
-    <!--        <pact.broker.token></pact.broker.token>-->
-    <!--        <pact.api.name>JavaMenuAPI</pact.api.name>-->
-    <!--        <pact.api.protocol>http</pact.api.protocol>-->
-    <!--        <pact.api.host>localhost</pact.api.host>-->
-    <!--        <pact.api.port>9000</pact.api.port>-->
-    <!--        <pact.version>3.5.24</pact.version>-->
     <pact.provider.spring.version>4.0.10</pact.provider.spring.version>
     <pact.consumer.version>4.3.2</pact.consumer.version>
 
@@ -96,21 +88,25 @@
     </dependency>
 
     <!-- STACKS dependencies -->
+
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-commons</artifactId>
       <version>${stacks.core.commons.version}</version>
     </dependency>
+
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-azure-cosmos</artifactId>
       <version>${stacks.azure.cosmos.version}</version>
     </dependency>
+
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-api</artifactId>
       <version>${stacks.core.api.version}</version>
     </dependency>
+
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-cqrs</artifactId>
