@@ -125,7 +125,6 @@
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
 
-
     <!-- Other dependencies -->
     <!-- TODO: to be moved to a common workloads parent -->
     <dependency>
@@ -133,34 +132,25 @@
       <artifactId>log4j-api</artifactId>
       <version>${log4j-version}</version>
     </dependency>
+
     <dependency>
       <groupId>nl.jqno.equalsverifier</groupId>
       <artifactId>equalsverifier</artifactId>
       <version>${equals-verifier.version}</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>au.com.dius</groupId>
       <artifactId>pact-jvm-provider-spring</artifactId>
       <version>${pact.provider.spring.version}</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>au.com.dius.pact</groupId>
       <artifactId>consumer</artifactId>
       <version>${pact.consumer.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjrt</artifactId>
-      <version>1.9.9.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjweaver</artifactId>
-      <version>1.9.9.1</version>
       <scope>test</scope>
     </dependency>
 
