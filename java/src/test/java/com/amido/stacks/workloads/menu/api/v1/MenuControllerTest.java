@@ -1,6 +1,6 @@
 package com.amido.stacks.workloads.menu.api.v1;
 
-import static com.amido.stacks.workloads.menu.domain.MenuHelper.createMenu;
+import static com.amido.stacks.workloads.menu.domain.utility.MenuHelper.createMenu;
 import static com.amido.stacks.workloads.util.TestHelper.getBaseURL;
 import static com.amido.stacks.workloads.util.TestHelper.getRequestHttpEntity;
 import static com.azure.cosmos.implementation.Utils.randomUUID;
@@ -21,11 +21,7 @@ import com.amido.stacks.workloads.Application;
 import com.amido.stacks.workloads.menu.api.v1.dto.request.CreateMenuRequest;
 import com.amido.stacks.workloads.menu.api.v1.dto.request.UpdateMenuRequest;
 import com.amido.stacks.workloads.menu.domain.Menu;
-import com.amido.stacks.workloads.menu.domain.MenuHelper;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
-import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
-import com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration;
-import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +31,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -47,15 +42,19 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     classes = Application.class)
-@EnableAutoConfiguration(
-    exclude = {
-      CosmosRepositoriesAutoConfiguration.class,
-      CosmosAutoConfiguration.class,
-      CosmosHealthConfiguration.class
+@TestPropertySource(
+    properties = {
+      "management.port=0",
+      "aws.xray.enabled=false",
+      "aws.secretsmanager.enabled=false",
+      "spring.autoconfigure.exclude=com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration,"
+          + "com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration,"
+          + "com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration"
     })
 @Tag("Integration")
 @ActiveProfiles("test")
@@ -252,7 +251,7 @@ class MenuControllerTest {
   @Test
   void testDeleteMenuSuccess() {
     // Given
-    Menu menu = MenuHelper.createMenu(1);
+    Menu menu = createMenu(1);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     var response =
@@ -269,7 +268,7 @@ class MenuControllerTest {
   @Test
   void testDeleteMenuWithInvalidId() {
     // Given
-    Menu menu = MenuHelper.createMenu(1);
+    Menu menu = createMenu(1);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     var response =
