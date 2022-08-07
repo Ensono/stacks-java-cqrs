@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -11,28 +8,19 @@
     <relativePath/>
     <!-- lookup parent from repository -->
   </parent>
-
   <groupId>com.amido.stacks.workloads</groupId>
   <artifactId>stacks-api-cqrs</artifactId>
   <version>1.0.0</version>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Demo project for Java with CQRS</description>
-
   <properties>
-
     <!-- Stacks versions -->
     <stacks.core.commons.version>1.0.3</stacks.core.commons.version>
     <stacks.core.api.version>1.0.3.2-RELEASE</stacks.core.api.version>
     <stacks.azure.cosmos.version>2.0.0</stacks.azure.cosmos.version>
     <stacks.aws.dynamodb.version>1.0.0-SNAPSHOT</stacks.aws.dynamodb.version>
     <stacks.core.cqrs.version>1.0.0</stacks.core.cqrs.version>
-
     <!-- Stacks features -->
-    <aws.profile.name>no-aws</aws.profile.name>
-    <azure.profile.name>no-azure</azure.profile.name>
-    <cosmosdb.profile.name>no-cosmosdb</cosmosdb.profile.name>
-    <dynamodb.profile.name>no-dynamodb</dynamodb.profile.name>
-
     <java.version>11</java.version>
     <org.projectlombok.version>1.18.24</org.projectlombok.version>
     <org.springdoc-openapi.version>1.5.9</org.springdoc-openapi.version>
@@ -57,19 +45,15 @@
     <log4j-version>2.17.0</log4j-version>
     <org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
     <aws-java-sdk-s3.version>1.12.273</aws-java-sdk-s3.version>
-
     <fmt-maven-plugin.version>2.11</fmt-maven-plugin.version>
     <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
     <puppycrawl-tools-checkstyle.version>9.2</puppycrawl-tools-checkstyle.version>
     <spotbugs-maven-plugin.version>4.2.3</spotbugs-maven-plugin.version>
     <spotbugs.version>4.5.2</spotbugs.version>
     <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
-
     <pact.provider.spring.version>4.0.10</pact.provider.spring.version>
     <pact.consumer.version>4.3.2</pact.consumer.version>
-
   </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -89,9 +73,7 @@
         </exclusions>
       </dependency>
     </dependencies>
-
   </dependencyManagement>
-
   <dependencies>
     <!-- https://security.snyk.io/vuln/SNYK-JAVA-COMGOOGLECODEGSON-1730327 -->
     <dependency>
@@ -99,33 +81,27 @@
       <artifactId>gson</artifactId>
       <version>2.8.9</version>
     </dependency>
-
     <!-- STACKS dependencies -->
-
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-commons</artifactId>
       <version>${stacks.core.commons.version}</version>
     </dependency>
-
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-api</artifactId>
       <version>${stacks.core.api.version}</version>
     </dependency>
-
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
       <artifactId>stacks-core-cqrs</artifactId>
       <version>${stacks.core.cqrs.version}</version>
     </dependency>
-
     <!-- Spring dependencies -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
-
     <!-- Other dependencies -->
     <!-- TODO: to be moved to a common workloads parent -->
     <dependency>
@@ -133,43 +109,41 @@
       <artifactId>log4j-api</artifactId>
       <version>${log4j-version}</version>
     </dependency>
-
     <dependency>
       <groupId>nl.jqno.equalsverifier</groupId>
       <artifactId>equalsverifier</artifactId>
       <version>${equals-verifier.version}</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>au.com.dius</groupId>
       <artifactId>pact-jvm-provider-spring</artifactId>
       <version>${pact.provider.spring.version}</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>au.com.dius.pact</groupId>
       <artifactId>consumer</artifactId>
       <version>${pact.consumer.version}</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjrt</artifactId>
       <version>1.9.9.1</version>
       <scope>runtime</scope>
     </dependency>
-
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-s3</artifactId>
       <version>${aws-java-sdk-s3.version}</version>
     </dependency>
-
+    <dependency>
+      <groupId>com.amido.stacks.modules</groupId>
+      <artifactId>stacks-azure-cosmos</artifactId>
+      <version>${stacks.azure.cosmos.version}</version>
+    </dependency>
   </dependencies>
-
   <reporting>
     <plugins>
       <plugin>
@@ -179,10 +153,8 @@
       </plugin>
     </plugins>
   </reporting>
-
   <build>
     <plugins>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -212,7 +184,6 @@
           <forceJavacCompilerUse>true</forceJavacCompilerUse>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -226,12 +197,10 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
-
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -277,7 +246,6 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>com.coveo</groupId>
         <artifactId>fmt-maven-plugin</artifactId>
@@ -292,7 +260,6 @@
           <style>google</style>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -319,7 +286,6 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
@@ -333,7 +299,6 @@
           </dependency>
         </dependencies>
       </plugin>
-
       <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
@@ -369,73 +334,10 @@
         </configuration>
       </plugin>
     </plugins>
-
   </build>
-
   <profiles>
     <!-- START FEATURE PROFILES -->
-    <profile>
-      <id>aws</id>
-      <activation>
-        <file>
-          <exists>.</exists>
-        </file>
-      </activation>
-      <properties>
-        <aws.profile.name>aws</aws.profile.name>
-      </properties>
-
-    </profile>
-
-    <profile>
-      <id>azure</id>
-      <activation>
-        <file>
-          <exists>.</exists>
-        </file>
-      </activation>
-      <properties>
-        <azure.profile.name>azure</azure.profile.name>
-      </properties>
-      <dependencies>
-      </dependencies>
-    </profile>
-
-    <profile>
-      <id>cosmosdb</id>
-      <activation>
-        <file>
-          <exists>.</exists>
-        </file>
-      </activation>
-      <properties>
-        <cosmosdb.profile.name>cosmosdb</cosmosdb.profile.name>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>com.amido.stacks.modules</groupId>
-          <artifactId>stacks-azure-cosmos</artifactId>
-          <version>${stacks.azure.cosmos.version}</version>
-        </dependency>
-      </dependencies>
-    </profile>
-
-    <profile>
-      <id>dynamodb</id>
-      <properties>
-        <dynamodb.profile.name>dynamodb</dynamodb.profile.name>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>com.amido.stacks.modules</groupId>
-          <artifactId>stacks-aws-dynamodb</artifactId>
-          <version>${stacks.aws.dynamodb.version}</version>
-        </dependency>
-      </dependencies>
-    </profile>
-
     <!-- END FEATURE PROFILES -->
-
     <profile>
       <id>owasp-dependency-check</id>
       <build>
@@ -455,7 +357,6 @@
         </plugins>
       </build>
     </profile>
-
     <profile>
       <id>test</id>
       <activation>
@@ -466,7 +367,6 @@
         </property>
       </activation>
     </profile>
-
     <profile>
       <id>local</id>
       <build>
@@ -480,7 +380,6 @@
         </resources>
       </build>
     </profile>
-
     <profile>
       <id>update-permissions</id>
       <activation>
@@ -514,7 +413,5 @@
         </plugins>
       </build>
     </profile>
-
   </profiles>
-
 </project>
