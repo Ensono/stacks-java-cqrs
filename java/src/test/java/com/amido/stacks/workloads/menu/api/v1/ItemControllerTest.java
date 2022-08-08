@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -173,8 +172,7 @@ class ItemControllerTest {
     Menu menu = createMenu(1);
     Item item = new Item(randomUUID().toString(), "item name", "item description", 5.99d, true);
     Category category =
-        new Category(
-            UUID.randomUUID().toString(), "cat name", "cat description", Arrays.asList(item));
+        new Category(randomUUID().toString(), "cat name", "cat description", Arrays.asList(item));
     menuHelperService.addOrUpdateCategory(menu, category);
 
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
@@ -518,7 +516,7 @@ class ItemControllerTest {
     // Given
     Menu menu = createMenu(1);
     Category category = createCategory(0);
-    Item item = new Item(UUID.randomUUID().toString(), "New Item", "Item description", 12.2d, true);
+    Item item = new Item(randomUUID().toString(), "New Item", "Item description", 12.2d, true);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
@@ -548,7 +546,7 @@ class ItemControllerTest {
     // Given
     Menu menu = createMenu(1);
     Category category = createCategory(0);
-    Item item = new Item(UUID.randomUUID().toString(), "New Item", "Item description", 12.2d, true);
+    Item item = new Item(randomUUID().toString(), "New Item", "Item description", 12.2d, true);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
@@ -574,15 +572,14 @@ class ItemControllerTest {
     // Given
     Menu menu = createMenu(1);
     Category category = createCategory(0);
-    Item item = new Item(UUID.randomUUID().toString(), "New Item", "Item description", 12.2d, true);
+    Item item = new Item(randomUUID().toString(), "New Item", "Item description", 12.2d, true);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     // When
     String requestUrl =
-        String.format(
-            DELETE_ITEM, getBaseURL(port), menu.getId(), category.getId(), UUID.randomUUID());
+        String.format(DELETE_ITEM, getBaseURL(port), menu.getId(), category.getId(), randomUUID());
 
     var response =
         this.testRestTemplate.exchange(

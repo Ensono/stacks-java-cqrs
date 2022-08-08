@@ -6,8 +6,8 @@ import static com.amido.stacks.workloads.menu.domain.utility.ItemHelper.createIt
 import static com.amido.stacks.workloads.menu.domain.utility.MenuHelper.createMenu;
 import static com.amido.stacks.workloads.util.TestHelper.getBaseURL;
 import static com.amido.stacks.workloads.util.TestHelper.getRequestHttpEntity;
-import static com.azure.cosmos.implementation.Utils.randomUUID;
 import static java.util.UUID.fromString;
+import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -171,8 +171,7 @@ class CategoryControllerTest {
     // Given
     Menu menu = createMenu(1);
     Category category =
-        new Category(
-            UUID.randomUUID().toString(), "cat name", "cat description", new ArrayList<>());
+        new Category(randomUUID().toString(), "cat name", "cat description", new ArrayList<>());
     menuHelperService.addOrUpdateCategory(menu, category);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
@@ -281,8 +280,7 @@ class CategoryControllerTest {
 
     // When
     String requestUrl =
-        String.format(
-            UPDATE_CATEGORY, getBaseURL(port), fromString(menu.getId()), UUID.randomUUID());
+        String.format(UPDATE_CATEGORY, getBaseURL(port), fromString(menu.getId()), randomUUID());
 
     var response =
         this.testRestTemplate.exchange(

@@ -194,8 +194,8 @@ for i in "${!SELECTED[@]}"; do
 	fi
 done
 
-
 #####################
+
 
 printf "You have selected these options for your project:\n\n"
 for i in "${CHECKED[@]}";

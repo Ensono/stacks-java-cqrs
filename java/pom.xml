@@ -18,8 +18,8 @@
     <stacks.core.commons.version>1.0.3</stacks.core.commons.version>
     <stacks.core.api.version>1.0.3.2-RELEASE</stacks.core.api.version>
     <stacks.azure.cosmos.version>2.0.0</stacks.azure.cosmos.version>
-    <stacks.aws.dynamodb.version>1.0.0-SNAPSHOT</stacks.aws.dynamodb.version>
     <stacks.core.cqrs.version>1.0.0</stacks.core.cqrs.version>
+    <stacks.aws.dynamodb.version>1.0.0-SNAPSHOT</stacks.aws.dynamodb.version>
     <!-- Stacks features -->
     <java.version>11</java.version>
     <org.projectlombok.version>1.18.24</org.projectlombok.version>
@@ -140,8 +140,8 @@
     </dependency>
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
-      <artifactId>stacks-azure-cosmos</artifactId>
-      <version>${stacks.azure.cosmos.version}</version>
+      <artifactId>stacks-aws-dynamodb</artifactId>
+      <version>${stacks.aws.dynamodb.version}</version>
     </dependency>
   </dependencies>
   <reporting>

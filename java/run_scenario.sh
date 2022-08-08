@@ -1,4 +1,4 @@
-#!/bin/bash
+  #!/bin/bash
 # from SO: https://stackoverflow.com/a/54261882/317605 (by https://stackoverflow.com/users/8207842/dols3m)
 function prompt_for_multiselect {
 
@@ -139,7 +139,7 @@ function check_environment {
 
 check_environment
 
-declare -a ALL_SPRING_PROFILES=(aws azure cosmosdb dynamodb servicebus kafka sqs)
+declare -a ALL_SPRING_PROFILES=(aws azure cosmosdb dynamodb)
 
 BASE_FOLDER="."
 
@@ -200,8 +200,8 @@ for i in "${!SELECTED[@]}"; do
 	fi
 done
 
-
 #####################
+
 
 MAVEN_SPECIFIC_PROFILES=""
 

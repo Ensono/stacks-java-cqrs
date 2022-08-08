@@ -3,7 +3,7 @@ spring:
     include:
       - aws
       - azure
-      - cosmosdb
+      - dynamodb
 
   application:
     name: com.amido.stacks-api-cqrs

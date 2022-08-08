@@ -3,7 +3,6 @@ package com.amido.stacks.workloads.menu.api.v1;
 import static com.amido.stacks.workloads.menu.domain.utility.MenuHelper.createMenu;
 import static com.amido.stacks.workloads.util.TestHelper.getBaseURL;
 import static com.amido.stacks.workloads.util.TestHelper.getRequestHttpEntity;
-import static com.azure.cosmos.implementation.Utils.randomUUID;
 import static java.util.UUID.fromString;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
@@ -186,7 +185,7 @@ class MenuControllerTest {
   @Test
   void testCannotUpdateIfMenuDoesntExist() {
     // Given
-    UUID menuId = randomUUID();
+    UUID menuId = UUID.randomUUID();
     when(menuRepository.findById(eq(menuId.toString()))).thenReturn(Optional.empty());
 
     UpdateMenuRequest request = new UpdateMenuRequest("name", "description", true);

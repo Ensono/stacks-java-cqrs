@@ -4,7 +4,6 @@ spring:
       - aws
       - azure
       - cosmosdb
-      - servicebus
 
   application:
     name: com.amido.stacks-api-cqrs
