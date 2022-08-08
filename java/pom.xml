@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -137,11 +139,6 @@
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-s3</artifactId>
       <version>${aws-java-sdk-s3.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.amido.stacks.modules</groupId>
-      <artifactId>stacks-aws-dynamodb</artifactId>
-      <version>${stacks.aws.dynamodb.version}</version>
     </dependency>
   </dependencies>
   <reporting>
@@ -337,6 +334,65 @@
   </build>
   <profiles>
     <!-- START FEATURE PROFILES -->
+    <profile>
+      <id>aws</id>
+      <activation>
+        <file>
+          <exists>.</exists>
+        </file>
+      </activation>
+      <properties>
+        <aws.profile.name>aws</aws.profile.name>
+      </properties>
+
+    </profile>
+
+    <profile>
+      <id>azure</id>
+      <activation>
+        <file>
+          <exists>.</exists>
+        </file>
+      </activation>
+      <properties>
+        <azure.profile.name>azure</azure.profile.name>
+      </properties>
+      <dependencies>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>cosmosdb</id>
+      <activation>
+        <file>
+          <exists>.</exists>
+        </file>
+      </activation>
+      <properties>
+        <cosmosdb.profile.name>cosmosdb</cosmosdb.profile.name>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.amido.stacks.modules</groupId>
+          <artifactId>stacks-azure-cosmos</artifactId>
+          <version>${stacks.azure.cosmos.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>dynamodb</id>
+      <properties>
+        <dynamodb.profile.name>dynamodb</dynamodb.profile.name>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.amido.stacks.modules</groupId>
+          <artifactId>stacks-aws-dynamodb</artifactId>
+          <version>${stacks.aws.dynamodb.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
     <!-- END FEATURE PROFILES -->
     <profile>
       <id>owasp-dependency-check</id>
