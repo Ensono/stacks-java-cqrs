@@ -1,9 +1,10 @@
 spring:
   profiles:
     include:
-      - aws
-      - azure
-      - dynamodb
+      - "@aws.profile.name@"
+      - "@azure.profile.name@"
+      - "@cosmosdb.profile.name@"
+      - "@dynamodb.profile.name@"
 
   application:
     name: com.amido.stacks-api-cqrs
