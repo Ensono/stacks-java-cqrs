@@ -139,7 +139,7 @@ function check_environment {
 
 check_environment
 
-declare -a ALL_SPRING_PROFILES=(aws azure cosmosdb dynamodb servicebus kafka sqs)
+declare -a ALL_SPRING_PROFILES=(aws azure cosmosdb dynamodb)
 
 BASE_FOLDER="."
 
