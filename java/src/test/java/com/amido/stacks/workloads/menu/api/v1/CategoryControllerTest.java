@@ -1,13 +1,13 @@
 package com.amido.stacks.workloads.menu.api.v1;
 
-import static com.amido.stacks.workloads.menu.domain.CategoryHelper.createCategories;
-import static com.amido.stacks.workloads.menu.domain.CategoryHelper.createCategory;
-import static com.amido.stacks.workloads.menu.domain.ItemHelper.createItem;
-import static com.amido.stacks.workloads.menu.domain.MenuHelper.createMenu;
+import static com.amido.stacks.workloads.menu.domain.utility.CategoryHelper.createCategories;
+import static com.amido.stacks.workloads.menu.domain.utility.CategoryHelper.createCategory;
+import static com.amido.stacks.workloads.menu.domain.utility.ItemHelper.createItem;
+import static com.amido.stacks.workloads.menu.domain.utility.MenuHelper.createMenu;
 import static com.amido.stacks.workloads.util.TestHelper.getBaseURL;
 import static com.amido.stacks.workloads.util.TestHelper.getRequestHttpEntity;
-import static com.azure.cosmos.implementation.Utils.randomUUID;
 import static java.util.UUID.fromString;
+import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -29,9 +29,6 @@ import com.amido.stacks.workloads.menu.domain.Category;
 import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.amido.stacks.workloads.menu.service.v1.utility.MenuHelperService;
-import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
-import com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration;
-import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -40,7 +37,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -49,15 +45,19 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     classes = Application.class)
-@EnableAutoConfiguration(
-    exclude = {
-      CosmosRepositoriesAutoConfiguration.class,
-      CosmosAutoConfiguration.class,
-      CosmosHealthConfiguration.class
+@TestPropertySource(
+    properties = {
+      "management.port=0",
+      "aws.xray.enabled=false",
+      "aws.secretsmanager.enabled=false",
+      "spring.autoconfigure.exclude=com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration,"
+          + "com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration,"
+          + "com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration"
     })
 @Tag("Integration")
 @ActiveProfiles("test")
@@ -171,8 +171,7 @@ class CategoryControllerTest {
     // Given
     Menu menu = createMenu(1);
     Category category =
-        new Category(
-            UUID.randomUUID().toString(), "cat name", "cat description", new ArrayList<>());
+        new Category(randomUUID().toString(), "cat name", "cat description", new ArrayList<>());
     menuHelperService.addOrUpdateCategory(menu, category);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
@@ -281,8 +280,7 @@ class CategoryControllerTest {
 
     // When
     String requestUrl =
-        String.format(
-            UPDATE_CATEGORY, getBaseURL(port), fromString(menu.getId()), UUID.randomUUID());
+        String.format(UPDATE_CATEGORY, getBaseURL(port), fromString(menu.getId()), randomUUID());
 
     var response =
         this.testRestTemplate.exchange(

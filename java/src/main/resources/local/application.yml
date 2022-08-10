@@ -4,7 +4,6 @@ spring:
       - aws
       - azure
       - cosmosdb
-      - servicebus
 
   application:
     name: com.amido.stacks-api-cqrs
@@ -24,7 +23,7 @@ management:
     web:
       base-path: /
       exposure:
-        include: health, info, beans
+        include: health, info, beans, refresh
 
 springdoc:
   swagger-ui:

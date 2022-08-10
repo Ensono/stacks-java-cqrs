@@ -1,9 +1,9 @@
 package com.amido.stacks.workloads.menu.api.v1;
 
-import static com.amido.stacks.workloads.menu.domain.CategoryHelper.createCategory;
-import static com.amido.stacks.workloads.menu.domain.ItemHelper.createItem;
-import static com.amido.stacks.workloads.menu.domain.ItemHelper.createItems;
-import static com.amido.stacks.workloads.menu.domain.MenuHelper.createMenu;
+import static com.amido.stacks.workloads.menu.domain.utility.CategoryHelper.createCategory;
+import static com.amido.stacks.workloads.menu.domain.utility.ItemHelper.createItem;
+import static com.amido.stacks.workloads.menu.domain.utility.ItemHelper.createItems;
+import static com.amido.stacks.workloads.menu.domain.utility.MenuHelper.createMenu;
 import static com.amido.stacks.workloads.util.TestHelper.getBaseURL;
 import static com.amido.stacks.workloads.util.TestHelper.getRequestHttpEntity;
 import static java.util.UUID.randomUUID;
@@ -25,25 +25,18 @@ import com.amido.stacks.core.api.dto.response.ResourceUpdatedResponse;
 import com.amido.stacks.workloads.menu.api.v1.dto.request.CreateItemRequest;
 import com.amido.stacks.workloads.menu.api.v1.dto.request.UpdateItemRequest;
 import com.amido.stacks.workloads.menu.domain.Category;
-import com.amido.stacks.workloads.menu.domain.CategoryHelper;
 import com.amido.stacks.workloads.menu.domain.Item;
 import com.amido.stacks.workloads.menu.domain.Menu;
-import com.amido.stacks.workloads.menu.domain.MenuHelper;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.amido.stacks.workloads.menu.service.v1.utility.MenuHelperService;
-import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
-import com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration;
-import com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -53,13 +46,17 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@EnableAutoConfiguration(
-    exclude = {
-      CosmosRepositoriesAutoConfiguration.class,
-      CosmosAutoConfiguration.class,
-      CosmosHealthConfiguration.class
+@TestPropertySource(
+    properties = {
+      "management.port=0",
+      "aws.xray.enabled=false",
+      "aws.secretsmanager.enabled=false",
+      "spring.autoconfigure.exclude=com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration,"
+          + "com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration,"
+          + "com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration"
     })
 @Tag("Integration")
 @ActiveProfiles("test")
@@ -80,7 +77,7 @@ class ItemControllerTest {
   @Test
   void testAddItem() {
     // Given
-    Menu menu = MenuHelper.createMenu(1);
+    Menu menu = createMenu(1);
     Category category =
         new Category(randomUUID().toString(), "cat name", "cat description", new ArrayList<>());
     menuHelperService.addOrUpdateCategory(menu, category);
@@ -148,7 +145,7 @@ class ItemControllerTest {
   void testAddItemWhenInvalidCategoryIdGiven() {
 
     // Given
-    Menu menu = MenuHelper.createMenu(1);
+    Menu menu = createMenu(1);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     CreateItemRequest request =
@@ -172,11 +169,10 @@ class ItemControllerTest {
   @Test
   void testCannotAddItemWhichAlreadyExists() {
     // Given
-    Menu menu = MenuHelper.createMenu(1);
+    Menu menu = createMenu(1);
     Item item = new Item(randomUUID().toString(), "item name", "item description", 5.99d, true);
     Category category =
-        new Category(
-            UUID.randomUUID().toString(), "cat name", "cat description", Arrays.asList(item));
+        new Category(randomUUID().toString(), "cat name", "cat description", Arrays.asList(item));
     menuHelperService.addOrUpdateCategory(menu, category);
 
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
@@ -202,8 +198,8 @@ class ItemControllerTest {
   @Test
   void testNoItemNameReturnsBadRequest() {
     // Given
-    Menu menu = MenuHelper.createMenu(1);
-    Category category = CategoryHelper.createCategory(1);
+    Menu menu = createMenu(1);
+    Category category = createCategory(1);
     menuHelperService.addOrUpdateCategory(menu, category);
 
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
@@ -227,8 +223,8 @@ class ItemControllerTest {
   @Test
   void testNoItemDescriptionReturnsBadRequest() {
     // Given
-    Menu menu = MenuHelper.createMenu(1);
-    Category category = CategoryHelper.createCategory(1);
+    Menu menu = createMenu(1);
+    Category category = createCategory(1);
     menuHelperService.addOrUpdateCategory(menu, category);
 
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
@@ -252,8 +248,8 @@ class ItemControllerTest {
   @Test
   void testInvalidPriceDescriptionReturnsBadRequest() {
     // Given
-    Menu menu = MenuHelper.createMenu(1);
-    Category category = CategoryHelper.createCategory(1);
+    Menu menu = createMenu(1);
+    Category category = createCategory(1);
     menuHelperService.addOrUpdateCategory(menu, category);
 
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
@@ -520,7 +516,7 @@ class ItemControllerTest {
     // Given
     Menu menu = createMenu(1);
     Category category = createCategory(0);
-    Item item = new Item(UUID.randomUUID().toString(), "New Item", "Item description", 12.2d, true);
+    Item item = new Item(randomUUID().toString(), "New Item", "Item description", 12.2d, true);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
@@ -550,7 +546,7 @@ class ItemControllerTest {
     // Given
     Menu menu = createMenu(1);
     Category category = createCategory(0);
-    Item item = new Item(UUID.randomUUID().toString(), "New Item", "Item description", 12.2d, true);
+    Item item = new Item(randomUUID().toString(), "New Item", "Item description", 12.2d, true);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
@@ -576,15 +572,14 @@ class ItemControllerTest {
     // Given
     Menu menu = createMenu(1);
     Category category = createCategory(0);
-    Item item = new Item(UUID.randomUUID().toString(), "New Item", "Item description", 12.2d, true);
+    Item item = new Item(randomUUID().toString(), "New Item", "Item description", 12.2d, true);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
 
     // When
     String requestUrl =
-        String.format(
-            DELETE_ITEM, getBaseURL(port), menu.getId(), category.getId(), UUID.randomUUID());
+        String.format(DELETE_ITEM, getBaseURL(port), menu.getId(), category.getId(), randomUUID());
 
     var response =
         this.testRestTemplate.exchange(
