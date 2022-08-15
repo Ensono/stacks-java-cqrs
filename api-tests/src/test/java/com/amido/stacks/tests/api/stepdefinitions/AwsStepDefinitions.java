@@ -1,6 +1,6 @@
 package com.amido.stacks.tests.api.stepdefinitions;
 
-import com.amido.stacks.tests.api.status.AwsFeaturesStatus;
+import com.amido.stacks.tests.api.cloud.AwsFeaturesStatus;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;

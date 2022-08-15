@@ -1,4 +1,4 @@
-package com.amido.stacks.tests.api.status;
+package com.amido.stacks.tests.api.cloud;
 
 import com.amido.stacks.tests.api.WebServiceEndPoints;
 import net.serenitybdd.rest.SerenityRest;
