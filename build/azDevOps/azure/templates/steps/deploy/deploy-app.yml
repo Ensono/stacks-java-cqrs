@@ -3,12 +3,12 @@ parameters:
   shared_replacements: {}
   template_input: []
   cat_template_output: false
-  azure_client_id: ""
-  azure_client_secret: ""
-  azure_tenant_id: ""
-  azure_subscription_id: ""
-  aks_cluster_resourcegroup: ""
-  aks_cluster_name: ""
+  aws_access_key_id: ""
+  aws_secret_access_key: ""
+  aws_default_region: ""
+  aws_account_id: ""
+  eks_cluster_name: ""
+  aws_cluster_role: ""
   deployments: []
 steps:
   # Template Substitutions
@@ -30,29 +30,47 @@ steps:
 
   - task: Bash@3
     inputs:
-      filePath: "${{ parameters.pipeline_scripts_directory }}/util-azure-login.bash"
+      filePath: "${{ parameters.pipeline_scripts_directory }}/util-aws-login.bash"
       arguments: >
-        -a "${{ parameters.azure_client_id }}"
-        -b "${{ parameters.azure_client_secret }}"
-        -c "${{ parameters.azure_tenant_id }}"
-        -d "${{ parameters.azure_subscription_id }}"
-    displayName: "Login: Azure CLI"
+        -a "${{ parameters.aws_access_key_id }}"
+        -b "${{ parameters.aws_secret_access_key }}"
+        -c "${{ parameters.aws_default_region }}"
+    displayName: "Login: AWS CLI"
 
   - task: Bash@3
     inputs:
-      filePath: "${{ parameters.pipeline_scripts_directory }}/util-azure-aks-login.bash"
+      filePath: "${{ parameters.pipeline_scripts_directory }}/util-aws-kubeconfig.bash"
       arguments: >
-        -a "${{ parameters.aks_cluster_resourcegroup }}"
-        -b "${{ parameters.aks_cluster_name }}"
-    displayName: "Login: Azure AKS Cluster Login"
+        -a "${{ parameters.eks_cluster_name }}"
+        -b "${{ parameters.aws_default_region }}"
+        -c "${{ parameters.aws_account_id }}"
+        -d "${{ parameters.aws_cluster_role }}"
+    displayName: "Login: AWS EKS Update KubeConfig"
+
+  - task: Bash@3
+    inputs:
+      filePath: "${{ parameters.pipeline_scripts_directory }}/util-aws-assume-role.bash"
+      arguments: >
+        -a "${{ parameters.aws_account_id }}"
+        -b "${{ parameters.aws_cluster_role }}"
+        -c "${{ parameters.aws_default_region }}"
+        -d "${{ parameters.aws_access_key_id }}"
+        -e "${{ parameters.aws_secret_access_key }}"
+    displayName: "Login: AWS EKS Assume Role"
 
   - ${{ each template in parameters.template_input }}:
       - task: Bash@3
         inputs:
-          filePath: "${{ parameters.pipeline_scripts_directory }}/deploy-k8s-apply.bash"
+          filePath: "${{ parameters.pipeline_scripts_directory }}/deploy-k8s-apply-aws.bash"
           arguments: >
             -a "${{ template.out }}"
+            -b "${{ parameters.aws_account_id }}"
+            -c "${{ parameters.aws_cluster_role }}"
+            -d "${{ parameters.aws_default_region }}"
         displayName: "Deploy: Kubectl Apply (${{ template.out }})"
+        env:
+          ${{ each var in parameters.servicebus_creds }}:
+            ${{ var.key }}: ${{ var.value }}
 
   - ${{ each deployment in parameters.deployments }}:
       - task: Bash@3
