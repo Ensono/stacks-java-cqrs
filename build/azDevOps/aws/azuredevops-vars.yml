@@ -6,13 +6,21 @@ variables:
   - name: project
     value: stacks
   - name: domain
-    value: java-api-cqrs-evnts
+    value: java-api-cqrs
   - name: self_repo
-    value: stacks-java-cqrs-events
+    value: stacks-java-cqrs
   - name: self_generic_name
     value: $(project)-$(domain)-aws
   - name: aws_default_region
     value: eu-west-2
+  - name: owner
+    value: stacks-team
+  - name: docker_image_name
+    value: stacks-java-api-cqrs
+  - name: k8s_app_route
+    value: /api/menu
+  - name: aws_cluster_role
+    value: "eks-admin-role"
 
   # Terraform Configuration
 
@@ -25,15 +33,15 @@ variables:
   # **`terraform_state_workspace: `**
   # avoid running anything past dev that is not on master
   # sample value: company-webapp
-  - name: tf_state_region
+  - name: region
     value: eu-west-2
-  - name: tf_state_dynambotable
-    value: dynamo-ew2-rjs-tf-state-dev-terraform-state-lock
-  - name: tf_state_s3_bucket
+  - name: dynamodb_table
+    value: amido-stacks-nonprod-euw2-java-menu
+  - name: bucket
     value: s3-ew2-rjs-tf-state-dev-terraform-backend-3
-  - name: tf_state_key
+  - name: key
     value: "eks.tfstate"
-  - name: tf_state_encryption
+  - name: aws_encrypt
     value: "true"
   - name: TF_FILE_LOCATION
     value: deploy/aws/app/kube
@@ -44,10 +52,9 @@ variables:
   - name: kubernetes_clustername_nonprod
     value: amido-stacks-dev-h0ax6owA
 
-
   # Container registry configuration
   - name: docker_container_registry_name_nonprod
-    value: stacks-java
+    value: stacks-java-cqrs
 
   # Domain names
   - name: base_domain_nonprod
