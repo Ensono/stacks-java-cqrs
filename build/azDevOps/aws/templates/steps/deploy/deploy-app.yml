@@ -7,8 +7,8 @@ parameters:
   aws_secret_access_key: ""
   aws_default_region: ""
   aws_account_id: ""
-  aws_cluster_role: ""
   eks_cluster_name: ""
+  aws_cluster_role: ""
   deployments: []
 steps:
   # Template Substitutions
@@ -43,6 +43,8 @@ steps:
       arguments: >
         -a "${{ parameters.eks_cluster_name }}"
         -b "${{ parameters.aws_default_region }}"
+        -c "${{ parameters.aws_account_id }}"
+        -d "${{ parameters.aws_cluster_role }}"
     displayName: "Login: AWS EKS Update KubeConfig"
 
   - task: Bash@3
@@ -52,14 +54,19 @@ steps:
         -a "${{ parameters.aws_account_id }}"
         -b "${{ parameters.aws_cluster_role }}"
         -c "${{ parameters.aws_default_region }}"
+        -d "${{ parameters.aws_access_key_id }}"
+        -e "${{ parameters.aws_secret_access_key }}"
     displayName: "Login: AWS EKS Assume Role"
 
   - ${{ each template in parameters.template_input }}:
       - task: Bash@3
         inputs:
-          filePath: "${{ parameters.pipeline_scripts_directory }}/deploy-k8s-apply.bash"
+          filePath: "${{ parameters.pipeline_scripts_directory }}/deploy-k8s-apply-aws.bash"
           arguments: >
             -a "${{ template.out }}"
+            -b "${{ parameters.aws_account_id }}"
+            -c "${{ parameters.aws_cluster_role }}"
+            -d "${{ parameters.aws_default_region }}"
         displayName: "Deploy: Kubectl Apply (${{ template.out }})"
         env:
           ${{ each var in parameters.servicebus_creds }}:
