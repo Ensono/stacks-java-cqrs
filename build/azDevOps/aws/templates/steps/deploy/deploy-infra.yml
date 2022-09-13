@@ -1,18 +1,18 @@
 parameters:
   pipeline_scripts_directory: ""
   docker_terraform_container: ""
+  access_key: ""
+  secret_key: ""
   aws_access_key_id: ""
   aws_secret_access_key: ""
-  aws_default_region: ""
-  aws_account_id: ""
   terraform_directory: ""
   terraform_backend_aws_access_key_id: ""
   terraform_backend_aws_secret_access_key: ""
   terraform_backend_aws_default_region: ""
-  terraform_state_region: ""
-  terraform_state_s3_bucket: ""
-  terraform_state_encryption: ""
-  terraform_state_key: ""
+  region: ""
+  bucket: ""
+  encrypt: ""
+  key: ""
   terraform_state_workspace: ""
   terraform_extra_properties: ""
   terraform_output_commands: ""
@@ -23,10 +23,9 @@ steps:
     inputs:
       filePath: "${{ parameters.pipeline_scripts_directory }}/util-aws-login.bash"
       arguments: >
-        -a "${{ parameters.aws_access_key_id}}"
+        -a "${{ parameters.aws_access_key_id }}"
         -b "${{ parameters.aws_secret_access_key }}"
         -c "${{ parameters.aws_default_region }}"
-
     target:
       container: ${{ parameters.docker_terraform_container }}
     displayName: "Login: AWS CLI"
@@ -35,15 +34,14 @@ steps:
     inputs:
       filePath: "${{ parameters.pipeline_scripts_directory }}/deploy-aws-terraform-init.bash"
       arguments: >
-        -a "${{ parameters.terraform_backend_aws_access_key_id }}"
-        -b "${{ parameters.terraform_backend_aws_secret_access_key }}"
-        -c "${{ parameters.terraform_backend_aws_default_region }}"
-        -e "${{ parameters.terraform_state_region }}"
-        -f "${{ parameters.terraform_state_s3_bucket }}"
-        -g "${{ parameters.terraform_state_dynamotable }}"
-        -h "${{ parameters.terraform_state_encryption }}"
-        -i "${{ parameters.terraform_state_key }}"
-        -j "${{ parameters.terraform_state_workspace }}"
+        -a "${{ parameters.access_key }}"
+        -b "${{ parameters.secret_key }}"
+        -c"${{ parameters.region }}"
+        -d "${{ parameters.bucket }}"
+        -e "${{ parameters.dynamodb_table }}"
+        -f "${{ parameters.encrypt }}"
+        -g "${{ parameters.key }}"
+        -h "${{ parameters.terraform_state_workspace }}"
       workingDirectory: ${{ parameters.terraform_directory }}
     target:
       container: ${{ parameters.docker_terraform_container }}

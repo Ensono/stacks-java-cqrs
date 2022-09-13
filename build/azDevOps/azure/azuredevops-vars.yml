@@ -1,6 +1,6 @@
 variables:
   - name: region
-    value: eu-west-2
+    value: westeurope
   - name: company
     value: amido
   - name: project
@@ -10,17 +10,7 @@ variables:
   - name: self_repo
     value: stacks-java-cqrs
   - name: self_generic_name
-    value: $(project)-$(domain)-aws
-  - name: aws_default_region
-    value: eu-west-2
-  - name: owner
-    value: stacks-team
-  - name: docker_image_name
-    value: stacksjava
-  - name: k8s_app_route
-    value: /api/menu
-  - name: aws_cluster_role
-    value: "eks-admin-role"
+    value: $(project)-$(domain)
 
   # Terraform Configuration
 
@@ -33,34 +23,61 @@ variables:
   # **`terraform_state_workspace: `**
   # avoid running anything past dev that is not on master
   # sample value: company-webapp
-  - name: region
-    value: eu-west-2
-  - name: dynamodb_table
-    value: dynamo-ew2-rjs-tf-state-dev-terraform-state-lock
-  - name: bucket
-    value: s3-ew2-rjs-tf-state-dev-terraform-backend-3
-  - name: key
-    value: "eks.tfstate"
-  - name: aws_encrypt
-    value: "true"
-  - name: TF_FILE_LOCATION
-    value: deploy/aws/app/kube
+  - name: tf_state_rg
+    value: Stacks-Ancillary-Resources
+  - name: tf_state_storage
+    value: amidostackstfstate
+  - name: tf_state_container
+    value: tfstate
+  - name: tf_state_key
+    value: java-api-cqrs
 
+  # TF Variables
+  # --nonprod
+  - name: tf_app_insights_name_nonprod
+    value: amido-stacks-nonprod-euw-core
+  - name: tf_app_gateway_frontend_ip_name_nonprod
+    value: amido-stacks-nonprod-euw-core
+  - name: tf_core_resource_group_nonprod
+    value: amido-stacks-nonprod-euw-core
+
+  # --prod
+  - name: tf_app_insights_name_prod
+    value: amido-stacks-prod-euw-core
+  - name: tf_app_gateway_frontend_ip_name_prod
+    value: amido-stacks-prod-euw-core
+  - name: tf_core_resource_group_prod
+    value: amido-stacks-prod-euw-core
 
   # Kubernetes configuration
   # --nonprod
   - name: kubernetes_clustername_nonprod
-    value: amido-stacks-dev-h0ax6owA
+    value: amido-stacks-nonprod-euw-core
+
+  # --prod
+  - name: kubernetes_clustername_prod
+    value: amido-stacks-prod-euw-core
 
   # Container registry configuration
   - name: docker_container_registry_name_nonprod
-    value: stacks-java
+    value: amidostacksnonprodeuwcore
+  - name: docker_container_registry_name_prod
+    value: amidostacksprodeuwcore
 
   # Domain names
   - name: base_domain_nonprod
     value: nonprod.amidostacks.com
   - name: base_domain_internal_nonprod
     value: nonprod.amidostacks.internal
+  - name: base_domain_prod
+    value: prod.amidostacks.com
+  - name: base_domain_internal_prod
+    value: prod.amidostacks.internal
+
+  # Environment
+  # Set the name of the resource group that has the DNS zones to be updated
+  - name: dns_zone_resource_group
+    value: "Stacks-Ancillary-Resources"
 
   # GitHub infomration
   - name: create_release
