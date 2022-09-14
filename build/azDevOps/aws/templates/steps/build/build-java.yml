@@ -145,7 +145,7 @@ steps:
   # TODO: Pull this out into a bash script?
   - bash: |
       set -euxo pipefail
-      cp "${{ parameters.repo_root_dir }}/build/azDevOps/azure/coverage/"* .
+      cp "${{ parameters.repo_root_dir }}/build/azDevOps/aws/coverage/"* .
       npm i
       ./node_modules/.bin/gulp inline-css-images
       ./node_modules/.bin/gulp inline-sources
