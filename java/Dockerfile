@@ -16,7 +16,7 @@ RUN ./mvnw dependency:go-offline --quiet\
 	&& ./mvnw clean package -Dmaven.default-test.skip=true -Dmaven.test.skip=true -DskipTests --no-transfer-progress --quiet\
   && mkdir -p extracted && java -Djarmode=layertools -jar target/*.jar extract --destination extracted
 
-FROM azul/zulu-openjdk-alpine:11-jre
+FROM azul/zulu-openjdk-alpine:11.0.20-11.66.15
 
 VOLUME /tmp
 
