@@ -48,10 +48,10 @@ import org.springframework.test.context.TestPropertySource;
     classes = Application.class)
 @TestPropertySource(
     properties = {
-        "management.port=0",
-        "aws.xray.enabled=false",
-        "aws.secretsmanager.enabled=false",
-        "cosmos.enabled=false"
+      "management.port=0",
+      "aws.xray.enabled=false",
+      "aws.secretsmanager.enabled=false",
+      "cosmos.enabled=false"
     })
 @Tag("Integration")
 @ActiveProfiles("test")
@@ -61,14 +61,11 @@ class MenuControllerTest {
   public static final String UPDATE_MENU = "%s/v1/menu/%s";
   public static final String DELETE_MENU = "%s/v1/menu/%s";
 
-  @LocalServerPort
-  private int port;
+  @LocalServerPort private int port;
 
-  @Autowired
-  private TestRestTemplate testRestTemplate;
+  @Autowired private TestRestTemplate testRestTemplate;
 
-  @MockBean
-  private MenuRepository menuRepository;
+  @MockBean private MenuRepository menuRepository;
 
   @Test
   void testCreateNewMenu() {
@@ -79,7 +76,7 @@ class MenuControllerTest {
         new CreateMenuRequest(
             m.getName(), m.getDescription(), UUID.fromString(m.getRestaurantId()), m.getEnabled());
     when(menuRepository.findAllByRestaurantIdAndName(
-        eq(m.getRestaurantId()), eq(m.getName()), any(Pageable.class)))
+            eq(m.getRestaurantId()), eq(m.getName()), any(Pageable.class)))
         .thenReturn(new PageImpl<>(Collections.emptyList()));
     when(menuRepository.save(any(Menu.class))).thenReturn(m);
 
@@ -157,8 +154,7 @@ class MenuControllerTest {
   void testUpdateSuccess() {
     // Given
     Menu menu = createMenu(0);
-    when(menuRepository.findById(menu.getId())).thenReturn(
-        Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(Optional.of(menu));
 
     UpdateMenuRequest request = new UpdateMenuRequest("new name", "new description", false);
 
@@ -209,8 +205,7 @@ class MenuControllerTest {
   void testUpdateMenuWithNoNameReturnsBadRequest() {
     // Given
     Menu menu = createMenu(0);
-    when(menuRepository.findById(menu.getId())).thenReturn(
-        Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(Optional.of(menu));
 
     UpdateMenuRequest request = new UpdateMenuRequest("", "new description", false);
 
@@ -232,8 +227,7 @@ class MenuControllerTest {
   void testUpdateMenuWithNoDescriptionReturnsBadRequest() {
     // Given
     Menu menu = createMenu(0);
-    when(menuRepository.findById(menu.getId())).thenReturn(
-        Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(Optional.of(menu));
 
     UpdateMenuRequest request = new UpdateMenuRequest("Updated Name", "", false);
 
@@ -255,8 +249,7 @@ class MenuControllerTest {
   void testDeleteMenuSuccess() {
     // Given
     Menu menu = createMenu(1);
-    when(menuRepository.findById(menu.getId())).thenReturn(
-        Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(Optional.of(menu));
 
     var response =
         this.testRestTemplate.exchange(
@@ -273,8 +266,7 @@ class MenuControllerTest {
   void testDeleteMenuWithInvalidId() {
     // Given
     Menu menu = createMenu(1);
-    when(menuRepository.findById(menu.getId())).thenReturn(
-        Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(Optional.of(menu));
 
     var response =
         this.testRestTemplate.exchange(
