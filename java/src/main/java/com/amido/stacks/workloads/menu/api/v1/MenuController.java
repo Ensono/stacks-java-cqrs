@@ -34,7 +34,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

@@ -17,7 +17,7 @@ import com.amido.stacks.workloads.menu.mappers.RequestToCommandMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import java.util.UUID;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
