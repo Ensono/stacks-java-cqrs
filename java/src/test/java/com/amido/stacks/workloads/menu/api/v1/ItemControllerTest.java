@@ -9,7 +9,6 @@ import static com.amido.stacks.workloads.util.TestHelper.getRequestHttpEntity;
 import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -40,7 +39,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -51,12 +50,10 @@ import org.springframework.test.context.TestPropertySource;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(
     properties = {
-      "management.port=0",
-      "aws.xray.enabled=false",
-      "aws.secretsmanager.enabled=false",
-      "spring.autoconfigure.exclude=com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration,"
-          + "com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration,"
-          + "com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration"
+        "management.port=0",
+        "aws.xray.enabled=false",
+        "aws.secretsmanager.enabled=false",
+        "cosmos.enabled=false"
     })
 @Tag("Integration")
 @ActiveProfiles("test")
@@ -66,13 +63,17 @@ class ItemControllerTest {
   public static final String UPDATE_ITEM = "%s/v1/menu/%s/category/%s/items/%s";
   public static final String DELETE_ITEM = "%s/v1/menu/%s/category/%s/items/%s";
 
-  @LocalServerPort private int port;
+  @LocalServerPort
+  private int port;
 
-  @Autowired private TestRestTemplate testRestTemplate;
+  @Autowired
+  private TestRestTemplate testRestTemplate;
 
-  @Autowired private MenuHelperService menuHelperService;
+  @Autowired
+  private MenuHelperService menuHelperService;
 
-  @MockBean private MenuRepository menuRepository;
+  @MockBean
+  private MenuRepository menuRepository;
 
   @Test
   void testAddItem() {
@@ -81,7 +82,8 @@ class ItemControllerTest {
     Category category =
         new Category(randomUUID().toString(), "cat name", "cat description", new ArrayList<>());
     menuHelperService.addOrUpdateCategory(menu, category);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
     // when(menuRepository.create(any(Menu.class), any(CreateItemCommand.class)))
     //    .thenReturn(Optional.of(menu));
     when(menuRepository.save(any(Menu.class))).thenReturn(menu);
@@ -146,7 +148,8 @@ class ItemControllerTest {
 
     // Given
     Menu menu = createMenu(1);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
 
     CreateItemRequest request =
         new CreateItemRequest("Some Name", "Some Description", 13.56d, true);
@@ -175,7 +178,8 @@ class ItemControllerTest {
         new Category(randomUUID().toString(), "cat name", "cat description", Arrays.asList(item));
     menuHelperService.addOrUpdateCategory(menu, category);
 
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
 
     CreateItemRequest request =
         new CreateItemRequest(item.getName(), "Some Description", 13.56d, true);
@@ -202,7 +206,8 @@ class ItemControllerTest {
     Category category = createCategory(1);
     menuHelperService.addOrUpdateCategory(menu, category);
 
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
     when(menuRepository.save(any(Menu.class))).thenReturn(menu);
     CreateItemRequest request = new CreateItemRequest("", "Some Description", 13.56d, true);
 
@@ -227,7 +232,8 @@ class ItemControllerTest {
     Category category = createCategory(1);
     menuHelperService.addOrUpdateCategory(menu, category);
 
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
     when(menuRepository.save(any(Menu.class))).thenReturn(menu);
     CreateItemRequest request = new CreateItemRequest("Some name", "", 13.56d, true);
 
@@ -252,7 +258,8 @@ class ItemControllerTest {
     Category category = createCategory(1);
     menuHelperService.addOrUpdateCategory(menu, category);
 
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
     when(menuRepository.save(any(Menu.class))).thenReturn(menu);
     CreateItemRequest request = new CreateItemRequest("Some name", "Item description", 0d, true);
 
@@ -278,7 +285,8 @@ class ItemControllerTest {
     Item item = createItem(0);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
 
     UpdateItemRequest request =
         new UpdateItemRequest("Some Name", "Some Description", 13.56d, true);
@@ -320,7 +328,8 @@ class ItemControllerTest {
     List<Item> items = createItems(2);
     category.setItems(items);
     menuHelperService.addOrUpdateCategory(menu, category);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
 
     UpdateItemRequest request =
         new UpdateItemRequest(items.get(0).getName(), "Some Description2", 13.56d, true);
@@ -368,7 +377,8 @@ class ItemControllerTest {
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
 
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
 
     UpdateItemRequest request =
         new UpdateItemRequest("Some Name", "Some Description", 13.56d, true);
@@ -400,7 +410,8 @@ class ItemControllerTest {
     Item item = new Item(randomUUID().toString(), "New Item", "Item description", 12.2d, true);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
 
     UpdateItemRequest request =
         new UpdateItemRequest("Some Name", "Some Description", 13.56d, true);
@@ -432,7 +443,8 @@ class ItemControllerTest {
     Item item = new Item(randomUUID().toString(), "New Item", "Item description", 12.2d, true);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
 
     UpdateItemRequest request = new UpdateItemRequest("", "Some Description", 13.56d, true);
 
@@ -461,7 +473,8 @@ class ItemControllerTest {
     Item item = createItem(0);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
 
     UpdateItemRequest request = new UpdateItemRequest("Updated Name", "", 13.56d, true);
 
@@ -490,7 +503,8 @@ class ItemControllerTest {
     Item item = createItem(0);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
 
     UpdateItemRequest request = new UpdateItemRequest("Updated Name", "la alal", 0d, true);
 
@@ -519,7 +533,8 @@ class ItemControllerTest {
     Item item = new Item(randomUUID().toString(), "New Item", "Item description", 12.2d, true);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
 
     // When
     String requestUrl =
@@ -549,7 +564,8 @@ class ItemControllerTest {
     Item item = new Item(randomUUID().toString(), "New Item", "Item description", 12.2d, true);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
 
     // When
     String requestUrl =
@@ -575,7 +591,8 @@ class ItemControllerTest {
     Item item = new Item(randomUUID().toString(), "New Item", "Item description", 12.2d, true);
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(
+        Optional.of(menu));
 
     // When
     String requestUrl =

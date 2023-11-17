@@ -12,40 +12,42 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(
     properties = {
-      "management.port=0",
-      "aws.xray.enabled=false",
-      "aws.secretsmanager.enabled=false",
-      "spring.autoconfigure.exclude=com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration,"
-          + "com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration,"
-          + "com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration"
+        "management.port=0",
+        "aws.xray.enabled=false",
+        "aws.secretsmanager.enabled=false",
+        "cosmos.enabled=false"
     })
 @Tag("Component")
 class ActuatorTest {
 
-  @Value("${local.management.port}")
-  private int mgt;
+  @LocalServerPort
+  private int port;
 
-  @Autowired private TestRestTemplate testRestTemplate;
+  @Autowired
+  private TestRestTemplate testRestTemplate;
 
-  @MockBean private MenuRepository menuRepository;
+  @MockBean
+  private MenuRepository menuRepository;
 
   @Test
   void shouldReturn200WhenSendingRequestToHealthEndpoint() {
 
-    var entity = this.testRestTemplate.getForEntity(getBaseURL(this.mgt) + "/health", Map.class);
+    var entity = this.testRestTemplate.getForEntity(getBaseURL(port) + "/health", Map.class);
     then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
   }
 
   @Test
   void shouldReturn200WhenSendingRequestToManagementEndpoint() {
 
-    var entity = this.testRestTemplate.getForEntity(getBaseURL(this.mgt) + "/info", Map.class);
+    var entity = this.testRestTemplate.getForEntity(getBaseURL(port) + "/info", Map.class);
     then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
   }
 }
