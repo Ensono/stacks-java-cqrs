@@ -37,7 +37,6 @@
     <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
     <aspectjrt.version>1.9.9.1</aspectjrt.version>
     <spring-cloud-context.version>4.0.4</spring-cloud-context.version>
-    <maven-owasp-dependency-check-plugin.version>8.4.3</maven-owasp-dependency-check-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -146,18 +145,6 @@
           <execution>
             <goals>
               <goal>repackage</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.owasp</groupId>
-        <artifactId>dependency-check-maven</artifactId>
-        <version>${maven-owasp-dependency-check-plugin.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>update-only</goal>
             </goals>
           </execution>
         </executions>
