@@ -2,7 +2,6 @@ package com.amido.stacks.workloads.menu.api.v2;
 
 import static com.amido.stacks.workloads.util.TestHelper.getBaseURL;
 import static org.assertj.core.api.BDDAssertions.then;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -19,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
@@ -29,9 +28,7 @@ import org.springframework.test.context.TestPropertySource;
       "management.port=0",
       "aws.xray.enabled=false",
       "aws.secretsmanager.enabled=false",
-      "spring.autoconfigure.exclude=com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration,"
-          + "com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration,"
-          + "com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration"
+      "cosmos.enabled=false"
     })
 @Tag("Integration")
 @ActiveProfiles("test")
@@ -69,7 +66,7 @@ class MenuControllerV2Test {
     // Given
     Menu menu = MenuHelper.createMenu(0);
 
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(Optional.of(menu));
 
     // When
     var response =

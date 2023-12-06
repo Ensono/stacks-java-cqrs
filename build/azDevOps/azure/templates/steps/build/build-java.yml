@@ -12,6 +12,7 @@ parameters:
   vulnerability_scan: true
   vulnerability_scan_fail_build_on_detection: true
   project_type: ""
+  nvd_api_key: ""
 
 steps:
   - task: Cache@2
@@ -68,6 +69,7 @@ steps:
         inputs:
           filePath: "${{ parameters.pipeline_scripts_directory }}/test-maven-owasp-dependency-check.bash"
           arguments: >
+            -X "${{ parameters.nvd_api_key }}"
             -Y "${{ parameters.vulnerability_scan_fail_build_on_detection }}"
             -Z "${{ parameters.maven_cache_directory }}"
           workingDirectory: "${{ parameters.project_root_dir }}"
