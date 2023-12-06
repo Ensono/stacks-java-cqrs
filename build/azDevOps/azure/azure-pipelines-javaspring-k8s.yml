@@ -227,6 +227,7 @@ stages:
               vulnerability_scan: "${{ variables.vulnerability_scan }}"
               vulnerability_scan_fail_build_on_detection: "${{ variables.vulnerability_scan_fail_build_on_detection }}"
               project_type: "${{ variables.java_project_type }}"
+              nvd_api_key: "$(nvd-api-key)"
 
           # Builds the Java API Tests
           - template: templates/steps/build/build-api-tests.yml
@@ -248,6 +249,7 @@ stages:
               vulnerability_scan: "${{ variables.vulnerability_scan }}"
               vulnerability_scan_fail_build_on_detection: "${{ variables.vulnerability_scan_fail_build_on_detection }}"
               project_type: "${{ variables.functional_test_project_type }}"
+              nvd_api_key: "$(nvd-api-key)"
 
           # Performs stati code analysis, such as Sonar Cloud
           - template: templates/steps/build/test-static-code-analysis.yml
