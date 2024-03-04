@@ -33,7 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
@@ -51,9 +51,7 @@ import org.springframework.test.context.TestPropertySource;
       "management.port=0",
       "aws.xray.enabled=false",
       "aws.secretsmanager.enabled=false",
-      "spring.autoconfigure.exclude=com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration,"
-          + "com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration,"
-          + "com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration"
+      "cosmos.enabled=false"
     })
 @Tag("Integration")
 @ActiveProfiles("test")
@@ -156,7 +154,7 @@ class MenuControllerTest {
   void testUpdateSuccess() {
     // Given
     Menu menu = createMenu(0);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(Optional.of(menu));
 
     UpdateMenuRequest request = new UpdateMenuRequest("new name", "new description", false);
 
@@ -186,7 +184,7 @@ class MenuControllerTest {
   void testCannotUpdateIfMenuDoesntExist() {
     // Given
     UUID menuId = UUID.randomUUID();
-    when(menuRepository.findById(eq(menuId.toString()))).thenReturn(Optional.empty());
+    when(menuRepository.findById(menuId.toString())).thenReturn(Optional.empty());
 
     UpdateMenuRequest request = new UpdateMenuRequest("name", "description", true);
 
@@ -207,7 +205,7 @@ class MenuControllerTest {
   void testUpdateMenuWithNoNameReturnsBadRequest() {
     // Given
     Menu menu = createMenu(0);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(Optional.of(menu));
 
     UpdateMenuRequest request = new UpdateMenuRequest("", "new description", false);
 
@@ -229,7 +227,7 @@ class MenuControllerTest {
   void testUpdateMenuWithNoDescriptionReturnsBadRequest() {
     // Given
     Menu menu = createMenu(0);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(Optional.of(menu));
 
     UpdateMenuRequest request = new UpdateMenuRequest("Updated Name", "", false);
 
@@ -251,7 +249,7 @@ class MenuControllerTest {
   void testDeleteMenuSuccess() {
     // Given
     Menu menu = createMenu(1);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(Optional.of(menu));
 
     var response =
         this.testRestTemplate.exchange(
@@ -268,7 +266,7 @@ class MenuControllerTest {
   void testDeleteMenuWithInvalidId() {
     // Given
     Menu menu = createMenu(1);
-    when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+    when(menuRepository.findById(menu.getId())).thenReturn(Optional.of(menu));
 
     var response =
         this.testRestTemplate.exchange(
@@ -277,7 +275,7 @@ class MenuControllerTest {
             new HttpEntity<>(getRequestHttpEntity()),
             ErrorResponse.class);
     // Then
-    verify(menuRepository, times(0)).delete(menu);
+    verify(menuRepository, times(0)).deleteById(menu.getId());
     then(response.getStatusCode()).isEqualTo(NOT_FOUND);
   }
 }

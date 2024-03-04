@@ -21,6 +21,7 @@
         <parallel.tests>4</parallel.tests>
         <webdriver.base.url/>
         <jackson.version>2.13.0</jackson.version>
+        <java.version>17</java.version>
 
         <!-- Set 'pact.broker.url' and 'pact.broker.token' -->
         <pact.broker.url/>
@@ -55,7 +56,7 @@
         <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <pact.provider-plugin.version>4.2.7</pact.provider-plugin.version>
         <maven-pmd-plugin.version>3.15.0</maven-pmd-plugin.version>
         <findbugs-maven-plugin.version>3.0.5</findbugs-maven-plugin.version>
@@ -435,8 +436,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <release>${java.version}</release>
                 </configuration>
             </plugin>
             <plugin>

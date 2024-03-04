@@ -17,6 +17,7 @@ parameters:
   vulnerability_scan: true
   vulnerability_scan_fail_build_on_detection: true
   project_type: ""
+  nvd_api_key: ""
 
 steps:
   # Builds the Java API Tests
@@ -39,6 +40,7 @@ steps:
       vulnerability_scan: "${{ parameters.vulnerability_scan }}"
       vulnerability_scan_fail_build_on_detection: "${{ parameters.vulnerability_scan_fail_build_on_detection }}"
       project_type: "${{ parameters.project_type }}"
+      nvd_api_key: "${{ parameters.nvd_api_key }}"
 
   - template: ./build-api-tests-cli.yml
     parameters:
@@ -59,3 +61,4 @@ steps:
       vulnerability_scan: "${{ parameters.vulnerability_scan }}"
       vulnerability_scan_fail_build_on_detection: "${{ parameters.vulnerability_scan_fail_build_on_detection }}"
       project_type: "${{ parameters.project_type }}"
+      nvd_api_key: "${{ parameters.nvd_api_key }}"
