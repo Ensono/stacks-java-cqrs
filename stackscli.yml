@@ -4,7 +4,7 @@ framework:
   name: java
   commands:
     - name: java
-      version: ">= 11"
+      version: ">= 17"
 
 # Pipeline files
 pipeline:

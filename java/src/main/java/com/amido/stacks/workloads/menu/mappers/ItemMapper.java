@@ -6,8 +6,5 @@ import com.amido.stacks.workloads.menu.domain.Item;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValueCheckStrategy;
 
-@Mapper(
-    componentModel = "spring",
-    uses = {},
-    nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+@Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface ItemMapper extends BaseMapper<ItemDTO, Item> {}

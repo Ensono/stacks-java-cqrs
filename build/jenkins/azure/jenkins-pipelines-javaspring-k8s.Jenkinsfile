@@ -117,7 +117,7 @@ pipeline {
               // e.g.:
               // args '-v /var/run/docker.sock:/var/run/docker.sock -u 1000:999'
               // Please check with your admin on any required steps you need to take to ensure a SUDOers access inside the containers
-              image "azul/zulu-openjdk-debian:11"
+              image "azul/zulu-openjdk-debian:17"
             }
           }
 
@@ -164,7 +164,7 @@ pipeline {
           agent {
             docker {
               // add additional args if you need to here
-              image "amidostacks/ci-k8s:0.0.11"
+              image "amidostacks/ci-k8s:0.0.17"
             }
           }
 
@@ -215,7 +215,7 @@ pipeline {
               agent {
                 docker {
                   // add additional args if you need to here
-                  image "azul/zulu-openjdk-debian:11"
+                  image "azul/zulu-openjdk-debian:17"
                 }
               }
 
@@ -364,7 +364,7 @@ pipeline {
               agent {
                 docker {
                   // add additional args if you need to here
-                  image "azul/zulu-openjdk-debian:11"
+                  image "azul/zulu-openjdk-debian:17"
                 }
               }
 
@@ -866,7 +866,7 @@ pipeline {
         stage("PostDeployDev") {
           agent {
             docker {
-              image "azul/zulu-openjdk-debian:11"
+              image "azul/zulu-openjdk-debian:17"
             }
           }
 
