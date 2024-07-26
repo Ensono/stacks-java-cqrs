@@ -15,7 +15,9 @@ parameters:
   docker_build_container: ""
   # Vulnerability Scanning
   vulnerability_scan: true
+  vulnerability_scan_api_key: "$(VULNERABILITY_SCAN_API_KEY)"
   vulnerability_scan_fail_build_on_detection: true
+  vulnerability_scan_database_directory: ""
   project_type: ""
 
 steps:
@@ -73,6 +75,8 @@ steps:
         inputs:
           filePath: "${{ parameters.pipeline_scripts_directory }}/test-maven-owasp-dependency-check.bash"
           arguments: >
+            -W "${{ parameters.vulnerability_scan_database_directory }}"
+            -X "${{ parameters.vulnerability_scan_api_key }}"
             -Y "${{ parameters.vulnerability_scan_fail_build_on_detection }}"
             -Z "${{ parameters.maven_cache_directory }}"
           workingDirectory: "${{ parameters.functional_test_project_root_dir }}"

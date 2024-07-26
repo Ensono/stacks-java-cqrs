@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
@@ -38,7 +38,7 @@ import org.springframework.test.context.TestPropertySource;
 @ActiveProfiles("test")
 class SecretsControllerTest {
 
-  public static final String GET_SECRETS = "/v1/secrets";
+  public static final String GET_SECRETS = "%s/v1/secrets";
 
   @LocalServerPort private int port;
 
@@ -53,7 +53,7 @@ class SecretsControllerTest {
     // When
     var response =
         this.testRestTemplate.getForEntity(
-            String.format("%s/v1/secrets", TestHelper.getBaseURL(port)), String.class);
+            String.format(GET_SECRETS, TestHelper.getBaseURL(port)), String.class);
 
     // Then
     then(response.getStatusCode()).isEqualTo(HttpStatus.OK);

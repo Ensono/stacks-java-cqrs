@@ -1,6 +1,6 @@
 
-The full documentation on Amido Stacks can be found [here](https://amido.github.io/stacks/).
+The full documentation on Ensono Stacks can be found [here](https://stacks.ensono.com/).
 
-Test documentation can be found [here](https://amido.github.io/stacks/docs/workloads/azure/backend/java_cqrs/testing_java_cqrs).
+Test documentation can be found [here](https://github.com/Ensono/amido.github.io/tree/master/docs/workloads/azure/backend/java/testing).
 
-Karate documentation is [here](https://amido.github.io/stacks/docs/workloads/azure/backend/java_cqrs/execute_karate_api_tests).
+Karate documentation is [here](https://github.com/Ensono/amido.github.io/tree/master/docs/workloads/azure/backend/java/testing).

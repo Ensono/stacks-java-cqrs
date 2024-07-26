@@ -2,7 +2,7 @@ package com.amido.stacks.workloads.menu.api.v2;
 
 import static com.amido.stacks.workloads.util.TestHelper.getBaseURL;
 import static org.assertj.core.api.BDDAssertions.then;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 

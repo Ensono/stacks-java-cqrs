@@ -31,21 +31,21 @@ steps:
         condition: always()
         inputs:
           path: "${{ parameters.project_root_dir }}/${{ parameters.vulnerability_scan_report }}"
-          artifact: "owasp-vulnerability-report-java"
+          artifact: "owasp-vulnerability-report-java-$(System.JobAttempt)"
         displayName: "Publish: Vulnerability Scan Report Artefact (${{ parameters.java_project_type }})"
 
       - task: PublishPipelineArtifact@1
         condition: always()
         inputs:
           path: "${{ parameters.functional_test_project_root_dir }}/${{ parameters.vulnerability_scan_report }}"
-          artifact: "owasp-vulnerability-report-functional-test"
+          artifact: "owasp-vulnerability-report-functional-test-$(System.JobAttempt)"
         displayName: "Publish: Vulnerability Scan Report Artefact (${{ parameters.functional_test_project_type }})"
 
       - task: PublishPipelineArtifact@1
         condition: always()
         inputs:
           path: "${{ parameters.functional_test_project_root_dir }}-karate/${{ parameters.vulnerability_scan_report }}"
-          artifact: "owasp-vulnerability-report-functional-test-karate"
+          artifact: "owasp-vulnerability-report-functional-test-karate-$(System.JobAttempt)"
         displayName: "Publish: Vulnerability Scan Report Artefact (${{ parameters.functional_test_project_type }})"
 
   # Publish Artefacts if required
@@ -53,18 +53,18 @@ steps:
       - task: PublishPipelineArtifact@1
         inputs:
           path: "${{ parameters.functional_test_artefact_path }}"
-          artifact: "${{ parameters.functional_test_artefact_name }}"
+          artifact: "${{ parameters.functional_test_artefact_name }}-$(System.JobAttempt)"
         displayName: "Publish: Functional Tests Artefact"
 
       - task: PublishPipelineArtifact@1
         inputs:
           path: "${{ parameters.functional_test_artefact_path }}-karate"
-          artifact: "${{ parameters.functional_test_artefact_name }}-karate"
+          artifact: "${{ parameters.functional_test_artefact_name }}-karate-$(System.JobAttempt)"
         displayName: "Publish: Functional Tests Artefact"
 
   - ${{ if eq(parameters.build_file, true) }}:
       - task: PublishPipelineArtifact@1
         inputs:
           path: "${{ parameters.build_file_path }}"
-          artifact: "${{ parameters.build_file_artefact_name }}"
+          artifact: "${{ parameters.build_file_artefact_name }}-$(System.JobAttempt)"
         displayName: "Publish: Build Artefacts"

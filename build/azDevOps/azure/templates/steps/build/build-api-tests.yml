@@ -15,7 +15,9 @@ parameters:
   docker_build_container: ""
   # Vulnerability Scanning
   vulnerability_scan: true
+  vulnerability_scan_api_key: "$(VULNERABILITY_SCAN_API_KEY)"
   vulnerability_scan_fail_build_on_detection: true
+  vulnerability_scan_database_directory: ""
   project_type: ""
 
 steps:
@@ -37,7 +39,9 @@ steps:
       docker_build_container: "${{ parameters.docker_build_container }}"
       # Vulnerability Scan
       vulnerability_scan: "${{ parameters.vulnerability_scan }}"
+      vulnerability_scan_api_key: "${{ parameters.vulnerability_scan_api_key }}"
       vulnerability_scan_fail_build_on_detection: "${{ parameters.vulnerability_scan_fail_build_on_detection }}"
+      vulnerability_scan_database_directory: "${{ parameters.vulnerability_scan_database_directory }}"
       project_type: "${{ parameters.project_type }}"
 
   - template: ./build-api-tests-cli.yml
@@ -57,5 +61,7 @@ steps:
       docker_build_container: "${{ parameters.docker_build_container }}"
       # Vulnerability Scan
       vulnerability_scan: "${{ parameters.vulnerability_scan }}"
+      vulnerability_scan_api_key: "${{ parameters.vulnerability_scan_api_key }}"
       vulnerability_scan_fail_build_on_detection: "${{ parameters.vulnerability_scan_fail_build_on_detection }}"
+      vulnerability_scan_database_directory: "${{ parameters.vulnerability_scan_database_directory }}"
       project_type: "${{ parameters.project_type }}"

@@ -8,8 +8,8 @@ import static com.amido.stacks.workloads.util.TestHelper.getBaseURL;
 import static com.amido.stacks.workloads.util.TestHelper.getRequestHttpEntity;
 import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.BDDAssertions.then;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -32,15 +32,17 @@ import com.amido.stacks.workloads.menu.service.v1.utility.MenuHelperService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
+import org.junit.Test;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -60,7 +62,7 @@ import org.springframework.test.context.TestPropertySource;
     })
 @Tag("Integration")
 @ActiveProfiles("test")
-class ItemControllerTest {
+public class ItemControllerTest {
 
   public static final String CREATE_ITEM = "%s/v1/menu/%s/category/%s/items";
   public static final String UPDATE_ITEM = "%s/v1/menu/%s/category/%s/items/%s";
@@ -75,15 +77,13 @@ class ItemControllerTest {
   @MockBean private MenuRepository menuRepository;
 
   @Test
-  void testAddItem() {
+  public void testAddItem() {
     // Given
     Menu menu = createMenu(1);
     Category category =
         new Category(randomUUID().toString(), "cat name", "cat description", new ArrayList<>());
     menuHelperService.addOrUpdateCategory(menu, category);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
-    // when(menuRepository.create(any(Menu.class), any(CreateItemCommand.class)))
-    //    .thenReturn(Optional.of(menu));
     when(menuRepository.save(any(Menu.class))).thenReturn(menu);
 
     CreateItemRequest request =
@@ -123,7 +123,7 @@ class ItemControllerTest {
   }
 
   @Test
-  void testInvalidCategoryIdWilThrowBadRequest() {
+  public void testInvalidCategoryIdWilThrowBadRequest() {
 
     // Given
     CreateItemRequest request =
@@ -216,7 +216,7 @@ class ItemControllerTest {
     // Then
     then(response).isNotNull();
     then(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-    then(response.getBody().getDescription())
+    then(Objects.requireNonNull(response.getBody()).getDescription())
         .isEqualTo("Invalid Request: {name=must not be blank}");
   }
 
@@ -241,7 +241,7 @@ class ItemControllerTest {
     // Then
     then(response).isNotNull();
     then(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-    then(response.getBody().getDescription())
+    then(Objects.requireNonNull(response.getBody()).getDescription())
         .isEqualTo("Invalid Request: {description=must not be blank}");
   }
 
@@ -266,7 +266,7 @@ class ItemControllerTest {
     // Then
     then(response).isNotNull();
     then(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-    then(response.getBody().getDescription())
+    then(Objects.requireNonNull(response.getBody()).getDescription())
         .isEqualTo("Invalid Request: {price=Price must be greater than zero}");
   }
 
@@ -449,7 +449,7 @@ class ItemControllerTest {
 
     // Then
     then(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    then(response.getBody().getDescription())
+    then(Objects.requireNonNull(response.getBody()).getDescription())
         .isEqualTo("Invalid Request: {name=must not be blank}");
   }
 
@@ -478,7 +478,7 @@ class ItemControllerTest {
 
     // Then
     then(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    then(response.getBody().getDescription())
+    then(Objects.requireNonNull(response.getBody()).getDescription())
         .isEqualTo("Invalid Request: {description=must not be blank}");
   }
 
@@ -507,7 +507,7 @@ class ItemControllerTest {
 
     // Then
     then(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    then(response.getBody().getDescription())
+    then(Objects.requireNonNull(response.getBody()).getDescription())
         .isEqualTo("Invalid Request: {price=Price must be greater than zero}");
   }
 
@@ -536,7 +536,7 @@ class ItemControllerTest {
     verify(menuRepository, times(1)).save(menu);
     then(response.getStatusCode()).isEqualTo(OK);
     Optional<Menu> optMenu = menuRepository.findById(menu.getId());
-    Menu updated = optMenu.get();
+    Menu updated = optMenu.orElseThrow(() -> new NoSuchElementException("Menu not found"));
     then(updated.getCategories()).hasSize(1);
     then(updated.getCategories().get(0).getItems()).isNotNull();
   }

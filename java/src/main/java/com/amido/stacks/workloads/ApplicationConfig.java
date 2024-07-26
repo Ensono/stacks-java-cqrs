@@ -1,28 +1,30 @@
 package com.amido.stacks.workloads;
 
-import com.auth0.spring.security.api.JwtWebSecurityConfigurer;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
+import java.util.List;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 /** ApplicationConfig - Configuration class for Auth0 application security. */
-@Configuration("MySecurityConfig")
+@Configuration("mySecurityConfig")
 @EnableWebSecurity
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class ApplicationConfig extends WebSecurityConfigurerAdapter {
+public class ApplicationConfig {
 
+  private static final String ALLOWED_ORIGINS = "enosono.com";
   private static final String V1_MENU_ENDPOINT = "/v1/menu";
   private static final String V1_MENU = "/v1/menu/**";
   private static final String V2_MENU_ENDPOINT = "/v2/menu";
@@ -45,7 +47,7 @@ public class ApplicationConfig extends WebSecurityConfigurerAdapter {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Arrays.asList("*"));
+    configuration.setAllowedOrigins(List.of(ALLOWED_ORIGINS));
     configuration.setAllowedMethods(Arrays.asList("DELETE", "GET", "POST", "PATCH", "PUT"));
     configuration.setAllowCredentials(true);
     configuration.addAllowedHeader("Authorization");
@@ -74,14 +76,13 @@ public class ApplicationConfig extends WebSecurityConfigurerAdapter {
    * @param http
    * @throws Exception
    */
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http.cors();
+  @Bean
+  public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+    http.cors(Customizer.withDefaults());
     if (BooleanUtils.isTrue(isEnabled)) {
-      enableAuth(http);
-    } else {
-      permitAll(http);
+      return enableAuth(http);
     }
+    return permitAll(http);
   }
 
   /**
@@ -90,18 +91,19 @@ public class ApplicationConfig extends WebSecurityConfigurerAdapter {
    * @param http
    * @throws Exception
    */
-  private void enableAuth(HttpSecurity http) throws Exception {
-    JwtWebSecurityConfigurer.forRS256(apiAudience, issuer)
-        .configure(http)
-        .authorizeRequests()
-        .antMatchers(V1_MENU_ENDPOINT)
-        .authenticated()
-        .antMatchers(V2_MENU_ENDPOINT)
-        .authenticated()
-        .antMatchers(V1_MENU)
-        .authenticated()
-        .antMatchers(V2_MENU)
-        .authenticated();
+  private SecurityFilterChain enableAuth(HttpSecurity http) throws Exception {
+    return http.authorizeHttpRequests(
+            authConfig ->
+                authConfig
+                    .requestMatchers(V1_MENU_ENDPOINT)
+                    .authenticated()
+                    .requestMatchers(V2_MENU_ENDPOINT)
+                    .authenticated()
+                    .requestMatchers(V1_MENU)
+                    .authenticated()
+                    .requestMatchers(V2_MENU)
+                    .authenticated())
+        .build();
   }
 
   /**
@@ -110,11 +112,9 @@ public class ApplicationConfig extends WebSecurityConfigurerAdapter {
    * @param http
    * @throws Exception
    */
-  private void permitAll(HttpSecurity http) throws Exception {
-    JwtWebSecurityConfigurer.forRS256(apiAudience, issuer)
-        .configure(http)
-        .authorizeRequests()
-        .antMatchers("/**")
-        .permitAll();
+  private SecurityFilterChain permitAll(HttpSecurity http) throws Exception {
+    return http.authorizeHttpRequests(authConfig -> authConfig.requestMatchers("/**").permitAll())
+        .httpBasic(Customizer.withDefaults())
+        .build();
   }
 }

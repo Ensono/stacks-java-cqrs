@@ -21,9 +21,9 @@ import org.springframework.context.annotation.Configuration;
     scheme = "bearer")
 public class OpenApiConfiguration {
 
-  private static final String PROJECT_URL = "https://github.com/amido/stacks-java";
-  private static final String STACKS_EMAIL = "stacks@amido.com";
-  private static final String SPRING_DOC = "http://springdoc.org";
+  private static final String PROJECT_URL = "https://github.com/Ensono/stacks-java";
+  private static final String STACKS_EMAIL = "stacks@ensono.com";
+  private static final String SPRING_DOC = "https://springdoc.org";
 
   /** OAS/Swagger Configuration. */
   @Bean
@@ -38,7 +38,7 @@ public class OpenApiConfiguration {
                 .title("Menu API")
                 .version("1.0")
                 .description("APIs used to interact and manage menus for a restaurant")
-                .contact(new Contact().name("Amido").url(PROJECT_URL).email(STACKS_EMAIL))
+                .contact(new Contact().name("Ensono").url(PROJECT_URL).email(STACKS_EMAIL))
                 .license(new License().name("Apache 2.0").url(SPRING_DOC)));
   }
 

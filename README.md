@@ -1,20 +1,19 @@
-The full documentation on Amido Stacks can be found [here](https://amido.github.io/stacks/).
+The full documentation on Ensono Stacks can be found [here](https://stacks.ensono.com/).
 
 ## Using the repository to build the Java Spring Boot Rest API application
 
 ### Customised solution
 
 To customise the namespaces and create an application for your company please visit the
-full [documentation](https://stacks.amido.com/docs/)
+full [documentation](https://stacks.ensono.com/docs)
 
 ### Running the application locally
 
 1. Clone one of the Java projects to your local machine from one of the following repos:
    ---
-    1. Simple web API: [stacks-java repository](https://github.com/amido/stacks-java)
-    2. Web API with CQRS: [stacks-java-cqrs repository](https://github.com/amido/stacks-java-cqrs)
-    3. Web API with CQRS and
-       events: [stacks-java-cqrs-events repository](https://github.com/amido/stacks-java-cqrs-events)
+   1. Simple web API: [stacks-java repository](https://github.com/Ensono/stacks-java)
+   2. Web API with CQRS: [stacks-java-cqrs repository](https://github.com/Ensono/stacks-java-cqrs)
+   3. Web API with CQRS and events: [stacks-java-cqrs-events repository](https://github.com/Ensono/stacks-java-cqrs-events)
 
 2. Configure required environment variables
    ---
@@ -58,7 +57,7 @@ full [documentation](https://stacks.amido.com/docs/)
 3. Build and run the application
    ---
 
-   Note that at a minimum [Java 11](https://adoptopenjdk.net/) should be installed.
+   Note that at a minimum [Java 17](https://www.azul.com/downloads/#zulu) should be installed.
 
    Move to the `<PROJECT-NAME>/java` folder, then
 
@@ -134,8 +133,8 @@ definition and an associated Application. There are corresponding configuration 
 the Stacks application, within the `auth.properties` file, e.g.
 
 ```text
-auth0.issuer=https://amidostacks.eu.auth0.com/
-auth0.apiAudience=https://amidostacks.eu.auth0.com/api/v2/
+auth0.issuer=https://ensonostacks.eu.auth0.com/
+auth0.apiAudience=https://ensonostacks.eu.auth0.com/api/v2/
 ```
 
 These parameters are used to verify that the JWT supplied in the Authorization header of a request
