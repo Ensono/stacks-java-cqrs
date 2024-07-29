@@ -110,12 +110,7 @@ class DomainToDtoMapperMapstructTest {
 
     Menu menu =
         new Menu(
-            id.toString(),
-            restaurantId.toString(),
-            name,
-            description,
-            List.of(category),
-            enabled);
+            id.toString(), restaurantId.toString(), name, description, List.of(category), enabled);
 
     // When
     MenuDTO menuDTO = menuMapper.toDto(menu);
