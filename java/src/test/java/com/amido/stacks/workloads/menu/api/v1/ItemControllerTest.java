@@ -35,8 +35,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
-import org.junit.Test;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -62,7 +62,7 @@ import org.springframework.test.context.TestPropertySource;
     })
 @Tag("Integration")
 @ActiveProfiles("test")
-public class ItemControllerTest {
+class ItemControllerTest {
 
   public static final String CREATE_ITEM = "%s/v1/menu/%s/category/%s/items";
   public static final String UPDATE_ITEM = "%s/v1/menu/%s/category/%s/items/%s";
@@ -77,7 +77,7 @@ public class ItemControllerTest {
   @MockBean private MenuRepository menuRepository;
 
   @Test
-  public void testAddItem() {
+  void testAddItem() {
     // Given
     Menu menu = createMenu(1);
     Category category =
@@ -123,7 +123,7 @@ public class ItemControllerTest {
   }
 
   @Test
-  public void testInvalidCategoryIdWilThrowBadRequest() {
+  void testInvalidCategoryIdWilThrowBadRequest() {
 
     // Given
     CreateItemRequest request =

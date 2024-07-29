@@ -10,6 +10,7 @@
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <logback.version>1.5.6</logback.version>
     <main.basedir>.</main.basedir>
     <source.basedir>${main.basedir}/stacks</source.basedir>
     <build.basedir>${main.basedir}/build</build.basedir>
@@ -88,6 +89,16 @@
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-common</artifactId>
       <version>1.8.0</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback.version}</version>
     </dependency>
     <dependency>
       <groupId>com.amido.stacks.modules</groupId>
