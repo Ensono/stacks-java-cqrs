@@ -271,7 +271,6 @@ stages:
               pullrequest_number: "$(pullrequest_number)"
               # Sonar
               sonar_enable: true
-              # Set to false to speed up validation of deploy stage, revert once done
               sonar_container: "sonar_scanner"
               sonar_host_url: "https://sonarcloud.io"
               sonar_project_name: "$(SONAR_PROJECT_NAME)"
@@ -614,6 +613,8 @@ stages:
           runOnce:
             deploy:
               steps:
+                - download: none
+
                 - checkout: self
 
                 - checkout: templates
@@ -623,19 +624,19 @@ stages:
                     pipeline_scripts_directory: "${{ variables.self_pipeline_scripts_dir }}"
                     docker_terraform_container: "terraform_custom"
                     # Azure Credenitals (For Deploying)
-                    azure_client_id: "$(prod-azure-client-id)"
-                    azure_client_secret: "$(prod-azure-client-secret)"
-                    azure_tenant_id: "$(prod-azure-tenant-id)"
-                    azure_subscription_id: "$(prod-azure-subscription-id)"
+                    azure_client_id: "$(ARM_CLIENT_ID)"
+                    azure_client_secret: "$(ARM_CLIENT_SECRET)"
+                    azure_tenant_id: "$(ARM_TENANT_ID)"
+                    azure_subscription_id: "$(ARM_SUBSCRIPTION_ID)"
                     # Terraform
                     terraform_directory: '$(self_repo_tf_dir)'
                     # Backend Azure State Storage Credentials
                     # Change these if your state storage is in a different
                     # location to your deployment
-                    terraform_backend_azure_client_id: "$(prod-azure-client-id)"
-                    terraform_backend_azure_client_secret: "$(prod-azure-client-secret)"
-                    terraform_backend_azure_tenant_id: "$(prod-azure-tenant-id)"
-                    terraform_backend_azure_subscription_id: "$(prod-azure-subscription-id)"
+                    terraform_backend_azure_client_id: "$(ARM_CLIENT_ID)"
+                    terraform_backend_azure_client_secret: "$(ARM_CLIENT_SECRET)"
+                    terraform_backend_azure_tenant_id: "$(ARM_TENANT_ID)"
+                    terraform_backend_azure_subscription_id: "$(ARM_SUBSCRIPTION_ID)"
                     terraform_state_rg: ${{ variables.tf_state_rg }}
                     terraform_state_storage: ${{ variables.tf_state_storage }}
                     terraform_state_container: ${{ variables.tf_state_container }}
@@ -689,6 +690,8 @@ stages:
           runOnce:
             deploy:
               steps:
+                - download: none
+
                 - checkout: self
 
                 - checkout: templates
@@ -704,10 +707,10 @@ stages:
                       -e "$(ARM_CLIENT_SECRET)"
                       -f "$(ARM_TENANT_ID)"
                       -g "$(k8s_docker_registry_prod)"
-                      -h "$(prod-azure-subscription-id)"
-                      -i "$(prod-azure-client-id)"
-                      -j "$(prod-azure-client-secret)"
-                      -k "$(prod-azure-tenant-id)"
+                      -h "$(ARM_SUBSCRIPTION_ID)"
+                      -i "$(ARM_CLIENT_ID)"
+                      -j "$(ARM_CLIENT_SECRET)"
+                      -k "$(ARM_TENANT_ID)"
                       -Z "false"
                   displayName: Promote Docker Image to Production ACR
 
@@ -748,6 +751,8 @@ stages:
           runOnce:
             deploy:
               steps:
+                - download: none
+
                 - checkout: self
 
                 - checkout: templates
@@ -788,10 +793,10 @@ stages:
                         additional_args: "-no-empty",
                       },
                     ]
-                    azure_client_id: "$(prod-azure-client-id)"
-                    azure_client_secret: "$(prod-azure-client-secret)"
-                    azure_tenant_id: "$(prod-azure-tenant-id)"
-                    azure_subscription_id: "$(prod-azure-subscription-id)"
+                    azure_client_id: "$(ARM_CLIENT_ID)"
+                    azure_client_secret: "$(ARM_CLIENT_SECRET)"
+                    azure_tenant_id: "$(ARM_TENANT_ID)"
+                    azure_subscription_id: "$(ARM_SUBSCRIPTION_ID)"
                     aks_cluster_resourcegroup: "${{ variables.aks_cluster_resourcegroup }}"
                     aks_cluster_name: "${{ variables.aks_cluster_name }}"
                     # Used to do a `kubectl rollout status`

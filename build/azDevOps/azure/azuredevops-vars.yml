@@ -62,7 +62,7 @@ variables:
   - name: docker_container_registry_name_nonprod
     value: ensonostackseuweirdfmu
   - name: docker_container_registry_name_prod
-    value: amidostacksprodeuwcore
+    value: ensonostackseuweirdfmu
 
   # Domain names
   - name: base_domain_nonprod
