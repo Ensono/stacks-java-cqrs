@@ -30,6 +30,7 @@
 
     <java.version>17</java.version>
     <logback.version>1.5.6</logback.version>
+    <log4j-version>2.23.1</log4j-version>
     <com.google.code.gson-version>2.11.0</com.google.code.gson-version>
     <azure.springboot.version>3.6.0</azure.springboot.version>
     <azure.messaging-servicebus.version>7.3.0</azure.messaging-servicebus.version>
@@ -177,6 +178,11 @@
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
       <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-api</artifactId>
+    <version>${log4j-version}</version>
     </dependency>
     <dependency>
       <groupId>jakarta.validation</groupId>
