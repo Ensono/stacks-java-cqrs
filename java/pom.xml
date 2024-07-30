@@ -162,6 +162,12 @@
       <artifactId>consumer</artifactId>
       <version>${au.com.dius.pact.consumer-version}</version>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.aspectj</groupId>
@@ -178,11 +184,6 @@
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
       <version>${logback.version}</version>
-    </dependency>
-    <dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-api</artifactId>
-    <version>${log4j-version}</version>
     </dependency>
     <dependency>
       <groupId>jakarta.validation</groupId>
