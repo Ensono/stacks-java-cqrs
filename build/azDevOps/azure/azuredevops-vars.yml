@@ -1,6 +1,6 @@
 variables:
   - name: region
-    value: westeurope
+    value: eu-west-2
   - name: company
     value: ensono
   - name: project
