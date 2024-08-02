@@ -3,6 +3,7 @@ package com.amido.stacks.workloads.actuator;
 import static com.amido.stacks.workloads.util.TestHelper.getBaseURL;
 import static org.assertj.core.api.BDDAssertions.then;
 
+import com.amido.stacks.workloads.Application;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import java.util.Map;
 import org.junit.jupiter.api.Tag;
@@ -15,15 +16,14 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.TestPropertySource;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+    classes = Application.class)
 @TestPropertySource(
     properties = {
       "management.port=0",
       "aws.xray.enabled=false",
-      "aws.secretsmanager.enabled=false",
-      "spring.autoconfigure.exclude=com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration,"
-          + "com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration,"
-          + "com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration"
+      "aws.secretsmanager.enabled=false"
     })
 @Tag("Component")
 class ActuatorTest {
