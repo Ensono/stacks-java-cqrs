@@ -30,7 +30,8 @@ import com.amido.stacks.workloads.menu.domain.Item;
 import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.amido.stacks.workloads.menu.service.v1.utility.MenuHelperService;
-import com.azure.spring.cloud.autoconfigure.implementation.data.cosmos.CosmosRepositoriesAutoConfiguration;
+import com.azure.cosmos.CosmosClient;
+import com.azure.spring.cloud.autoconfigure.implementation.cosmos.AzureCosmosAutoConfiguration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,13 +57,13 @@ import org.springframework.test.context.TestPropertySource;
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     classes = Application.class)
-@EnableAutoConfiguration(exclude = {CosmosRepositoriesAutoConfiguration.class})
 @TestPropertySource(
     properties = {
       "management.port=0",
       "aws.xray.enabled=false",
       "aws.secretsmanager.enabled=false"
     })
+@EnableAutoConfiguration(exclude = {AzureCosmosAutoConfiguration.class})
 @Tag("Integration")
 @ActiveProfiles("test")
 class ItemControllerTest {
@@ -436,6 +437,7 @@ class ItemControllerTest {
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
+
 
     UpdateItemRequest request = new UpdateItemRequest("", "Some Description", 13.56d, true);
 

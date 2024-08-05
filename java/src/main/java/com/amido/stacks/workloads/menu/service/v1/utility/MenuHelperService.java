@@ -70,20 +70,19 @@ public class MenuHelperService {
     return optCategory.get();
   }
 
-  public Item checkItemExistsById(MenuCommand command, Category category, UUID itemId) {
+  public void checkItemExistsById(MenuCommand command, Category category, UUID itemId) {
 
     if (category.getItems() == null) {
       category.setItems(new ArrayList<>());
     }
 
-    Optional<Item> optItem =
-        category.getItems().stream().filter(i -> itemId.toString().equals(i.getId())).findFirst();
+    var optItem = category.getItems().stream()
+        .filter(i -> itemId.toString().equals(i.getId()))
+        .findFirst();
 
     if (optItem.isEmpty()) {
       throw new ItemDoesNotExistsException(command, UUID.fromString(category.getId()), itemId);
     }
-
-    return optItem.get();
   }
 
   public void verifyCategoryNameNotAlreadyExisting(
