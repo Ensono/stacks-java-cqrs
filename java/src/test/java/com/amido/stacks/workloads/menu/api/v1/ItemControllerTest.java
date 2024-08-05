@@ -30,8 +30,6 @@ import com.amido.stacks.workloads.menu.domain.Item;
 import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.amido.stacks.workloads.menu.service.v1.utility.MenuHelperService;
-import com.azure.cosmos.CosmosClient;
-import com.azure.spring.cloud.autoconfigure.implementation.cosmos.AzureCosmosAutoConfiguration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +40,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -63,7 +60,6 @@ import org.springframework.test.context.TestPropertySource;
       "aws.xray.enabled=false",
       "aws.secretsmanager.enabled=false"
     })
-@EnableAutoConfiguration(exclude = {AzureCosmosAutoConfiguration.class})
 @Tag("Integration")
 @ActiveProfiles("test")
 class ItemControllerTest {
@@ -437,7 +433,6 @@ class ItemControllerTest {
     menuHelperService.addOrUpdateItem(category, item);
     menuHelperService.addOrUpdateCategory(menu, category);
     when(menuRepository.findById(eq(menu.getId()))).thenReturn(Optional.of(menu));
-
 
     UpdateItemRequest request = new UpdateItemRequest("", "Some Description", 13.56d, true);
 

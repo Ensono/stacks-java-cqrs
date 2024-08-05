@@ -29,9 +29,6 @@ import com.amido.stacks.workloads.menu.domain.Category;
 import com.amido.stacks.workloads.menu.domain.Menu;
 import com.amido.stacks.workloads.menu.repository.MenuRepository;
 import com.amido.stacks.workloads.menu.service.v1.utility.MenuHelperService;
-import com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration;
-import com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration;
-import com.azure.spring.cloud.autoconfigure.implementation.data.cosmos.CosmosRepositoriesAutoConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -42,7 +39,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -56,12 +52,6 @@ import org.springframework.test.context.TestPropertySource;
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     classes = Application.class)
-@EnableAutoConfiguration(
-    exclude = {
-      CosmosRepositoriesAutoConfiguration.class,
-      CosmosAutoConfiguration.class,
-      CosmosHealthConfiguration.class
-    })
 @TestPropertySource(
     properties = {
       "management.port=0",

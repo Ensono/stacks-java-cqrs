@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest(
@@ -26,6 +27,7 @@ import org.springframework.test.context.TestPropertySource;
       "aws.secretsmanager.enabled=false"
     })
 @Tag("Component")
+@ActiveProfiles("test")
 class ActuatorTest {
 
   @Value("${local.management.port}")

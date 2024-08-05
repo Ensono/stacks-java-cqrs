@@ -8,10 +8,12 @@ import com.amido.stacks.workloads.util.TestHelper;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.cloud.autoconfigure.RefreshAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
@@ -29,13 +31,11 @@ import org.springframework.test.context.TestPropertySource;
     properties = {
       "management.port=0",
       "aws.xray.enabled=false",
-      "aws.secretsmanager.enabled=false",
-      "spring.autoconfigure.exclude=com.azure.spring.autoconfigure.cosmos.CosmosRepositoriesAutoConfiguration,"
-          + "com.azure.spring.autoconfigure.cosmos.CosmosAutoConfiguration,"
-          + "com.azure.spring.autoconfigure.cosmos.CosmosHealthConfiguration"
+      "aws.secretsmanager.enabled=false"
     })
 @Tag("Integration")
 @ActiveProfiles("test")
+@ImportAutoConfiguration(RefreshAutoConfiguration.class)
 class SecretsControllerTest {
 
   public static final String GET_SECRETS = "%s/v1/secrets";

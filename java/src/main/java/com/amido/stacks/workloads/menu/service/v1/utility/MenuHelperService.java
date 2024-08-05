@@ -76,9 +76,8 @@ public class MenuHelperService {
       category.setItems(new ArrayList<>());
     }
 
-    var optItem = category.getItems().stream()
-        .filter(i -> itemId.toString().equals(i.getId()))
-        .findFirst();
+    var optItem =
+        category.getItems().stream().filter(i -> itemId.toString().equals(i.getId())).findFirst();
 
     if (optItem.isEmpty()) {
       throw new ItemDoesNotExistsException(command, UUID.fromString(category.getId()), itemId);
