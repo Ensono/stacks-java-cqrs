@@ -136,6 +136,6 @@ public class GenericMenuConsumer {
 
     assertThat(getByTermResponse.getStatusCode().value()).isEqualTo(200);
     assertThat(getByTermResponse.getBody()).contains("pageSize", "pageNumber");
-    assertThat(getByTermResponse.getBody().contains("Dessert Menu (Automated Test Data)"));
+    assertThat(getByTermResponse.getBody()).contains("Dessert Menu (Automated Test Data)");
   }
 }

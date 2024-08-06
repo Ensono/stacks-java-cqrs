@@ -5,7 +5,8 @@ import com.amido.stacks.tests.api.WebServiceEndPoints;
 import java.util.HashMap;
 import java.util.Map;
 import net.serenitybdd.core.Serenity;
-import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
+
+import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.util.EnvironmentVariables;
@@ -13,17 +14,18 @@ import net.thucydides.core.util.SystemEnvironmentVariables;
 
 public class MenuRequests {
 
-  private static String menuUrl =
+  private static final String menuUrl =
       WebServiceEndPoints.BASE_URL.getUrl().concat(WebServiceEndPoints.MENU.getUrl());
-  private static String OAUTH_TOKEN_URL =
+  private static final String OAUTH_TOKEN_URL =
       OAuthConfigurations.OAUTH_TOKEN_URL.getOauthConfiguration();
   private static String authorizationToken;
 
-  private static EnvironmentVariables environmentVariables =
+  private static final EnvironmentVariables environmentVariables =
       SystemEnvironmentVariables.createEnvironmentVariables();
 
-  private static String generateAuthorisation =
-      EnvironmentSpecificConfiguration.from(environmentVariables)
+  private static final String generateAuthorisation =
+      EnvironmentSpecificConfiguration.from(
+              (net.thucydides.model.util.EnvironmentVariables) environmentVariables)
           .getProperty("generate.auth0.token");
 
   boolean generateToken = Boolean.parseBoolean(generateAuthorisation);

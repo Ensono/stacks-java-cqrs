@@ -50,6 +50,7 @@
         <spring.web.version>6.1.11</spring.web.version>
         <com.google.code.gson.version>2.11.0</com.google.code.gson.version>
         <net.thucydides.core.version>0.9.275</net.thucydides.core.version>
+        <rest-assured.version>5.5.0</rest-assured.version>
 
         <!-- Maven plugins -->
         <owasp-dependency-check-plugin.version>10.0.2</owasp-dependency-check-plugin.version>
@@ -82,7 +83,6 @@
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-core</artifactId>
             <version>${serenity.version}</version>
-            <scope>test</scope>
             <exclusions>
                 <exclusion>
                     <groupId>io.cucumber</groupId>
@@ -114,6 +114,12 @@
         </dependency>
         <dependency>
             <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-junit5</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-screenplay</artifactId>
             <version>${serenity.version}</version>
             <scope>test</scope>
@@ -128,6 +134,12 @@
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-cucumber6</artifactId>
             <version>${serenity.cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -222,6 +234,13 @@
             <artifactId>httpclient5</artifactId>
             <version>${httpclient5.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${org.projectlombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>

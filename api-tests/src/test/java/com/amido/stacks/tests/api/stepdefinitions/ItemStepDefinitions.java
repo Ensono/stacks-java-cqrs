@@ -120,7 +120,7 @@ public class ItemStepDefinitions {
         actualMenu.getCategories().stream()
             .filter(cat -> cat.getId().equals(categoryId))
             .flatMap(category -> category.getItems().stream())
-            .collect(Collectors.toList());
+            .toList();
 
     Assert.assertTrue(actualItems.contains(expectedItem));
   }

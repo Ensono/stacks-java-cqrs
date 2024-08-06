@@ -1,7 +1,9 @@
 package com.amido.stacks.tests.api.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class AuthorizationRequest {
 
   @JsonProperty("client_id")
@@ -24,19 +26,4 @@ public class AuthorizationRequest {
     this.grantType = grantType;
   }
 
-  public String getClientId() {
-    return clientId;
-  }
-
-  public String getClientSecret() {
-    return clientSecret;
-  }
-
-  public String getAudience() {
-    return audience;
-  }
-
-  public String getGrantType() {
-    return grantType;
-  }
 }

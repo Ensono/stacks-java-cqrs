@@ -106,6 +106,66 @@
       <version>2.0.1.2-RELEASE</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>5.5.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20240303</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.thucydides</groupId>
+      <artifactId>thucydides-core</artifactId>
+      <version>0.9.275</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.serenity-bdd</groupId>
+      <artifactId>serenity-core</artifactId>
+      <version>4.1.20</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.serenity-bdd</groupId>
+      <artifactId>serenity-model</artifactId>
+      <version>4.1.20</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.serenity-bdd</groupId>
+      <artifactId>serenity-rest-assured</artifactId>
+      <version>4.1.20</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>au.com.dius</groupId>
+      <artifactId>pact-jvm-consumer-junit_2.11</artifactId>
+      <version>3.5.24</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.26.3</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.serenity-bdd</groupId>
+      <artifactId>serenity-cucumber6</artifactId>
+      <version>2.6.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+      <version>2.3.19</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

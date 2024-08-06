@@ -10,7 +10,7 @@ public class FreemarkerTemplate {
 
   private Configuration getConfiguration() {
     if (configuration == null) {
-      configuration = new Configuration(Configuration.VERSION_2_3_28);
+      configuration = new Configuration();
       configuration.setDefaultEncoding("UTF-8");
       configuration.setClassForTemplateLoading(FreemarkerTemplate.class, "/");
       configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
