@@ -25,5 +25,4 @@ public class AuthorizationRequest {
     this.audience = audience;
     this.grantType = grantType;
   }
-
 }

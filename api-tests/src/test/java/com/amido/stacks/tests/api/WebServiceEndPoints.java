@@ -17,5 +17,4 @@ public enum WebServiceEndPoints {
   WebServiceEndPoints(String url) {
     this.url = url;
   }
-
 }

@@ -22,5 +22,4 @@ public enum ExceptionMessages {
   ExceptionMessages(String message) {
     this.message = message;
   }
-
 }

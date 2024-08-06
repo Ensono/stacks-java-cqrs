@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import net.serenitybdd.core.Serenity;
-
 import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
@@ -30,7 +29,8 @@ public class MenuActions {
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
   private static final String client_id = OAuthConfigurations.CLIENT_ID.getOauthConfiguration();
-  private static final String client_secret = OAuthConfigurations.CLIENT_SECRET.getOauthConfiguration();
+  private static final String client_secret =
+      OAuthConfigurations.CLIENT_SECRET.getOauthConfiguration();
   private static final String audience = OAuthConfigurations.AUDIENCE.getOauthConfiguration();
   private static final String grant_type = OAuthConfigurations.GRANT_TYPE.getOauthConfiguration();
   private static final EnvironmentVariables environmentVariables =

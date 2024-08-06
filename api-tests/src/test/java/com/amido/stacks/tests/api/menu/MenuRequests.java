@@ -5,7 +5,6 @@ import com.amido.stacks.tests.api.WebServiceEndPoints;
 import java.util.HashMap;
 import java.util.Map;
 import net.serenitybdd.core.Serenity;
-
 import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;

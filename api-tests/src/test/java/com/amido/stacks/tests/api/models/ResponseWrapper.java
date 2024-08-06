@@ -23,5 +23,4 @@ public class ResponseWrapper {
     this.pageNumber = pageNumber;
     this.results = results;
   }
-
 }

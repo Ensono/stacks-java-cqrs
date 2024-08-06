@@ -131,7 +131,10 @@ public class MenuStepDefinitions {
     Menu expectedMenu = MenuActions.mapToMenu(menuDetails.get(0), id);
 
     Menu actualMenu = lastResponse().getBody().as(Menu.class);
-    assertThat(expectedMenu).usingRecursiveComparison().ignoringFields("categories").isEqualTo(actualMenu);
+    assertThat(expectedMenu)
+        .usingRecursiveComparison()
+        .ignoringFields("categories")
+        .isEqualTo(actualMenu);
   }
 
   @When("I search the updated menu")
