@@ -3,12 +3,12 @@ package com.amido.stacks.tests.api.category;
 import com.amido.stacks.tests.api.WebServiceEndPoints;
 import java.util.HashMap;
 import java.util.Map;
+import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
 import net.serenitybdd.rest.SerenityRest;
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.util.EnvironmentVariables;
-import net.thucydides.core.util.SystemEnvironmentVariables;
+import net.thucydides.model.environment.SystemEnvironmentVariables;
+import net.thucydides.model.util.EnvironmentVariables;
 
 public class CategoryRequests {
   private static final String menuUrl =
@@ -19,8 +19,7 @@ public class CategoryRequests {
       SystemEnvironmentVariables.createEnvironmentVariables();
 
   private static final String generateAuthorisation =
-      EnvironmentSpecificConfiguration.from(
-              (net.thucydides.model.util.EnvironmentVariables) environmentVariables)
+      EnvironmentSpecificConfiguration.from(environmentVariables)
           .getProperty("generate.auth0.token");
 
   boolean generateToken = Boolean.parseBoolean(generateAuthorisation);

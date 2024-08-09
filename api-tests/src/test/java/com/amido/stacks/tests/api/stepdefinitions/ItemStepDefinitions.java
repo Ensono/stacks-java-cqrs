@@ -19,8 +19,8 @@ import io.cucumber.java.en.When;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.core.Serenity;
-import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
 public class ItemStepDefinitions {

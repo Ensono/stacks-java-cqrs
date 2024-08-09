@@ -3,31 +3,29 @@ package com.amido.stacks.tests.api.item;
 import com.amido.stacks.tests.api.WebServiceEndPoints;
 import java.util.HashMap;
 import java.util.Map;
+import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
 import net.serenitybdd.rest.SerenityRest;
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.util.EnvironmentVariables;
-import net.thucydides.core.util.SystemEnvironmentVariables;
+import net.thucydides.model.environment.SystemEnvironmentVariables;
+import net.thucydides.model.util.EnvironmentVariables;
 
 public class ItemRequests {
 
   private static final String menuUrl =
       WebServiceEndPoints.BASE_URL.getUrl().concat(WebServiceEndPoints.MENU.getUrl());
-  private static String authorizationToken;
   private static final EnvironmentVariables environmentVariables =
       SystemEnvironmentVariables.createEnvironmentVariables();
 
   private static final String generateAuthorisation =
-      EnvironmentSpecificConfiguration.from(
-              (net.thucydides.model.util.EnvironmentVariables) environmentVariables)
+      EnvironmentSpecificConfiguration.from(environmentVariables)
           .getProperty("generate.auth0.token");
 
   boolean generateToken = Boolean.parseBoolean(generateAuthorisation);
   private static final Map<String, String> commonHeaders = new HashMap<>();
 
   public ItemRequests() {
-    authorizationToken = String.valueOf(Serenity.getCurrentSession().get("Access Token"));
+    String authorizationToken = String.valueOf(Serenity.getCurrentSession().get("Access Token"));
 
     if (generateToken) {
       commonHeaders.put("Authorization", "Bearer " + authorizationToken);
