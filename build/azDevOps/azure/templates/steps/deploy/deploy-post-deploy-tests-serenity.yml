@@ -39,7 +39,7 @@ steps:
         inputs:
           filePath: "${{ parameters.pipeline_scripts_directory }}/test-maven-post-deploy-tagged-test-run.bash"
           arguments: >
-            -a "@Functional"
+            -a "Functional"
             -b "${{ parameters.functional_test_base_url }}"
             -Y "${{ parameters.maven_ignored_post_deploy_test_tags }}"
             -Z "${{ parameters.maven_cache_directory }}"

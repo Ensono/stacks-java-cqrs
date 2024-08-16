@@ -134,9 +134,9 @@ variables:
   - name: maven_allowed_test_tags
     value: "Unit | Component | Integration"
   - name: maven_allowed_post_deploy_test_tags
-    value: "@Functional or @Smoke or @Performance"
+    value: "Functional | Smoke | Performance"
   - name: maven_ignored_post_deploy_test_tags
-    value: "@Ignore"
+    value: "Ignore"
   - name: maven_post_deploy_html_report_directory
     value: "target/site/serenity"
   - name: maven_post_deploy_failsafe_reports_directory

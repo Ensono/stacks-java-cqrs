@@ -1,12 +1,17 @@
 package com.amido.stacks.tests.api;
 
-import io.cucumber.junit.CucumberOptions;
-import net.serenitybdd.cucumber.CucumberWithSerenity;
-import org.junit.runner.RunWith;
+import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 
-@RunWith(CucumberWithSerenity.class)
-@CucumberOptions(
-    plugin = {"pretty", "html:target/cucumber"},
-    features = "src/test/resources/cucumber/features",
-    tags = "(not @Ignore) and (@Smoke or @Regression or @Functional)")
+import org.junit.platform.suite.api.ConfigurationParameter;
+import org.junit.platform.suite.api.IncludeEngines;
+import org.junit.platform.suite.api.SelectClasspathResource;
+import org.junit.platform.suite.api.Suite;
+
+@Suite
+@IncludeEngines("cucumber")
+@SelectClasspathResource("/cucumber/features")
+@ConfigurationParameter(
+    key = PLUGIN_PROPERTY_NAME,
+    value =
+        "io.cucumber.core.plugin.SerenityReporterParallel,pretty,timeline:target/test-results/timeline,html:target/cucumber.html")
 public class CucumberTestSuite {}

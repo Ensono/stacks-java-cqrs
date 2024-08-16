@@ -13,7 +13,6 @@ import net.thucydides.model.util.EnvironmentVariables;
 public class CategoryRequests {
   private static final String menuUrl =
       WebServiceEndPoints.BASE_URL.getUrl() + WebServiceEndPoints.MENU.getUrl();
-  private static String authorizationToken;
 
   private static final EnvironmentVariables environmentVariables =
       SystemEnvironmentVariables.createEnvironmentVariables();
@@ -26,7 +25,7 @@ public class CategoryRequests {
   private static final Map<String, String> commonHeaders = new HashMap<>();
 
   public CategoryRequests() {
-    authorizationToken = String.valueOf(Serenity.getCurrentSession().get("Access Token"));
+    String authorizationToken = String.valueOf(Serenity.getCurrentSession().get("Access Token"));
 
     if (generateToken) {
       commonHeaders.put("Authorization", "Bearer " + authorizationToken);
