@@ -4,4 +4,3 @@ spring:
       uri: https://localhost:8081
       databaseName: Stacks
       key: ${COSMOSDB_KEY}
-     
