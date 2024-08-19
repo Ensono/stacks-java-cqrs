@@ -32,6 +32,6 @@ COPY --from=build ${DEPENDENCY}/application/ ./
 
 RUN if [ -e "/BOOT-INF/classes/emulatorcert.crt" ]; then cd $JAVA_HOME/lib/security && keytool -importcert -cacerts -storepass changeit -noprompt -alias documentdbemulator -file /BOOT-INF/classes/emulatorcert.crt; fi
 
-ENTRYPOINT ["java","org.springframework.boot.loader.JarLauncher"]
+ENTRYPOINT ["java","org.springframework.boot.loader.launch.JarLauncher"]
 
 EXPOSE 9000
