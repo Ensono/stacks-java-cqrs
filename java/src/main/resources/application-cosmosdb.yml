@@ -3,4 +3,4 @@ spring:
     cosmos:
       uri: https://localhost:8081
       databaseName: Stacks
-      key: ${COSMOSDB_KEY}
+      key: ${AZURE_COSMOS_KEY}
