@@ -79,7 +79,7 @@ variable "dns_zone_resource_group" {
   type = string
 }
 
-variable "core_resource_group" {
+variable "infra_resource_group" {
   type = string
 }
 

@@ -37,16 +37,16 @@ resources:
     # Container for inlining Jacoco assets as Azure DevOps strips them
     # https://github.com/microsoft/azure-pipelines-tasks/issues/3027
     - container: node
-      image: amidostacks/node-14:0.0.1
+      image: node:20.16.0-bullseye-slim
     # Container for Sonar Scanner
     - container: sonar_scanner
       image: amidostacks/runner-pwsh-dotnet:0.4.51-stable
     # Container for Kubernetes Deployment
     - container: k8s_deploy
-      image: amidostacks/ci-k8s:0.0.12
+      image: ensonostackseuweirdfmu.azurecr.io/ensono/eir-infrastructure:1.1.165
     # Container for Terraform deployments
     - container: terraform_custom
-      image: amidostacks/ci-tf:0.0.8
+      image: ensonostackseuweirdfmu.azurecr.io/ensono/eir-infrastructure:1.1.165
 
 variables:
   - template: azuredevops-vars.yml
@@ -339,7 +339,7 @@ stages:
       - group: stacks-java-api
       - name: dns_name
         value: "$(Environment.ShortName)-java-api-cqrs"
-      - name: core_resource_group
+      - name: infra_resource_group
         value: $(tf_core_resource_group_nonprod)
       - name: Environment.ShortName
         value: dev
@@ -425,7 +425,7 @@ stages:
                       TF_VAR_dns_record: "${{ variables.dns_name }}",
                       TF_VAR_dns_zone_name: "${{ variables.base_domain_nonprod }}",
                       TF_VAR_dns_zone_resource_group: "${{ variables.dns_zone_resource_group }}",
-                      TF_VAR_core_resource_group: "${{ variables.core_resource_group }}",
+                      TF_VAR_infra_resource_group: "${{ variables.infra_resource_group }}",
                       TF_VAR_internal_dns_zone_name: "${{ variables.base_domain_internal_nonprod }}",
                       TF_VAR_create_cosmosdb: "${{ variables.create_cosmosdb }}",
                       TF_VAR_create_cache: "${{ variables.create_cache }}",
@@ -470,7 +470,7 @@ stages:
           - name: functional_test_base_url
             value: "https://${{ variables.dns_pointer }}${{ variables.k8s_app_path }}"
           - name: aks_cluster_resourcegroup
-            value: "${{ variables.core_resource_group }}"
+            value: "${{ variables.infra_resource_group }}"
           - name: aks_cluster_name
             value: $(kubernetes_clustername_nonprod)
           - name: app_name
@@ -570,7 +570,7 @@ stages:
       - group: stacks-java-api
       - name: dns_name
         value: "$(Environment.ShortName)-java-api-cqrs"
-      - name: core_resource_group
+      - name: infra_resource_group
         value: $(tf_core_resource_group_prod)
       - name: Environment.ShortName
         value: prod
@@ -656,7 +656,7 @@ stages:
                       TF_VAR_dns_record: "${{ variables.dns_name }}",
                       TF_VAR_dns_zone_name: "${{ variables.base_domain_prod }}",
                       TF_VAR_dns_zone_resource_group: "${{ variables.dns_zone_resource_group }}",
-                      TF_VAR_core_resource_group: "${{ variables.core_resource_group }}",
+                      TF_VAR_infra_resource_group: "${{ variables.infra_resource_group }}",
                       TF_VAR_internal_dns_zone_name: "${{ variables.base_domain_internal_prod }}",
                       TF_VAR_create_cosmosdb: "${{ variables.create_cosmosdb }}",
                       TF_VAR_create_cache: "${{ variables.create_cache }}",
@@ -742,7 +742,7 @@ stages:
           - name: functional_test_base_url
             value: "https://${{ variables.dns_pointer }}/${{ variables.k8s_app_path }}"
           - name: aks_cluster_resourcegroup
-            value: "${{ variables.core_resource_group }}"
+            value: "${{ variables.infra_resource_group }}"
           - name: aks_cluster_name
             value: $(kubernetes_clustername_prod)
           - name: app_name
