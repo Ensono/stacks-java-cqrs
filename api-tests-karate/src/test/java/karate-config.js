@@ -18,11 +18,11 @@ function fn() {
         generate_auth0_token: false,
 
         base_url: java.lang.System.getenv('BASE_URL'),
-        client_id_value: java.lang.System.getenv('CLIENT_ID'),
-        client_secret_value: java.lang.System.getenv('CLIENT_SECRET'),
-        audience_value: java.lang.System.getenv('AUDIENCE'),
+        client_id_value: java.lang.System.getenv('AUTH0_CLIENT_ID'),
+        client_secret_value: java.lang.System.getenv('AUTH0_CLIENT_SECRET'),
+        audience_value: java.lang.System.getenv('AUTH0_AUDIENCE'),
         grant_type_value: java.lang.System.getenv('GRANT_TYPE'),
-        oauth_token_url: java.lang.System.getenv('OAUTH_TOKEN_URL'),
+        oauth_token_url: java.lang.System.getenv('AUTH0_TOKEN_URL'),
 
         menu_by_id_path: '/v1/menu/<menu_id>',
         category: '/v1/menu/<menu_id>/category',
