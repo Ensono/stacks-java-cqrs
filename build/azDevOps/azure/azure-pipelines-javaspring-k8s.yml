@@ -186,6 +186,7 @@ stages:
       - group: stacks-acr-creds
       - group: stacks-infra-credentials-nonprod
       - group: stacks-credentials-nonprod-kv
+      - group: sonar-credentials
       - group: stacks-java-api
       - group: stacks-java-api-cqrs
     jobs:
