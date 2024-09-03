@@ -39,7 +39,7 @@ spec:
       http:
         paths:
           - path: ${k8s_app_path}(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: ${resource_def_name}
