@@ -277,7 +277,7 @@ stages:
               sonar_project_name: "$(SONAR_PROJECT_NAME)"
               sonar_project_key: "$(SONAR_PROJECT_KEY)"
               sonar_token: "$(SONAR_TOKEN)"
-              sonar_organisation: "$(SONAR_ORGANIZATION)"
+              sonar_organisation: "$(SONAR_ORGANISATION)"
               # Probably `GitHub` or `vsts`
               sonar_pullrequest_provider: "GitHub"
               sonar_remote_repo: "${{ variables.self_remote_repo }}"
