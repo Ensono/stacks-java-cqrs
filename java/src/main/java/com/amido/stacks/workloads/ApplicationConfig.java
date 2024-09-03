@@ -114,12 +114,13 @@ public class ApplicationConfig {
    */
   private SecurityFilterChain permitAll(HttpSecurity http) throws Exception {
     return http.authorizeHttpRequests(authConfig -> authConfig.requestMatchers("/**").permitAll())
-            .build();
+        .build();
   }
 
   //  TO-DO: reinstate if attempt fails (Jack Blower and Ronnie Kilsbo)
   //  private SecurityFilterChain permitAll(HttpSecurity http) throws Exception {
-  //    return http.authorizeHttpRequests(authConfig -> authConfig.requestMatchers("/**").permitAll())
+  //    return http.authorizeHttpRequests(authConfig ->
+  // authConfig.requestMatchers("/**").permitAll())
   //        .httpBasic(Customizer.withDefaults())
   //        .build();
   //  }
