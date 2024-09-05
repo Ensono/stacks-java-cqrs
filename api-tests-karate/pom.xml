@@ -12,8 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
         <maven.compiler.version>3.13.0</maven.compiler.version>
-        <karate.version>1.5.0</karate.version>
-        <karate.junit5.version>1.4.1</karate.junit5.version>
+        <karate.junit5.version>1.5.0</karate.junit5.version>
         <cucumber.reporting.version>5.8.2</cucumber.reporting.version>
         <maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
         <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
@@ -24,12 +23,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>io.karatelabs</groupId>
-            <artifactId>karate-apache</artifactId>
-            <version>${karate.version}</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>io.karatelabs</groupId>
             <artifactId>karate-junit5</artifactId>
