@@ -19,8 +19,8 @@ parameters:
   vulnerability_scan_fail_build_on_detection: true
   vulnerability_scan_database_directory: ""
   project_type: ""
-
 steps:
+
   - task: Cache@2
     inputs:
       key: 'maven-api-tests | "$(Agent.OS)" | ${{ parameters.functional_test_project_root_dir }}/pom.xml'
@@ -29,6 +29,12 @@ steps:
         maven-api-tests
       path: "${{ parameters.functional_test_project_root_dir }}/${{ parameters.maven_cache_directory }}"
     displayName: Cache Maven packages (${{ parameters.project_type }})
+
+  - template: ./build-nvd-cache.yaml
+    parameters:
+      vulnerability_scan: ${{ parameters.vulverability_scan }}
+      repo_root_dir: ${{ parameters.repo_root_dir }}
+      vulnerability_scan_database_directory: ${{ parameters.vulnerability_scan_database_directory }}
 
   - task: Bash@3
     inputs:

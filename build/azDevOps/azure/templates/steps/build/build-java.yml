@@ -25,33 +25,11 @@ steps:
       path: "${{ parameters.project_root_dir }}/${{ parameters.maven_cache_directory }}"
     displayName: Cache Maven packages (${{ parameters.project_type }})
 
-  - ${{ if eq(parameters.vulnerability_scan, true) }}:
-      - task: Bash@3
-        inputs:
-          targetType: "inline"
-          script: |
-            DATE="$(date "+%F")"
-            HOUR="$(date "+%H")"
-            # NVD Cache lasts 4 hours (240 mins) and so cache based on the hour's time
-            # in 24 hours. E.g. 0-3 are 0, 1-4 are 1, 20-23 are 5 etc.. This gives a
-            # cache that lasts roughly 4 hours at a time.
-            HOUR_BY_FOUR="$(( ${HOUR} / 4 ))"
-            NVD_CACHE_FILE="${DATE}-${HOUR_BY_FOUR}"
-            echo "echoing to a file '${{ parameters.repo_root_dir }}/.nvd-cache-day' with value '${DATE}'"
-            echo "echoing to a file '${{ parameters.repo_root_dir }}/.nvd-cache-full' with value '${NVD_CACHE_FILE}'"
-            # Partial (slow) download lasts 24 hours
-            echo "${DATE}" > ${{ parameters.repo_root_dir }}/.nvd-cache-day
-            # Full Cache is 4 hours, so use the by four computed variable
-            echo "${NVD_CACHE_FILE}" > ${{ parameters.repo_root_dir }}/.nvd-cache-full
-        displayName: Set NVD Cache Variable
-
-      - task: Cache@2
-        inputs:
-          key: '${{ parameters.repo_root_dir }}/.nvd-cache-day | ${{ parameters.repo_root_dir }}/.nvd-cache-full'
-          restoreKeys: |
-            ${{ parameters.repo_root_dir }}/.nvd-cache-day
-          path: "${{ parameters.vulnerability_scan_database_directory }}"
-        displayName: Cache NVD Database
+  - template: ./build-nvd-cache.yaml
+    parameters:
+      vulnerability_scan: ${{ parameters.vulverability_scan }}
+      repo_root_dir: ${{ parameters.repo_root_dir }}
+      vulnerability_scan_database_directory: ${{ parameters.vulnerability_scan_database_directory }}
 
   - task: Bash@3
     inputs:
