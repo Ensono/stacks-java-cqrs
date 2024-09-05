@@ -6,7 +6,7 @@ parameters:
   - name: vulnerability_scan_database_directory
     type: string
 steps:
-  - ${{ if eq(parameters.vulnerability_scan, true) }}:
+  - ${{ if eq(parameters.vulnerability_scan, 'true') }}:
       - task: Bash@3
         inputs:
           targetType: "inline"
