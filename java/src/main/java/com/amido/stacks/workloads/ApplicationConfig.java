@@ -24,7 +24,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class ApplicationConfig {
 
-  private static final String ALLOWED_ORIGINS = "enosono.com";
+  private static final String ALLOWED_ORIGINS = "*";
   private static final String V1_MENU_ENDPOINT = "/v1/menu";
   private static final String V1_MENU = "/v1/menu/**";
   private static final String V2_MENU_ENDPOINT = "/v2/menu";
@@ -92,7 +92,9 @@ public class ApplicationConfig {
    * @throws Exception
    */
   private SecurityFilterChain enableAuth(HttpSecurity http) throws Exception {
-    return http.authorizeHttpRequests(
+    return http.csrf()
+        .disable()
+        .authorizeHttpRequests(
             authConfig ->
                 authConfig
                     .requestMatchers(V1_MENU_ENDPOINT)
@@ -113,16 +115,10 @@ public class ApplicationConfig {
    * @throws Exception
    */
   private SecurityFilterChain permitAll(HttpSecurity http) throws Exception {
-    return http.authorizeHttpRequests(authConfig -> authConfig.requestMatchers("/**").permitAll())
+    return http.csrf()
+        .disable()
+        .authorizeHttpRequests(authConfig -> authConfig.requestMatchers("/**").permitAll())
+        .httpBasic(Customizer.withDefaults())
         .build();
   }
-
-  //  TO-DO: reinstate if attempt fails (Jack Blower and Ronnie Kilsbo)
-  //  private SecurityFilterChain permitAll(HttpSecurity http) throws Exception {
-  //    return http.authorizeHttpRequests(authConfig ->
-  // authConfig.requestMatchers("/**").permitAll())
-  //        .httpBasic(Customizer.withDefaults())
-  //        .build();
-  //  }
-
 }
