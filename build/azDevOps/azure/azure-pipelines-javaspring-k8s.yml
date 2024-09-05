@@ -376,7 +376,7 @@ stages:
           - template: templates/steps/build/post-build-tasks-cli.yml
             parameters:
               project_root_dir: "${{ variables.self_project_dir }}"
-              functional_test_project_root_dir: "${{ variables.self_functional_testproject_dir }}"
+              functional_test_project_root_dir: "${{ variables.self_functional_testproject_dir }}-karate"
               # Functional tests
               functional_test: ${{ variables.functional_test }}
               functional_test_artefact_name: "${{ variables.functional_test_artefact_name }}-karate"
