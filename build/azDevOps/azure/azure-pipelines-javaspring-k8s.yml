@@ -379,8 +379,8 @@ stages:
               functional_test_project_root_dir: "${{ variables.self_functional_testproject_dir }}"
               # Functional tests
               functional_test: ${{ variables.functional_test }}
-              functional_test_artefact_name: "${{ variables.functional_test_artefact_name }}"
-              functional_test_artefact_path: "${{ variables.functional_test_artefact_path }}"
+              functional_test_artefact_name: "${{ variables.functional_test_artefact_name }}-karate"
+              functional_test_artefact_path: "${{ variables.functional_test_artefact_path }}-karate"
               functional_test_project_type: "${{ variables.functional_test_project_type }}"
               vulnerability_scan: "${{ variables.vulnerability_scan }}"
               vulnerability_scan_report: "${{ variables.vulnerability_scan_report }}"

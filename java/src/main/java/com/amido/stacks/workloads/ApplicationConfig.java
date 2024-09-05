@@ -116,9 +116,8 @@ public class ApplicationConfig {
    * @throws Exception
    */
   private SecurityFilterChain permitAll(HttpSecurity http) throws Exception {
-    return http
-            .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(authConfig -> authConfig.requestMatchers("/**").permitAll())
-            .build();
+    return http.csrf(AbstractHttpConfigurer::disable)
+        .authorizeHttpRequests(authConfig -> authConfig.requestMatchers("/**").permitAll())
+        .build();
   }
 }
