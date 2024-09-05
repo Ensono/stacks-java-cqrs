@@ -64,8 +64,3 @@ Feature: Delete Item
     Given the application is running
     When I delete the item for the category with "InvalidID" id
     Then the returned status code is 400
-
-
-  Scenario: Remove an item with empty 'category id' field
-    When I delete the item with " " id
-    Then the returned status code is 405

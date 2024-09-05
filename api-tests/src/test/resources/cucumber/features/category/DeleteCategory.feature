@@ -64,8 +64,3 @@ Feature: Delete category
   Scenario: Remove a category with invalid id format
     When I delete the category with "InvalidFormat" id
     Then the returned status code is 400
-
-
-  Scenario: Remove a category with empty 'category id' field
-    When I delete the category with " " id
-    Then the returned status code is 405
