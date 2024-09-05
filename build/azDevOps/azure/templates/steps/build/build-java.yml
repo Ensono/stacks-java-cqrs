@@ -152,14 +152,17 @@ steps:
       container: ${{ parameters.docker_build_container }}
     displayName: "Generate Jacoco coverage reports (${{ parameters.project_type }})"
 
-  # TODO: Pull this out into a bash script?
-  - bash: |
-      set -euxo pipefail
-      cp "${{ parameters.repo_root_dir }}/build/azDevOps/azure/coverage/"* .
-      npm ci
-      ./node_modules/.bin/gulp inline-css-images
-      ./node_modules/.bin/gulp inline-sources
-    workingDirectory: "${{ parameters.project_root_dir }}/target/site/"
+  # TODO: Pull this out into a pwsh script?
+  - task: PowerShell@2
+    inputs:
+      targetType: inline
+      script: |
+        . /opt/microsoft/powershell/7/Microsoft.PowerShell_profile.ps1
+        Copy-Item -Path "${{ parameters.repo_root_dir }}/build/azDevOps/azure/coverage/*" -Destination . -Recurse
+        npm ci
+        ./node_modules/.bin/gulp inline-css-images
+        ./node_modules/.bin/gulp inline-sources
+      workingDirectory: "${{ parameters.project_root_dir }}/target/site/"
     target:
       container: node
     displayName: "Gulp: Inline Jacoco report assets (${{ parameters.project_type }})"
