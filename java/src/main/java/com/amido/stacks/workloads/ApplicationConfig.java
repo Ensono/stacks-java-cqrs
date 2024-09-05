@@ -13,6 +13,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -93,8 +94,7 @@ public class ApplicationConfig {
    * @throws Exception
    */
   private SecurityFilterChain enableAuth(HttpSecurity http) throws Exception {
-    return http.csrf()
-        .disable()
+    return http.csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(
             authConfig ->
                 authConfig
@@ -116,10 +116,9 @@ public class ApplicationConfig {
    * @throws Exception
    */
   private SecurityFilterChain permitAll(HttpSecurity http) throws Exception {
-    return http.csrf()
-        .disable()
-        .authorizeHttpRequests(authConfig -> authConfig.requestMatchers("/**").permitAll())
-        .httpBasic(Customizer.withDefaults())
-        .build();
+    return http
+            .csrf(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests(authConfig -> authConfig.requestMatchers("/**").permitAll())
+            .build();
   }
 }
