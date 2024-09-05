@@ -1,6 +1,6 @@
 parameters:
   - name: vulnerability_scan
-    type: boolean
+    type: string
   - name: repo_root_dir
     type: string
   - name: vulnerability_scan_database_directory
