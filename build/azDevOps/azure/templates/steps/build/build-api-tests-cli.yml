@@ -32,7 +32,7 @@ steps:
 
   - template: ./build-nvd-cache.yaml
     parameters:
-      vulnerability_scan: ${{ parameters.vulverability_scan }}
+      vulnerability_scan: ${{ parameters.vulnerability_scan }}
       repo_root_dir: ${{ parameters.repo_root_dir }}
       vulnerability_scan_database_directory: ${{ parameters.vulnerability_scan_database_directory }}
 
