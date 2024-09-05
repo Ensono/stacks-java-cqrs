@@ -309,7 +309,7 @@ stages:
           - checkout: templates
 
             # Builds the Java API Tests
-          - template: ./build-api-tests-cli.yml
+          - template: templates/steps/build/build-api-tests-cli.yml
             parameters:
               repo_root_dir: "${{ variables.self_repo_dir }}"
               functional_test_project_root_dir: "${{ variables.self_functional_testproject_dir }}"
@@ -354,7 +354,7 @@ stages:
           - checkout: templates
 
             # Builds the Java API Tests
-          - template: ./build-api-tests-cli.yml
+          - template: templates/steps/build/build-api-tests-cli.yml
             parameters:
               repo_root_dir: "${{ variables.self_repo_dir }}"
               functional_test_project_root_dir: "${{ variables.self_functional_testproject_dir }}-karate"
