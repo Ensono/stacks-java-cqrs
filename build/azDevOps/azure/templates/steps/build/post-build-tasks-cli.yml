@@ -7,21 +7,21 @@ parameters:
   functional_test_project_type: ""
   vulnerability_scan: ""
   vulnerability_scan_report: ""
-
+  suffix: ""
 steps:
   # Publish Vulnerability Artefacts if required
   - ${{ if eq(parameters.vulnerability_scan, true) }}:
       - task: PublishPipelineArtifact@1
         condition: always()
         inputs:
-          path: "${{ parameters.functional_test_project_root_dir }}/${{ parameters.vulnerability_scan_report }}"
-          artifact: "owasp-vulnerability-report-functional-test-$(System.JobAttempt)"
+          path: "${{ parameters.functional_test_project_root_dir }}${{ parameters.suffix }}/${{ parameters.vulnerability_scan_report }}"
+          artifact: "owasp-vulnerability-report-functional-test${{ parameters.suffix }}-$(System.JobAttempt)"
         displayName: "Publish: Vulnerability Scan Report Artefact (${{ parameters.functional_test_project_type }})"
 
   # Publish Artefacts if required
   - ${{ if eq(parameters.functional_test, true) }}:
       - task: PublishPipelineArtifact@1
         inputs:
-          path: "${{ parameters.functional_test_artefact_path }}"
-          artifact: "${{ parameters.functional_test_artefact_name }}-$(System.JobAttempt)"
+          path: "${{ parameters.functional_test_artefact_path }}${{ parameters.suffix }}"
+          artifact: "${{ parameters.functional_test_artefact_name }}${{ parameters.suffix }}-$(System.JobAttempt)"
         displayName: "Publish: Functional Tests Artefact"
