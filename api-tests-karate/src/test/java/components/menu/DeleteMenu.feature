@@ -9,7 +9,7 @@ Feature: Delete menu
       | name        | 'Vegetarian Food (Automated Test Data)' |
       | description | 'The most delicious vegetarian dishes'  |
       | enabled     | true                                    |
-    * def created_menu = karate.call(read('classpath:CreateGenericData.feature'), {body:menu_body, url:base_url.concat(menu)})
+    * def created_menu = call read('classpath:CreateGenericData.feature') {body:#(menu_body), url:#(base_url.concat(menu))}
     * karate.set('menu_id',created_menu.id)
     * replace menu_by_id_path.menu_id = created_menu.id
 
@@ -27,7 +27,7 @@ Feature: Delete menu
       | token     | value                 |
       | <menu_id> | karate.get('menu_id') |
     * match response.description contains menu_does_not_exists
-    * configure afterScenario = function(){karate.call(read('classpath:DeleteCreatedMenus.feature'), {menuId:karate.get('menu_id')})}
+    * configure afterScenario = function(){ karate.call(true, 'classpath:DeleteCreatedMenus.feature', {menuId:karate.get('menu_id')})}
 
 
   Scenario Outline: Delete the menu - Resource not found
@@ -54,4 +54,4 @@ Feature: Delete menu
     Examples:
       | menuId          | expected_status_code |
       | 'WrongIdFormat' | 400                  |
-      | ''              | 405                  |
+      | ''              | 404                  |

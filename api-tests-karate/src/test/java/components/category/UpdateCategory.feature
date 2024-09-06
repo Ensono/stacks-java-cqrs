@@ -8,7 +8,7 @@ Feature: Update a category
       | name        | 'Italian Cuisine (Automated Test Data)' |
       | description | 'The most delicious Italian dishes'     |
       | enabled     | true                                    |
-    * def created_menu = karate.call(read('classpath:CreateGenericData.feature'), {body:menu_body, url:base_url.concat(menu)})
+    * def created_menu = call read('classpath:CreateGenericData.feature') {body:#(menu_body), url:#(base_url.concat(menu))}
     * karate.set('menu_id',created_menu.id)
     * replace menu_by_id_path.menu_id = created_menu.id
     * replace category.menu_id = karate.get('menu_id')
@@ -18,13 +18,13 @@ Feature: Update a category
       | path        | value                                                       |
       | name        | 'Meat plates (Automated Test Data)'                         |
       | description | 'This category contains all possible meat cooking methods.' |
-    * def created_category = karate.call(read('classpath:CreateGenericData.feature'), {body:category_body, url:base_url.concat(category)})
+    * def created_category = call read('classpath:CreateGenericData.feature') {body:#(category_body), url:#(base_url.concat(category))}
     * karate.set('category_id',created_category.id)
     * replace category_by_id_path
       | token         | value                     |
       | <menu_id>     | karate.get('menu_id')     |
       | <category_id> | karate.get('category_id') |
-    * configure afterScenario = function(){karate.call(read('classpath:DeleteCreatedMenus.feature'), {menuId:karate.get('menu_id')})}
+    * configure afterScenario = function(){ karate.call(true, 'classpath:DeleteCreatedMenus.feature', {menuId:karate.get('menu_id')})}
 
   @Smoke
   Scenario Outline: Update created category
@@ -37,14 +37,14 @@ Feature: Update a category
     And request category_body
     When method PUT
     Then status 200
-     # Check the updated category
+    # Check the updated category
     Given url base_url.concat(menu_by_id_path)
     And header Authorization = auth.bearer_token
     When method GET
     Then status 200
     * def category_list = []
     * def category_list = response.categories
-    * match category_list.size() == 1
+    * match category_list == '#[1]'
     * match category_list[0].name == <name>
     * match category_list[0].description == <description>
 

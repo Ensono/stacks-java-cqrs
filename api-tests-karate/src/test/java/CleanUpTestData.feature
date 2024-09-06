@@ -8,5 +8,5 @@ Feature: Clean up the test data
     When method GET
     Then status 200
     * def menuIds = $response.results.[*].id
-    * def deleteMenu = function(menuId){  karate.call(read('classpath:DeleteCreatedMenus.feature'), {menuId:menuId})  }
+    * def deleteMenu = function(menuId){ karate.call(true, 'classpath:DeleteCreatedMenus.feature', {menuId:menuId}) }
     * eval karate.forEach(menuIds, deleteMenu)

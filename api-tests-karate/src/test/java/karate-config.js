@@ -37,11 +37,10 @@ function fn() {
         item_does_not_exists: 'An item with the id \'<item_id>\' does not exists for category with the id \'<category_id>\' and for menu with id \'<menu_id>\'.',
     };
 
-
     if (env == 'local') {
         config.base_url = 'http://localhost:9000';
     } else if (env == 'prod') {
-        config.base_url = 'https://prod-java-api.prod.amidostacks.com/api/menu';
+        config.base_url = 'https://prod-java-api-cqrs.prod.stacks.ensono.com/api/menu';
     } else if (env == 'system') {
         config.base_url = java.lang.System.getenv('BASE_URL');
     }
@@ -80,6 +79,8 @@ function fn() {
         "price": 0,
         "available": null
     };
+
+    karate.configure('headers', { Accept: 'application/json', "Content-Type": "application/json" });
 
     return config;
 }

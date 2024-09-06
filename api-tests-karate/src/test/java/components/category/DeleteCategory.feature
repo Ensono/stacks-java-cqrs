@@ -8,24 +8,24 @@ Feature: Delete category
       | name        | 'Italian Cuisine (Automated Test Data)' |
       | description | 'The most delicious Italian dishes'     |
       | enabled     | true                                    |
-    * def created_menu = karate.call(read('classpath:CreateGenericData.feature'), {body:menu_body, url:base_url.concat(menu)})
+    * def created_menu = call read('classpath:CreateGenericData.feature') {body:#(menu_body), url:#(base_url.concat(menu))}
     * karate.set('menu_id',created_menu.id)
     * replace menu_by_id_path.menu_id = created_menu.id
     * replace category.menu_id = karate.get('menu_id')
 
-     # create category
+    # create category
     * set category_body
       | path        | value                                                       |
       | name        | 'Meat plates (Automated Test Data)'                         |
       | description | 'This category contains all possible meat cooking methods.' |
-    * def created_category = karate.call(read('classpath:CreateGenericData.feature'), {body:category_body, url:base_url.concat(category)})
+    * def created_category = call read('classpath:CreateGenericData.feature') {body:#(category_body), url:#(base_url.concat(category))}
 
     * karate.set('category_id',created_category.id)
     * replace category_by_id_path
       | token         | value                     |
       | <menu_id>     | karate.get('menu_id')     |
       | <category_id> | karate.get('category_id') |
-    * configure afterScenario = function(){karate.call(read('classpath:DeleteCreatedMenus.feature'), {menuId:karate.get('menu_id')})}
+    * configure afterScenario = function(){ karate.call(true, 'classpath:DeleteCreatedMenus.feature', {menuId:karate.get('menu_id')}) }
 
   @Smoke
   Scenario: Delete created category
@@ -38,7 +38,7 @@ Feature: Delete category
     And header Authorization = auth.bearer_token
     When method GET
     Then status 200
-    * match response.categories.size() == 0
+    * match response.categories == '#[0]'
 
 
   Scenario Outline: Remove a category - Bad request

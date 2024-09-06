@@ -9,7 +9,7 @@ Feature: Create a menu
       | name        | <name>        |
       | description | <description> |
       | enabled     | <enabled>     |
-    * def created_menu = karate.call(read('classpath:CreateGenericData.feature'), {body:menu_body, url:base_url.concat(menu)})
+    * def created_menu = call read('classpath:CreateGenericData.feature') {body:#(menu_body), url:#(base_url.concat(menu))}
     * karate.set('menu_id',created_menu.id)
     * replace menu_by_id_path.menu_id = created_menu.id
 #    Check the created menu
@@ -21,7 +21,7 @@ Feature: Create a menu
     And response.description == "<description>"
     And response.tenantId == "<tenantId>"
     And response.enabled == <enabled>
-    * karate.call(read('classpath:DeleteCreatedMenus.feature'), {menuId:karate.get('menu_id')})
+    * call read('classpath:DeleteCreatedMenus.feature') {menuId:karate.get('menu_id')}
 
     Examples:
       | tenantId                               | name                                    | description                            | enabled |
@@ -56,7 +56,7 @@ Feature: Create a menu
       | name        | <name>        |
       | description | <description> |
       | enabled     | <enabled>     |
-    * def created_menu = karate.call(read('classpath:CreateGenericData.feature'), {body:menu_body, url:base_url.concat(menu)})
+    * def created_menu = call read('classpath:CreateGenericData.feature') {body:#(menu_body), url:#(base_url.concat(menu))}
     * karate.set('menu_id',created_menu.id)
     # Check the created menu
     * replace menu_by_id_path.menu_id = karate.get('menu_id')
@@ -70,14 +70,14 @@ Feature: Create a menu
     And response.enabled == <enabled>
     And request menu_body
 
-#    Create the second menu with the same data
+    # Create the second menu with the same data
     Given url base_url.concat(menu)
     And header Authorization = auth.bearer_token
     And request menu_body
     When method POST
     Then status 409
     * match response.description contains "A Menu with the name <name> already exists for the restaurant with id <tenantId>"
-    * karate.call(read('classpath:DeleteCreatedMenus.feature'), {menuId:karate.get('menu_id')})
+    * call read('classpath:DeleteCreatedMenus.feature') {menuId:karate.get('menu_id')}
 
     Examples:
       | tenantId                               | name                                         | description                | enabled |

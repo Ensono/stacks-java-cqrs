@@ -2,16 +2,16 @@
 Feature: Update a menu
 
   Background: Create menu and Category for future items
-     # Create a menu
+    # Create a menu
     * set menu_body
       | path        | value                                   |
       | tenantId    | '74b858a4-d00f-11ea-87d0-0242ac130003'  |
       | name        | 'Italian Cuisine (Automated Test Data)' |
       | description | 'The most delicious Italian dishes'     |
       | enabled     | true                                    |
-    * def created_menu = karate.call(read('classpath:CreateGenericData.feature'), {body:menu_body, url:base_url.concat(menu)})
+    * def created_menu = call read('classpath:CreateGenericData.feature') {body:#(menu_body), url:#(base_url.concat(menu))}
     * karate.set('menu_id',created_menu.id)
-    * configure afterScenario = function(){karate.call(read('classpath:DeleteCreatedMenus.feature'), {menuId:karate.get('menu_id')})}
+    * configure afterScenario = function(){ karate.call(true, 'classpath:DeleteCreatedMenus.feature', {menuId:karate.get('menu_id')})}
 
   @Smoke
   Scenario Outline: Update menu
@@ -27,7 +27,7 @@ Feature: Update a menu
     And request menu_body
     When method PUT
     Then status 200
-     # Check the updated menu
+    # Check the updated menu
     Given url base_url.concat(menu_by_id_path)
     And header Authorization = auth.bearer_token
     When method GET
@@ -62,4 +62,3 @@ Feature: Update a menu
       | '74b858a4-d00f-11ea-87d0-0242ac130003' | ''                                        | 'The most delicious vegetarian dishes' | true    |
       | '74b858a4-d00f-11ea-87d0-0242ac130003' | 'Updated Menu Name (Automated Test Data)' | ''                                     | true    |
       | '74b858a4-d00f-11ea-87d0-0242ac130003' | 'Updated Menu Name (Automated Test Data)' | 'The most delicious vegetarian dishes' | ''      |
-

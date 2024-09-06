@@ -8,12 +8,12 @@ Feature: Create a category
       | name        | 'Italian Cuisine (Automated Test Data)' |
       | description | 'The most delicious Italian dishes'     |
       | enabled     | true                                    |
-    * def created_menu = karate.call(read('classpath:CreateGenericData.feature'), {body:menu_body, url:base_url.concat(menu)})
+    * def created_menu = call read('classpath:CreateGenericData.feature') {body:#(menu_body), url:#(base_url.concat(menu))}
     * karate.set('menu_id',created_menu.id)
 
     * replace menu_by_id_path.menu_id = created_menu.id
     * replace category.menu_id = karate.get('menu_id')
-    * configure afterScenario = function(){karate.call(read('classpath:DeleteCreatedMenus.feature'), {menuId:karate.get('menu_id')})}
+    * configure afterScenario = function(){ karate.call(true, 'classpath:DeleteCreatedMenus.feature', {menuId:karate.get('menu_id')})}
 
 
   @Smoke
@@ -22,17 +22,17 @@ Feature: Create a category
       | path        | value         |
       | name        | <name>        |
       | description | <description> |
-    * def created_category = karate.call(read('classpath:CreateGenericData.feature'), {body:category_body, url:base_url.concat(category)})
+    * def created_category = call read('classpath:CreateGenericData.feature') {body:#(category_body), url:#(base_url.concat(category))}
     * karate.set('category_id',created_category.id)
 
-#   Check the created category
+    # Check the created category
     Given url base_url.concat(menu_by_id_path)
     And header Authorization = auth.bearer_token
     When method GET
     Then status 200
     * def category_list = []
     * def category_list = response.categories
-    * match category_list.size() == 1
+    * match category_list == '#[1]'
     * match category_list[0].name == <name>
     * match category_list[0].description == <description>
 
@@ -46,7 +46,7 @@ Feature: Create a category
       | path        | value         |
       | name        | <name>        |
       | description | <description> |
-    * def created_category = karate.call(read('classpath:CreateGenericData.feature'), {body:category_body, url:base_url.concat(category)})
+    * def created_category = call read('classpath:CreateGenericData.feature') {body:#(category_body), url:#(base_url.concat(category))}
     * karate.set('category_id',created_category.id)
     # Create a category with the same data
     Given url base_url.concat(category)
