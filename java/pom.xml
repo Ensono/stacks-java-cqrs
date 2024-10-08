@@ -61,7 +61,7 @@
     <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
     <spring-cloud-azure-autoconfigure.version>5.14.0</spring-cloud-azure-autoconfigure.version>
     <azure-spring-boot.version>3.10.0</azure-spring-boot.version>
-    <azure-spring-data-cosmos.version>5.14.0</azure-spring-data-cosmos.version>
+    <azure-spring-data-cosmos.version>5.16.0</azure-spring-data-cosmos.version>
   </properties>
 
   <dependencyManagement>
