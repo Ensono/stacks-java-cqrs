@@ -32,7 +32,7 @@
         <pact.jvm.provider.junit.version>4.0.10</pact.jvm.provider.junit.version>
         <spotbugs.version>4.8.6</spotbugs.version>
         <puppycrawl-tools-checkstyle.version>10.17.0</puppycrawl-tools-checkstyle.version>
-        <junit.jupiter.version>5.10.3</junit.jupiter.version>
+        <junit.jupiter.version>5.11.2</junit.jupiter.version>
         <junit-platform.version>1.11.0</junit-platform.version>
         <freemarker.version>2.3.33</freemarker.version>
         <assertj.core.version>3.26.3</assertj.core.version>
