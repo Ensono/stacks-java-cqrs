@@ -50,7 +50,7 @@
     <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
     <au.com.dius.pact-jvm-provider-spring.version>4.0.10
     </au.com.dius.pact-jvm-provider-spring.version>
-    <au.com.dius.pact.consumer-version>4.3.2</au.com.dius.pact.consumer-version>
+    <au.com.dius.pact.consumer-version>4.6.14</au.com.dius.pact.consumer-version>
     <spring-boot-maven-plugin.version>3.3.2</spring-boot-maven-plugin.version>
     <junit-jupiter-api.version>5.11.0-M2</junit-jupiter-api.version>
     <spring-boot-dependencies.version>3.3.2</spring-boot-dependencies.version>
