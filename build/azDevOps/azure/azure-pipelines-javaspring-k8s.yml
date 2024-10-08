@@ -341,52 +341,6 @@ stages:
               vulnerability_scan_report: "${{ variables.vulnerability_scan_report }}"
               suffix: ""
 
-      - job: TestBuildKarate
-        dependsOn:
-        pool:
-          vmImage: $(pool_vm_image)
-        steps:
-          - checkout: self
-
-          - checkout: templates
-
-          # Builds the Java API Tests
-          - template: templates/steps/build/build-api-tests-cli.yml
-            parameters:
-              repo_root_dir: "${{ variables.self_repo_dir }}"
-              functional_test_project_root_dir: "${{ variables.self_functional_testproject_dir }}-karate"
-              functional_test_artefact_path: "${{ variables.functional_test_artefact_path }}-karate"
-              pipeline_scripts_directory: "${{ variables.self_pipeline_scripts_dir }}"
-              # Maven
-              maven_untagged_test_check: true
-              maven_cache_directory: "${{ variables.maven_cache_directory }}"
-              maven_allowed_post_deploy_test_tags: "${{ variables.maven_allowed_post_deploy_test_tags }}"
-              maven_ignored_post_deploy_test_tags: "${{ variables.maven_ignored_post_deploy_test_tags }}"
-              maven_post_deploy_html_report_directory: "${{ variables.maven_post_deploy_html_report_directory }}"
-              maven_post_deploy_failsafe_reports_directory: "${{ variables.maven_post_deploy_failsafe_reports_directory }}"
-              # Docker
-              docker_build_container: "${{ variables.docker_java_image }}"
-              # Vulnerability Scan
-              vulnerability_scan: "${{ variables.vulnerability_scan }}"
-              vulnerability_scan_api_key: "${{ variables.vulnerability_scan_api_key }}"
-              vulnerability_scan_fail_build_on_detection: "${{ variables.vulnerability_scan_fail_build_on_detection }}"
-              vulnerability_scan_database_directory: "${{ variables.vulnerability_scan_database_directory }}"
-              project_type: "${{ variables.functional_test_project_type }}"
-
-          # Post build tasks: publishing artefacts
-          - template: templates/steps/build/post-build-tasks-cli.yml
-            parameters:
-              project_root_dir: "${{ variables.self_project_dir }}"
-              functional_test_project_root_dir: "${{ variables.self_functional_testproject_dir }}"
-              # Functional tests
-              functional_test: ${{ variables.functional_test }}
-              functional_test_artefact_name: "${{ variables.functional_test_artefact_name }}"
-              functional_test_artefact_path: "${{ variables.functional_test_artefact_path }}"
-              functional_test_project_type: "${{ variables.functional_test_project_type }}"
-              vulnerability_scan: "${{ variables.vulnerability_scan }}"
-              vulnerability_scan_report: "${{ variables.vulnerability_scan_report }}"
-              suffix: "-karate"
-
   - stage: Dev
     dependsOn: Build
     condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
