@@ -17,9 +17,9 @@ import com.amido.stacks.workloads.menu.mappers.RequestToCommandMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import java.util.UUID;
-import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,7 +58,7 @@ public class CategoryController {
   @CreateAPIResponses
   ResponseEntity<ResourceCreatedResponse> addMenuCategory(
       @Parameter(description = "Menu id", required = true) @PathVariable("id") UUID menuId,
-      @Valid @RequestBody CreateCategoryRequest body,
+      @Validated @RequestBody CreateCategoryRequest body,
       @Parameter(hidden = true) @RequestAttribute("CorrelationId") String correlationId) {
     return new ResponseEntity<>(
         new ResourceCreatedResponse(
@@ -79,7 +79,7 @@ public class CategoryController {
       @Parameter(description = "Menu id", required = true) @PathVariable("id") UUID menuId,
       @Parameter(description = "Category id", required = true) @PathVariable("categoryId")
           UUID categoryId,
-      @Valid @RequestBody UpdateCategoryRequest body,
+      @Validated @RequestBody UpdateCategoryRequest body,
       @Parameter(hidden = true) @RequestAttribute("CorrelationId") String correlationId) {
     return new ResponseEntity<>(
         new ResourceUpdatedResponse(

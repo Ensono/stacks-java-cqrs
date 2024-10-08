@@ -10,8 +10,8 @@ import com.amido.stacks.workloads.menu.api.v1.dto.response.SearchMenuResultItem;
 import com.amido.stacks.workloads.menu.domain.Category;
 import com.amido.stacks.workloads.menu.domain.Item;
 import com.amido.stacks.workloads.menu.domain.Menu;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -110,12 +110,7 @@ class DomainToDtoMapperMapstructTest {
 
     Menu menu =
         new Menu(
-            id.toString(),
-            restaurantId.toString(),
-            name,
-            description,
-            Arrays.asList(category),
-            enabled);
+            id.toString(), restaurantId.toString(), name, description, List.of(category), enabled);
 
     // When
     MenuDTO menuDTO = menuMapper.toDto(menu);
@@ -126,7 +121,7 @@ class DomainToDtoMapperMapstructTest {
     assertThat(menuDTO.getName()).isEqualTo(name);
     assertThat(menuDTO.getDescription()).isEqualTo(description);
     assertThat(menuDTO.getEnabled()).isEqualTo(enabled);
-    assertThat(menuDTO.getCategories().size()).isEqualTo(1);
+    assertThat(menuDTO.getCategories()).hasSize(1);
     assertThat(menuDTO.getCategories().get(0).getName()).isEqualTo(category.getName());
     assertThat(menuDTO.getCategories().get(0).getDescription())
         .isEqualTo(category.getDescription());

@@ -1,6 +1,6 @@
 package com.amido.stacks.workloads.menu.mappers;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.amido.stacks.workloads.menu.api.v1.dto.request.CreateCategoryRequest;
 import com.amido.stacks.workloads.menu.api.v1.dto.request.CreateItemRequest;

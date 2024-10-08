@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import lombok.Getter;
 
+@Getter
 public class Menu {
 
   @JsonProperty("id")
@@ -40,30 +42,6 @@ public class Menu {
     this.description = description;
     this.categories = categories;
     this.enabled = enabled;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public UUID getRestaurantId() {
-    return restaurantId;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public List<Category> getCategories() {
-    return categories;
-  }
-
-  public Boolean getEnabled() {
-    return enabled;
   }
 
   @Override

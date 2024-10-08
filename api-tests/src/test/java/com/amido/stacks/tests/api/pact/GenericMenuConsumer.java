@@ -12,7 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.Rule;
 import org.junit.Test;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 public class GenericMenuConsumer {
@@ -136,6 +140,6 @@ public class GenericMenuConsumer {
 
     assertThat(getByTermResponse.getStatusCode().value()).isEqualTo(200);
     assertThat(getByTermResponse.getBody()).contains("pageSize", "pageNumber");
-    assertThat(getByTermResponse.getBody().contains("Dessert Menu (Automated Test Data)"));
+    assertThat(getByTermResponse.getBody()).contains("Dessert Menu (Automated Test Data)");
   }
 }

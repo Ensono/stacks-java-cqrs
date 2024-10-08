@@ -7,7 +7,7 @@ data "azurerm_client_config" "current" {}
 
 # Naming convention
 module "default_label" {
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=0.24.1"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=0.25.0"
   namespace  = "${var.name_company}-${var.name_project}"
   stage      = var.name_environment
   name       = "${lookup(var.location_name_map, var.resource_group_location, "uksouth")}-${var.name_domain}"
@@ -18,7 +18,7 @@ module "default_label" {
 }
 
 module "app" {
-  source                               = "git::https://github.com/amido/stacks-terraform//azurerm/modules/azurerm-server-side-app?ref=v1.5.1"
+  source                               = "git::https://github.com/amido/stacks-terraform//azurerm/modules/azurerm-server-side-app?ref=v6.0.14"
   create_cdn_endpoint                  = var.create_cdn_endpoint
   create_cosmosdb                      = var.create_cosmosdb
   resource_namer                       = module.default_label.id
@@ -32,10 +32,9 @@ module "app" {
   create_dns_record                    = var.create_dns_record
   dns_record                           = var.dns_record
   dns_zone_name                        = var.dns_zone_name
-  core_resource_group                  = var.core_resource_group
-  dns_zone_resource_group              = var.dns_zone_resource_group != "" ? var.dns_zone_resource_group : var.core_resource_group
-  dns_a_records                        = [data.azurerm_public_ip.app_gateway.ip_address]
+  infra_resource_group                 = var.infra_resource_group
+  dns_zone_resource_group              = var.dns_zone_resource_group != "" ? var.dns_zone_resource_group : var.infra_resource_group
+  dns_ip_address_name                  = var.app_gateway_frontend_ip_name
+  dns_ip_address_resource_group        = var.infra_resource_group
   subscription_id                      = data.azurerm_client_config.current.subscription_id
-  # Alternatively if you want you can pass in the IP directly and remove the need for a lookup
-  # dns_a_records                        = ["0.1.23.45"]
 }

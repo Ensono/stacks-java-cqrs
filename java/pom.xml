@@ -3,13 +3,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.5.2</version>
-    <relativePath/>
-    <!-- lookup parent from repository -->
-  </parent>
+
   <groupId>com.amido.stacks.workloads</groupId>
   <artifactId>stacks-api-cqrs</artifactId>
   <version>1.0.0</version>
@@ -25,54 +19,64 @@
     <dynamodb.profile.name>no-dynamodb</dynamodb.profile.name>
 
     <!-- Stacks versions -->
-    <stacks.core.commons.version>2.0.5</stacks.core.commons.version>
-    <stacks.core.api.version>1.0.4.4-RELEASE</stacks.core.api.version>
-    <stacks.azure.cosmos.version>2.1.1</stacks.azure.cosmos.version>
-    <stacks.core.cqrs.version>1.0.0</stacks.core.cqrs.version>
-    <stacks.aws.dynamodb.version>2.2.1</stacks.aws.dynamodb.version>
-    <stacks.aws.version>1.0.2</stacks.aws.version>
+    <stacks.core.commons.version>2.0.7</stacks.core.commons.version>
+    <stacks.core.api.version>1.0.5.11-RELEASE</stacks.core.api.version>
+    <stacks.azure.cosmos.version>3.0.2</stacks.azure.cosmos.version>
+    <stacks.core.cqrs.version>2.0.1.2-RELEASE</stacks.core.cqrs.version>
+    <stacks.aws.dynamodb.version>3.0.1</stacks.aws.dynamodb.version>
+    <stacks.aws.version>1.0.3</stacks.aws.version>
     <stacks.azure.version>1.0.3</stacks.azure.version>
 
 
-    <java.version>11</java.version>
-    <org.projectlombok.version>1.18.24</org.projectlombok.version>
-    <org.springdoc-openapi.version>1.5.9</org.springdoc-openapi.version>
-    <applicationinsights.version>2.6.3</applicationinsights.version>
-    <cosmosdb.version>3.6.0</cosmosdb.version>
-    <azure.springboot.version>3.6.0</azure.springboot.version>
-    <azure.messaging-servicebus.version>7.3.0</azure.messaging-servicebus.version>
-    <jackson.version>2.12.3</jackson.version>
-    <mockito.version>3.11.2</mockito.version>
-    <lombok.version>1.18.20</lombok.version>
-    <hamcrest.version>2.2</hamcrest.version>
-    <pitest.version>1.6.7</pitest.version>
-    <jacoco.version>0.8.7</jacoco.version>
-    <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+    <java.version>17</java.version>
+    <org.projectlombok.version>1.18.34</org.projectlombok.version>
+    <applicationinsights.version>3.5.4</applicationinsights.version>
+    <logback.version>1.5.6</logback.version>
+    <com.google.code.gson-version>2.11.0</com.google.code.gson-version>
+    <pitest.version>1.16.1</pitest.version>
+    <jacoco.version>0.8.12</jacoco.version>
+    <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
+    <pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
     <maven-surefire-phase>test</maven-surefire-phase>
-    <junit-jupiter.version>5.7.2</junit-jupiter.version>
-    <equals-verifier.version>3.8.1</equals-verifier.version>
-    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-    <owasp-dependency-check-plugin.version>6.2.2</owasp-dependency-check-plugin.version>
-    <auth0-spring-security-api.version>1.4.1</auth0-spring-security-api.version>
-    <io-projectreactor-netty.version>1.0.8</io-projectreactor-netty.version>
-    <log4j-version>2.17.0</log4j-version>
-    <org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
-    <fmt-maven-plugin.version>2.11</fmt-maven-plugin.version>
-    <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
-    <puppycrawl-tools-checkstyle.version>9.2</puppycrawl-tools-checkstyle.version>
-    <spotbugs-maven-plugin.version>4.2.3</spotbugs-maven-plugin.version>
-    <spotbugs.version>4.5.2</spotbugs.version>
+    <equals-verifier.version>3.16.1</equals-verifier.version>
+    <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+    <owasp-dependency-check-plugin.version>10.0.2</owasp-dependency-check-plugin.version>
+    <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+    <fmt-maven-plugin.version>2.13</fmt-maven-plugin.version>
+    <maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
+    <puppycrawl-tools-checkstyle.version>10.17.0</puppycrawl-tools-checkstyle.version>
+    <spotbugs-maven-plugin.version>4.8.6.2</spotbugs-maven-plugin.version>
+    <spotbugs.version>4.8.6</spotbugs.version>
     <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
-    <pact.provider.spring.version>4.0.10</pact.provider.spring.version>
-    <pact.consumer.version>4.3.2</pact.consumer.version>
+    <au.com.dius.pact-jvm-provider-spring.version>4.0.10
+    </au.com.dius.pact-jvm-provider-spring.version>
+    <au.com.dius.pact.consumer-version>4.3.2</au.com.dius.pact.consumer-version>
+    <spring-boot-maven-plugin.version>3.3.2</spring-boot-maven-plugin.version>
+    <junit-jupiter-api.version>5.11.0-M2</junit-jupiter-api.version>
+    <spring-boot-dependencies.version>3.3.2</spring-boot-dependencies.version>
+    <io.projectreactor-reactor-bom.version>2023.0.8</io.projectreactor-reactor-bom.version>
+    <spring-cloud-context.version>3.1.3</spring-cloud-context.version>
+    <springdoc-openapi-common.version>1.8.0</springdoc-openapi-common.version>
+    <aspectjrt.version>1.9.22.1</aspectjrt.version>
+    <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
+    <spring-cloud-azure-autoconfigure.version>5.14.0</spring-cloud-azure-autoconfigure.version>
+    <azure-spring-boot.version>3.10.0</azure-spring-boot.version>
+    <azure-spring-data-cosmos.version>5.14.0</azure-spring-data-cosmos.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot-dependencies.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>io.projectreactor</groupId>
         <artifactId>reactor-bom</artifactId>
-        <version>2020.0.14</version>
+        <version>${io.projectreactor-reactor-bom.version}</version>
         <type>pom</type>
       </dependency>
       <dependency>
@@ -93,7 +97,7 @@
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
-      <version>2.8.9</version>
+      <version>${com.google.code.gson-version}</version>
     </dependency>
     <!-- STACKS dependencies -->
     <dependency>
@@ -113,21 +117,55 @@
     </dependency>
     <!-- Spring dependencies -->
     <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-context</artifactId>
+      <version>${spring-cloud-context.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-context</artifactId>
-      <version>3.1.3</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-common</artifactId>
+      <version>${springdoc-openapi-common.version}</version>
+      <scope>compile</scope>
     </dependency>
     <!-- Other dependencies -->
     <!-- TODO: to be moved to a common workloads parent -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>${log4j-version}</version>
-    </dependency>
     <dependency>
       <groupId>nl.jqno.equalsverifier</groupId>
       <artifactId>equalsverifier</artifactId>
@@ -137,22 +175,77 @@
     <dependency>
       <groupId>au.com.dius</groupId>
       <artifactId>pact-jvm-provider-spring</artifactId>
-      <version>${pact.provider.spring.version}</version>
+      <version>${au.com.dius.pact-jvm-provider-spring.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>au.com.dius.pact</groupId>
       <artifactId>consumer</artifactId>
-      <version>${pact.consumer.version}</version>
+      <version>${au.com.dius.pact.consumer-version}</version>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjrt</artifactId>
-      <version>1.9.9.1</version>
+      <version>${aspectjrt.version}</version>
       <scope>runtime</scope>
     </dependency>
-
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
+      <version>${jakarta.validation-api.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit-jupiter-api.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <version>${org.mapstruct.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct-processor</artifactId>
+      <version>${org.mapstruct.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.azure.spring</groupId>
+      <artifactId>spring-cloud-azure-autoconfigure</artifactId>
+      <version>${spring-cloud-azure-autoconfigure.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.azure.spring</groupId>
+      <artifactId>azure-spring-boot</artifactId>
+      <version>${azure-spring-boot.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-spring-data-cosmos</artifactId>
+      <version>${azure-spring-data-cosmos.version}</version>
+    </dependency>
   </dependencies>
 
   <reporting>
@@ -168,52 +261,6 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven-compiler-plugin.version}</version>
-        <configuration>
-          <source>11</source>
-          <target>11</target>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-              <version>${lombok.version}</version>
-            </path>
-            <!-- This is needed when using Lombok 1.18.16 and above -->
-            <path>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok-mapstruct-binding</artifactId>
-              <version>0.2.0</version>
-            </path>
-            <!-- Mapstruct should follow the lombok path(s) -->
-            <path>
-              <groupId>org.mapstruct</groupId>
-              <artifactId>mapstruct-processor</artifactId>
-              <version>${org.mapstruct.version}</version>
-            </path>
-          </annotationProcessorPaths>
-          <forceJavacCompilerUse>true</forceJavacCompilerUse>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven-surefire-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>default-test</id>
-            <!-- Only run tests in the `test` phase, avoid running
-            in the `package` phase. -->
-            <phase>${maven-surefire-phase}</phase>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>${jacoco.version}</version>
@@ -221,7 +268,20 @@
           <excludes>
             <exclude>**/AuthControllerImpl*</exclude>
             <exclude>**/ApplicationConfig*</exclude>
+            <exclude>**/*MapperImpl.*</exclude>
           </excludes>
+          <rules>
+            <rule>
+              <element>BUNDLE</element>
+              <limits>
+                <limit>
+                  <counter>INSTRUCTION</counter>
+                  <value>COVEREDRATIO</value>
+                  <minimum>0.80</minimum>
+                </limit>
+              </limits>
+            </rule>
+          </rules>
         </configuration>
         <executions>
           <execution>
@@ -247,9 +307,9 @@
                   <element>BUNDLE</element>
                   <limits>
                     <limit>
-                      <counter>COMPLEXITY</counter>
+                      <counter>INSTRUCTION</counter>
                       <value>COVEREDRATIO</value>
-                      <minimum>0.00</minimum>
+                      <minimum>0.80</minimum>
                     </limit>
                   </limits>
                 </rule>
@@ -257,6 +317,17 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <configuration>
+          <parallel>none</parallel>
+          <perCoreThreadCount>true</perCoreThreadCount>
+          <threadCount>2</threadCount>
+          <useUnlimitedThreads>false</useUnlimitedThreads>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>com.coveo</groupId>
@@ -286,7 +357,6 @@
         </dependencies>
         <configuration>
           <configLocation>google_checks.xml</configLocation>
-          <encoding>UTF-8</encoding>
           <consoleOutput>true</consoleOutput>
           <failsOnError>true</failsOnError>
           <linkXRef>false</linkXRef>
@@ -319,7 +389,7 @@
           <dependency>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-junit5-plugin</artifactId>
-            <version>0.14</version>
+            <version>${pitest-junit5-plugin.version}</version>
           </dependency>
         </dependencies>
         <executions>
@@ -344,6 +414,30 @@
             <outputFormat>HTML</outputFormat>
           </outputFormats>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>17</source>
+          <target>17</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot-maven-plugin.version}</version>
+        <configuration>
+          <mainClass>com.amido.stacks.workloads.Application</mainClass>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
@@ -480,7 +574,7 @@
             <version>${exec-maven-plugin.version}</version>
             <executions>
               <execution>
-                <id>Add execution rigths on bash scripts</id>
+                <id>Add execution rights on bash scripts</id>
                 <phase>process-resources</phase>
                 <goals>
                   <goal>exec</goal>

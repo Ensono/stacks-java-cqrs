@@ -16,7 +16,7 @@ We will use the following participants - or pacticipants as they are called in P
 }
   ``` 
 
- ``` The consumer  ``` - is a an app that shows the menu’s name. 
+ ``` The consumer  ``` - is an app that shows the menu’s name. 
  It expects that a call to GET menu/{menuId} returns:
 ```
  - a 200 success code,

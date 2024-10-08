@@ -1,5 +1,8 @@
 package com.amido.stacks.tests.api;
 
+import lombok.Getter;
+
+@Getter
 public enum ExceptionMessages {
   MENU_ALREADY_EXISTS(
       "A Menu with the name '(.*)' already exists for the restaurant with id '(.*)'."),
@@ -18,9 +21,5 @@ public enum ExceptionMessages {
 
   ExceptionMessages(String message) {
     this.message = message;
-  }
-
-  public String getMessage() {
-    return message;
   }
 }

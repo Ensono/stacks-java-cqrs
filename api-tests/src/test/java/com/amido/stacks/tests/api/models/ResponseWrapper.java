@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+import lombok.Getter;
 
+@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResponseWrapper {
 
@@ -20,17 +22,5 @@ public class ResponseWrapper {
     this.pageSize = pageSize;
     this.pageNumber = pageNumber;
     this.results = results;
-  }
-
-  public Integer getPageSize() {
-    return pageSize;
-  }
-
-  public Integer getPageNumber() {
-    return pageNumber;
-  }
-
-  public List<Menu> getResults() {
-    return results;
   }
 }

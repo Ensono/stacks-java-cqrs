@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import lombok.Getter;
 
+@Getter
 public class Category {
 
   @JsonProperty("id")
@@ -26,22 +28,6 @@ public class Category {
     this.name = name;
     this.description = description;
     this.items = items;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public List<Item> getItems() {
-    return items;
   }
 
   @Override

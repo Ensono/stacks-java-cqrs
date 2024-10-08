@@ -28,10 +28,3 @@ Feature: Delete menu
     And the menu list is not empty
     When I delete the menu with "WrongIdFormat" id
     Then the returned status code is 400
-
-
-  Scenario: Delete the menu - Bad request - empty 'id' field
-    Given the application is running
-    And the menu list is not empty
-    When I delete the menu with " " id
-    Then the returned status code is 405

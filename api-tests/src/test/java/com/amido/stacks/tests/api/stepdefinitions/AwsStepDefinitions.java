@@ -6,7 +6,7 @@ import static org.hamcrest.Matchers.equalTo;
 import com.amido.stacks.tests.api.cloud.AwsFeaturesStatus;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.thucydides.core.annotations.Steps;
+import net.serenitybdd.annotations.Steps;
 
 public class AwsStepDefinitions {
 

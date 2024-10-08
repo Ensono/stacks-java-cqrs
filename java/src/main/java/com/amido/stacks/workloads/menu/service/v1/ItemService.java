@@ -76,8 +76,4 @@ public class ItemService {
 
     menuRepository.save(menu);
   }
-
-  public Optional<Menu> findById(String id) {
-    return menuRepository.findById(id);
-  }
 }

@@ -10,7 +10,8 @@ public class FreemarkerTemplate {
 
   private Configuration getConfiguration() {
     if (configuration == null) {
-      configuration = new Configuration(Configuration.VERSION_2_3_28);
+      // TODO: This might want to be kept up with the version of the library in the pom.xml
+      configuration = new Configuration(Configuration.VERSION_2_3_33);
       configuration.setDefaultEncoding("UTF-8");
       configuration.setClassForTemplateLoading(FreemarkerTemplate.class, "/");
       configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);

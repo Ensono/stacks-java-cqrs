@@ -1,5 +1,8 @@
 package com.amido.stacks.tests.api;
 
+import lombok.Getter;
+
+@Getter
 public enum WebServiceEndPoints {
   BASE_URL(System.getenv("BASE_URL")),
   CATEGORY("/category"),
@@ -13,9 +16,5 @@ public enum WebServiceEndPoints {
 
   WebServiceEndPoints(String url) {
     this.url = url;
-  }
-
-  public String getUrl() {
-    return url;
   }
 }

@@ -9,10 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MergeFrom {
-  private String templateFile;
+  private final String templateFile;
   private Map<String, String> defaultValues;
 
-  private static FreemarkerTemplate freemarkerTemplate = new FreemarkerTemplate();
+  private static final FreemarkerTemplate freemarkerTemplate = new FreemarkerTemplate();
 
   public MergeFrom(String templateFile) {
     this.templateFile = templateFile;

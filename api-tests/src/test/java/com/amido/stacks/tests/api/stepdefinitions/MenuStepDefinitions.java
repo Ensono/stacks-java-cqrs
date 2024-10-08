@@ -20,9 +20,9 @@ import io.cucumber.java.en.When;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
-import net.thucydides.core.annotations.Steps;
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -131,7 +131,10 @@ public class MenuStepDefinitions {
     Menu expectedMenu = MenuActions.mapToMenu(menuDetails.get(0), id);
 
     Menu actualMenu = lastResponse().getBody().as(Menu.class);
-    assertThat(expectedMenu).isEqualToIgnoringGivenFields(actualMenu, "categories");
+    assertThat(expectedMenu)
+        .usingRecursiveComparison()
+        .ignoringFields("categories")
+        .isEqualTo(actualMenu);
   }
 
   @When("I search the updated menu")

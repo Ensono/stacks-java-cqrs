@@ -1,8 +1,8 @@
 package com.amido.stacks.tests.api.cloud;
 
 import com.amido.stacks.tests.api.WebServiceEndPoints;
+import net.serenitybdd.annotations.Step;
 import net.serenitybdd.rest.SerenityRest;
-import net.thucydides.core.annotations.Step;
 
 public class AwsFeaturesStatus {
 

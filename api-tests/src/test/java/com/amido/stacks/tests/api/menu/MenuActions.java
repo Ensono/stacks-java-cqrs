@@ -9,13 +9,14 @@ import com.amido.stacks.tests.api.models.Menu;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import net.serenitybdd.core.Serenity;
-import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
-import net.thucydides.core.util.EnvironmentVariables;
-import net.thucydides.core.util.SystemEnvironmentVariables;
+import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
+import net.thucydides.model.environment.SystemEnvironmentVariables;
+import net.thucydides.model.util.EnvironmentVariables;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -27,13 +28,14 @@ public class MenuActions {
   private static final Logger LOGGER = LoggerFactory.getLogger(MenuActions.class);
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
-  private static String client_id = OAuthConfigurations.CLIENT_ID.getOauthConfiguration();
-  private static String client_secret = OAuthConfigurations.CLIENT_SECRET.getOauthConfiguration();
-  private static String audience = OAuthConfigurations.AUDIENCE.getOauthConfiguration();
-  private static String grant_type = OAuthConfigurations.GRANT_TYPE.getOauthConfiguration();
-  private static EnvironmentVariables environmentVariables =
+  private static final String client_id = OAuthConfigurations.CLIENT_ID.getOauthConfiguration();
+  private static final String client_secret =
+      OAuthConfigurations.CLIENT_SECRET.getOauthConfiguration();
+  private static final String audience = OAuthConfigurations.AUDIENCE.getOauthConfiguration();
+  private static final String grant_type = OAuthConfigurations.GRANT_TYPE.getOauthConfiguration();
+  private static final EnvironmentVariables environmentVariables =
       SystemEnvironmentVariables.createEnvironmentVariables();
-  private static String generateAuthorisation =
+  private static final String generateAuthorisation =
       EnvironmentSpecificConfiguration.from(environmentVariables)
           .getProperty("generate.auth0.token");
   private static String authBody;
@@ -95,6 +97,8 @@ public class MenuActions {
       actualMenu = objectMapper.readValue(response.body().print(), Menu.class);
     } catch (JsonProcessingException e) {
       e.printStackTrace();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
     return actualMenu;
   }

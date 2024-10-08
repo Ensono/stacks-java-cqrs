@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Tag("Unit")
-public class MenuDTOTest {
+class MenuDTOTest {
 
   @Test
-  public void equalsContract() {
+  void equalsContract() {
     EqualsVerifier.simple().forClass(MenuDTO.class).verify();
   }
 }

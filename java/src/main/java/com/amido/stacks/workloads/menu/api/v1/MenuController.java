@@ -33,10 +33,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -91,7 +90,7 @@ public class MenuController {
       operationId = "CreateMenu")
   @CreateAPIResponses
   ResponseEntity<ResourceCreatedResponse> createMenu(
-      @Valid @RequestBody CreateMenuRequest body,
+      @Validated @RequestBody CreateMenuRequest body,
       @Parameter(hidden = true) @RequestAttribute("CorrelationId") String correlationId) {
     return new ResponseEntity<>(
         new ResourceCreatedResponse(
@@ -139,7 +138,7 @@ public class MenuController {
         new SearchMenuResult(
             pageSize,
             pageNumber,
-            menuList.stream().map(searchMenuResultItemMapper::toDto).collect(Collectors.toList())));
+            menuList.stream().map(searchMenuResultItemMapper::toDto).toList()));
   }
 
   @GetMapping(value = "/{id}")
@@ -174,7 +173,7 @@ public class MenuController {
   @UpdateAPIResponses
   ResponseEntity<ResourceUpdatedResponse> updateMenu(
       @Parameter(description = "Menu id", required = true) @PathVariable("id") UUID menuId,
-      @Valid @RequestBody UpdateMenuRequest body,
+      @Validated @RequestBody UpdateMenuRequest body,
       @Parameter(hidden = true) @RequestAttribute("CorrelationId") String correlationId) {
     UpdateMenuCommand command = requestToCommandMapper.map(correlationId, menuId, body);
     return new ResponseEntity<>(

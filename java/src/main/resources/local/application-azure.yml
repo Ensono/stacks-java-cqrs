@@ -4,7 +4,7 @@ azure:
     enabled: true
   keyvault:
     enabled: false
-    uri: https://amido.stacks-tmp.vault.azure.net/
+    uri: https://ensono.stacks-tmp.vault.azure.net/
     client-id: xxxxxx
     client-key: xxxxxx
     tenant-id: xxxxxx
