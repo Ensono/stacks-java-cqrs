@@ -37,7 +37,7 @@
         <freemarker.version>2.3.33</freemarker.version>
         <assertj.core.version>3.26.3</assertj.core.version>
         <hamcrest.version>2.2</hamcrest.version>
-        <byte.buddy.version>1.14.18</byte.buddy.version>
+        <byte.buddy.version>1.15.4</byte.buddy.version>
         <org.projectlombok.version>1.18.34</org.projectlombok.version>
         <springfox.swagger2.version>3.0.0</springfox.swagger2.version>
         <springfox.swagger-ui.version>3.0.0</springfox.swagger-ui.version>
