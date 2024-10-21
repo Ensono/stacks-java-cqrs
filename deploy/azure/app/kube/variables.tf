@@ -133,3 +133,11 @@ variable "cosmosdb_offer_type" {
   default     = "Standard"
   description = "Specify the offer type"
 }
+
+###########################
+# App Insights
+##########################
+variable "app_insights_name" {
+  type        = string
+  description = "app insights name for key retriaval in memory"
+}

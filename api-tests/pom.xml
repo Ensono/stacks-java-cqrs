@@ -12,11 +12,11 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <serenity.version>4.1.20</serenity.version>
-        <serenity.maven.version>4.1.20</serenity.maven.version>
+        <serenity.version>4.2.2</serenity.version>
+        <serenity.maven.version>4.2.6</serenity.maven.version>
         <serenity.cucumber.version>2.6.0</serenity.cucumber.version>
-        <cucumber.version>7.18.1</cucumber.version>
-        <logback.version>1.5.6</logback.version>
+        <cucumber.version>7.8.1</cucumber.version>
+        <logback.version>1.5.11</logback.version>
         <encoding>UTF-8</encoding>
         <parallel.tests>4</parallel.tests>
         <webdriver.base.url/>
@@ -31,25 +31,25 @@
         <pact.jvm.consumer.version>4.0.10</pact.jvm.consumer.version>
         <pact.jvm.provider.junit.version>4.0.10</pact.jvm.provider.junit.version>
         <spotbugs.version>4.8.6</spotbugs.version>
-        <puppycrawl-tools-checkstyle.version>10.17.0</puppycrawl-tools-checkstyle.version>
-        <junit.jupiter.version>5.10.3</junit.jupiter.version>
+        <puppycrawl-tools-checkstyle.version>10.18.2</puppycrawl-tools-checkstyle.version>
+        <junit.jupiter.version>5.11.2</junit.jupiter.version>
         <junit-platform.version>1.11.0</junit-platform.version>
         <freemarker.version>2.3.33</freemarker.version>
         <assertj.core.version>3.26.3</assertj.core.version>
         <hamcrest.version>2.2</hamcrest.version>
-        <byte.buddy.version>1.14.18</byte.buddy.version>
+        <byte.buddy.version>1.15.5</byte.buddy.version>
         <org.projectlombok.version>1.18.34</org.projectlombok.version>
         <springfox.swagger2.version>3.0.0</springfox.swagger2.version>
         <springfox.swagger-ui.version>3.0.0</springfox.swagger-ui.version>
         <json.version>20240303</json.version>
         <netty.codec.http.version>4.1.112.Final</netty.codec.http.version>
-        <netty.codec.http2.version>4.1.72.Final</netty.codec.http2.version>
+        <netty.codec.http2.version>4.1.114.Final</netty.codec.http2.version>
         <netty.transport.native.epoll.version>4.1.112.Final</netty.transport.native.epoll.version>
         <guava.version>33.2.1-jre</guava.version>
         <httpclient5.version>5.3.1</httpclient5.version>
         <xerces.version>2.12.2</xerces.version>
         <commons.codec.version>1.17.1</commons.codec.version>
-        <spring.web.version>6.1.11</spring.web.version>
+        <spring.web.version>6.1.14</spring.web.version>
         <com.google.code.gson.version>2.11.0</com.google.code.gson.version>
         <net.thucydides.core.version>0.9.275</net.thucydides.core.version>
         <rest-assured.version>5.5.0</rest-assured.version>
@@ -57,9 +57,9 @@
         <!-- Maven plugins -->
         <owasp-dependency-check-plugin.version>10.0.2</owasp-dependency-check-plugin.version>
         <copy-rename-maven-plugin.version>1.0.1</copy-rename-maven-plugin.version>
-        <exec-maven-plugin.version>3.3.0</exec-maven-plugin.version>
+        <exec-maven-plugin.version>3.4.1</exec-maven-plugin.version>
         <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>3.3.1</maven-failsafe-plugin.version>
+        <maven-failsafe-plugin.version>3.5.1</maven-failsafe-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <pact.provider-plugin.version>4.6.11</pact.provider-plugin.version>
         <maven-pmd-plugin.version>3.24.0</maven-pmd-plugin.version>

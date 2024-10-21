@@ -39,3 +39,9 @@ output "dns_name" {
   description = "DNS Name if created"
   value       = module.app.dns_name
 }
+
+output "app_insights_instrumentation_key" {
+  description = "App Insights key for downstream deploymnent use"
+  value       = data.azurerm_application_insights.example.instrumentation_key
+  sensitive   = true
+}
