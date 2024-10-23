@@ -19,7 +19,7 @@
     <encoding>UTF-8</encoding>
     <parallel.tests>4</parallel.tests>
     <webdriver.base.url/>
-    <jackson.version>2.17.2</jackson.version>
+    <jackson.version>2.18.0</jackson.version>
     <java.version>17</java.version>
 
     <!-- Set 'pact.broker.url' and 'pact.broker.token' -->
@@ -35,16 +35,16 @@
     <freemarker.version>2.3.33</freemarker.version>
     <assertj.core.version>3.26.3</assertj.core.version>
     <hamcrest.version>2.2</hamcrest.version>
-    <byte.buddy.version>1.15.5</byte.buddy.version>
+    <byte.buddy.version>1.15.7</byte.buddy.version>
     <org.projectlombok.version>1.18.34</org.projectlombok.version>
     <springfox.swagger2.version>3.0.0</springfox.swagger2.version>
     <springfox.swagger-ui.version>3.0.0</springfox.swagger-ui.version>
     <json.version>20240303</json.version>
-    <netty.codec.http.version>4.1.112.Final</netty.codec.http.version>
+    <netty.codec.http.version>4.1.114.Final</netty.codec.http.version>
     <netty.codec.http2.version>4.1.114.Final</netty.codec.http2.version>
-    <netty.transport.native.epoll.version>4.1.112.Final</netty.transport.native.epoll.version>
-    <guava.version>33.2.1-jre</guava.version>
-    <httpclient5.version>5.3.1</httpclient5.version>
+    <netty.transport.native.epoll.version>4.1.114.Final</netty.transport.native.epoll.version>
+    <guava.version>33.3.1-jre</guava.version>
+    <httpclient5.version>5.4</httpclient5.version>
     <xerces.version>2.12.2</xerces.version>
     <commons.codec.version>1.17.1</commons.codec.version>
     <spring.web.version>6.1.14</spring.web.version>
@@ -55,15 +55,15 @@
     <!-- Maven plugins -->
     <owasp-dependency-check-plugin.version>10.0.2</owasp-dependency-check-plugin.version>
     <copy-rename-maven-plugin.version>1.0.1</copy-rename-maven-plugin.version>
-    <exec-maven-plugin.version>3.4.1</exec-maven-plugin.version>
-    <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
+    <exec-maven-plugin.version>3.5.0</exec-maven-plugin.version>
+    <maven-surefire-plugin.version>3.5.1</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>3.5.1</maven-failsafe-plugin.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-    <pact.provider-plugin.version>4.6.11</pact.provider-plugin.version>
-    <maven-pmd-plugin.version>3.24.0</maven-pmd-plugin.version>
+    <pact.provider-plugin.version>4.6.14</pact.provider-plugin.version>
+    <maven-pmd-plugin.version>3.25.0</maven-pmd-plugin.version>
     <findbugs-maven-plugin.version>3.0.5</findbugs-maven-plugin.version>
     <fmt-maven-plugin.version>2.13</fmt-maven-plugin.version>
-    <maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
+    <maven-checkstyle-plugin.version>3.5.0</maven-checkstyle-plugin.version>
     <spotbugs-maven-plugin.version>4.8.6.2</spotbugs-maven-plugin.version>
   </properties>
 
