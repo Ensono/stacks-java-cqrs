@@ -12,10 +12,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <serenity.version>4.2.2</serenity.version>
+        <serenity.version>4.2.6</serenity.version>
         <serenity.maven.version>4.2.6</serenity.maven.version>
-        <serenity.cucumber.version>2.6.0</serenity.cucumber.version>
-        <cucumber.version>7.8.1</cucumber.version>
+        <!-- <serenity.cucumber.version>2.6.0</serenity.cucumber.version> -->
+        <cucumber.version>7.20.1</cucumber.version>
         <logback.version>1.5.11</logback.version>
         <encoding>UTF-8</encoding>
         <parallel.tests>4</parallel.tests>
@@ -32,8 +32,8 @@
         <pact.jvm.provider.junit.version>4.0.10</pact.jvm.provider.junit.version>
         <spotbugs.version>4.8.6</spotbugs.version>
         <puppycrawl-tools-checkstyle.version>10.18.2</puppycrawl-tools-checkstyle.version>
-        <junit.jupiter.version>5.11.2</junit.jupiter.version>
-        <junit-platform.version>1.11.0</junit-platform.version>
+        <junit-jupiter.version>5.11.3</junit-jupiter.version>
+        <junit-platform.version>1.11.3</junit-platform.version>
         <freemarker.version>2.3.33</freemarker.version>
         <assertj.core.version>3.26.3</assertj.core.version>
         <hamcrest.version>2.2</hamcrest.version>
@@ -69,6 +69,18 @@
         <spotbugs-maven-plugin.version>4.8.6.2</spotbugs-maven-plugin.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <!-- https://security.snyk.io/vuln/SNYK-JAVA-COMGOOGLECODEGSON-1730327 -->
         <dependency>
@@ -91,10 +103,10 @@
             <artifactId>serenity-core</artifactId>
             <version>${serenity.version}</version>
             <exclusions>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>io.cucumber</groupId>
                     <artifactId>cucumber-core</artifactId>
-                </exclusion>
+                </exclusion> -->
                 <exclusion>
                     <groupId>commons-logging</groupId>
                     <artifactId>commons-logging</artifactId>
@@ -169,19 +181,16 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

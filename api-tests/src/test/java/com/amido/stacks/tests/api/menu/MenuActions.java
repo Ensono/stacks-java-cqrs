@@ -97,8 +97,6 @@ public class MenuActions {
       actualMenu = objectMapper.readValue(response.body().print(), Menu.class);
     } catch (JsonProcessingException e) {
       e.printStackTrace();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
     }
     return actualMenu;
   }
