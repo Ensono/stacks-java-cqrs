@@ -34,7 +34,7 @@
     <junit-jupiter.version>5.11.3</junit-jupiter.version>
     <freemarker.version>2.3.33</freemarker.version>
     <assertj.core.version>3.26.3</assertj.core.version>
-    <hamcrest.version>2.2</hamcrest.version>
+    <hamcrest.version>3.0</hamcrest.version>
     <byte.buddy.version>1.15.5</byte.buddy.version>
     <org.projectlombok.version>1.18.34</org.projectlombok.version>
     <springfox.swagger2.version>3.0.0</springfox.swagger2.version>
