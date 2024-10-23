@@ -64,7 +64,7 @@
     <findbugs-maven-plugin.version>3.0.5</findbugs-maven-plugin.version>
     <fmt-maven-plugin.version>2.13</fmt-maven-plugin.version>
     <maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
-    <spotbugs-maven-plugin.version>4.8.6.2</spotbugs-maven-plugin.version>
+    <spotbugs-maven-plugin.version>4.8.6.5</spotbugs-maven-plugin.version>
   </properties>
 
   <dependencyManagement>
