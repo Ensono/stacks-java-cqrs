@@ -38,7 +38,7 @@
     <maven-surefire-phase>test</maven-surefire-phase>
     <equals-verifier.version>3.17.3</equals-verifier.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-    <owasp-dependency-check-plugin.version>12.1.3</owasp-dependency-check-plugin.version>
+    <owasp-dependency-check-plugin.version>12.1.8</owasp-dependency-check-plugin.version>
     <org.mapstruct.version>1.6.3</org.mapstruct.version>
     <fmt-maven-plugin.version>2.13</fmt-maven-plugin.version>
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
