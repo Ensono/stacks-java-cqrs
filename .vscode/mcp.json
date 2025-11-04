@@ -1,0 +1,29 @@
+{
+  "inputs": [
+    {
+      "id": "azureDevOpsPat",
+      "type": "promptString",
+      "description": "Azure DevOps Personal Access Token",
+      "password": true
+    },
+    {
+      "id": "ado_org",
+      "type": "promptString",
+      "description": "Azure DevOps Organization (e.g., https://dev.azure.com/your-org)",
+      "default": "ensonodigitaluk"
+    }
+  ],
+  "servers": {
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "azure-devops": {
+      "command": "npx",
+      "args": ["-y", "@azure-devops/mcp", "${input:ado_org}"],
+      "env": {
+        "AZURE_DEVOPS_PAT": "${input:azureDevOpsPat}"
+      }
+    }
+  }
+}
