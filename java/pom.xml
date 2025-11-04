@@ -27,9 +27,9 @@
     <stacks.azure.version>1.0.3</stacks.azure.version>
 
     <java.version>17</java.version>
-    <org.projectlombok.version>1.18.38</org.projectlombok.version>
+    <org.projectlombok.version>1.18.42</org.projectlombok.version>
     <applicationinsights.version>3.5.4</applicationinsights.version>
-    <logback.version>1.5.18</logback.version>
+    <logback.version>1.5.20</logback.version>
     <com.google.code.gson-version>2.13.2</com.google.code.gson-version>
     <pitest.version>1.17.1</pitest.version>
     <jacoco.version>0.8.12</jacoco.version>

@@ -1,0 +1,65 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Maven: OWASP Dependency Check",
+      "type": "shell",
+      "command": "./mvnw",
+      "args": [
+        "-P",
+        "owasp-dependency-check",
+        "clean",
+        "verify",
+        "-Dgpg.skip=true"
+      ],
+      "options": {
+        "env": {
+          "NVD_API_KEY": "${input:nvdApiKey}"
+        }
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Maven: Clean Install",
+      "type": "shell",
+      "command": "./mvnw",
+      "args": [
+        "clean",
+        "install",
+        "-Dgpg.skip=true"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Maven: Clean Verify",
+      "type": "shell",
+      "command": "./mvnw",
+      "args": [
+        "clean",
+        "verify",
+        "-Dgpg.skip=true"
+      ],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "nvdApiKey",
+      "type": "promptString",
+      "description": "Enter your NVD API Key (get one at https://nvd.nist.gov/developers/request-an-api-key)",
+      "password": true
+    }
+  ]
+}
