@@ -304,6 +304,51 @@ stages:
 
           - checkout: templates
 
+          # Run OWASP Dependency Check for api-tests module
+          - task: Bash@3
+            displayName: 'Maven: OWASP Vulnerability Scan (API Tests)'
+            inputs:
+              targetType: 'inline'
+              workingDirectory: '$(self_functional_testproject_dir)'
+              script: |
+                set -euo pipefail
+                echo "Running OWASP Dependency Check for api-tests module..."
+                echo "Working directory: $(pwd)"
+                echo "Maven cache: $(maven_cache_directory)"
+                echo "Database directory: $(vulnerability_scan_database_directory)"
+                
+                # Run OWASP dependency check
+                # Note: Using CVSS threshold 11 to allow build to continue with vulnerabilities
+                # (matches behavior in java module scan)
+                CVSS_THRESHOLD=11
+                if [ "$(vulnerability_scan_fail_build_on_detection)" = "true" ]; then
+                  CVSS_THRESHOLD=0
+                fi
+                
+                ./mvnw org.owasp:dependency-check-maven:check \
+                  --no-transfer-progress \
+                  -Powasp-dependency-check \
+                  -Dmaven.repo.local=$(maven_cache_directory) \
+                  -Dsun.jnu.encoding=UTF-8 \
+                  -Dfile.encoding=UTF-8 \
+                  -DfailBuildOnCVSS=$CVSS_THRESHOLD \
+                  -DassemblyAnalyzerEnabled=false \
+                  -DdataDirectory=$(vulnerability_scan_database_directory) \
+                  -DnvdApiKey=$(vulnerability_scan_api_key) || {
+                    echo "##vso[task.logissue type=warning]OWASP Dependency Check found vulnerabilities in api-tests module"
+                    echo "Report will be published in post-build tasks"
+                  }
+                
+                # Verify report was generated
+                if [ -f "target/dependency-check-report.html" ]; then
+                  echo "✅ OWASP report generated successfully at target/dependency-check-report.html"
+                  ls -lh target/dependency-check-report.html
+                else
+                  echo "##vso[task.logissue type=error]OWASP report not generated at target/dependency-check-report.html"
+                  exit 1
+                fi
+            condition: and(succeeded(), eq(variables['vulnerability_scan'], true))
+
           # Builds the Java API Tests
           - template: templates/steps/build/build-api-tests-cli.yml
             parameters:
