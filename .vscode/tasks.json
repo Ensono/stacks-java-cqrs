@@ -4,7 +4,7 @@
     {
       "label": "Maven: OWASP Dependency Check",
       "type": "shell",
-      "command": "./java/mvnw",
+      "command": "./mvnw",
       "args": [
         "-P",
         "owasp-dependency-check",
@@ -13,6 +13,7 @@
         "-Dgpg.skip=true"
       ],
       "options": {
+        "cwd": "${workspaceFolder}/java",
         "env": {
           "NVD_API_KEY": "${input:nvdApiKey}"
         }
@@ -30,8 +31,11 @@
     {
       "label": "Maven: Clean Install",
       "type": "shell",
-      "command": "./java/mvnw",
+      "command": "./mvnw",
       "args": ["clean", "install", "-Dgpg.skip=true"],
+      "options": {
+        "cwd": "${workspaceFolder}/java"
+      },
       "problemMatcher": [],
       "group": {
         "kind": "build",
@@ -45,8 +49,11 @@
     {
       "label": "Maven: Clean Verify",
       "type": "shell",
-      "command": "./java/mvnw",
+      "command": "./mvnw",
       "args": ["clean", "verify", "-Dgpg.skip=true"],
+      "options": {
+        "cwd": "${workspaceFolder}/java"
+      },
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
