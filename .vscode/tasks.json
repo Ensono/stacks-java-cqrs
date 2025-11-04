@@ -4,7 +4,7 @@
     {
       "label": "Maven: OWASP Dependency Check",
       "type": "shell",
-      "command": "./mvnw",
+      "command": "./java/mvnw",
       "args": [
         "-P",
         "owasp-dependency-check",
@@ -30,28 +30,28 @@
     {
       "label": "Maven: Clean Install",
       "type": "shell",
-      "command": "./mvnw",
-      "args": [
-        "clean",
-        "install",
-        "-Dgpg.skip=true"
-      ],
+      "command": "./java/mvnw",
+      "args": ["clean", "install", "-Dgpg.skip=true"],
       "problemMatcher": [],
       "group": {
         "kind": "build",
         "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
       }
     },
     {
       "label": "Maven: Clean Verify",
       "type": "shell",
-      "command": "./mvnw",
-      "args": [
-        "clean",
-        "verify",
-        "-Dgpg.skip=true"
-      ],
-      "problemMatcher": []
+      "command": "./java/mvnw",
+      "args": ["clean", "verify", "-Dgpg.skip=true"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
     }
   ],
   "inputs": [
