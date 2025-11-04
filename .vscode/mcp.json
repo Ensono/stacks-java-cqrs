@@ -11,6 +11,12 @@
       "type": "promptString",
       "description": "Azure DevOps Organization (e.g., https://dev.azure.com/your-org)",
       "default": "ensonodigitaluk"
+    },
+    {
+      "id": "nvdApiKey",
+      "type": "promptString",
+      "description": "Enter your NVD API Key (get one at https://nvd.nist.gov/developers/request-an-api-key)",
+      "password": true
     }
   ],
   "servers": {
@@ -23,6 +29,13 @@
       "args": ["-y", "@azure-devops/mcp", "${input:ado_org}"],
       "env": {
         "AZURE_DEVOPS_PAT": "${input:azureDevOpsPat}"
+      }
+    },
+    "mcp-nvd": {
+      "command": "uvx",
+      "args": ["mcp-nvd"],
+      "env": {
+        "NVD_API_KEY": "${input:nvdApiKey}"
       }
     }
   }

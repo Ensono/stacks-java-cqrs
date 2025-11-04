@@ -49,7 +49,7 @@
     {
       "label": "Maven: Clean Verify",
       "type": "shell",
-      "command": "./mvnw",
+      "command": "./java/mvnw",
       "args": ["clean", "verify", "-Dgpg.skip=true"],
       "options": {
         "cwd": "${workspaceFolder}/java"
