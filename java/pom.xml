@@ -26,6 +26,10 @@
     <stacks.aws.version>1.0.3</stacks.aws.version>
     <stacks.azure.version>1.0.3</stacks.azure.version>
 
+    <!-- Build properties -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
     <java.version>17</java.version>
     <org.projectlombok.version>1.18.42</org.projectlombok.version>
     <applicationinsights.version>3.5.4</applicationinsights.version>
@@ -145,6 +149,24 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-test</artifactId>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.skyscreamer</groupId>
+          <artifactId>jsonassert</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.skyscreamer</groupId>
+      <artifactId>jsonassert</artifactId>
+      <version>1.5.3</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.vaadin.external.google</groupId>
+          <artifactId>android-json</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
@@ -167,6 +189,12 @@
       <artifactId>springdoc-openapi-common</artifactId>
       <version>${springdoc-openapi-common.version}</version>
       <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.vaadin.external.google</groupId>
+          <artifactId>android-json</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <!-- Other dependencies -->
     <!-- TODO: to be moved to a common workloads parent -->
