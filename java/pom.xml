@@ -36,7 +36,7 @@
     <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
     <pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
     <maven-surefire-phase>test</maven-surefire-phase>
-    <equals-verifier.version>3.17.3</equals-verifier.version>
+    <equals-verifier.version>4.2.3</equals-verifier.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     <owasp-dependency-check-plugin.version>12.1.8</owasp-dependency-check-plugin.version>
     <org.mapstruct.version>1.6.3</org.mapstruct.version>
