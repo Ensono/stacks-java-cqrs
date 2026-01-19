@@ -51,7 +51,7 @@
     <spring-boot-maven-plugin.version>3.3.13</spring-boot-maven-plugin.version>
     <junit-jupiter.version>5.11.3</junit-jupiter.version>
     <spring-boot-dependencies.version>3.3.13</spring-boot-dependencies.version>
-    <io.projectreactor-reactor-bom.version>2024.0.0</io.projectreactor-reactor-bom.version>
+    <io.projectreactor-reactor-bom.version>2025.0.2</io.projectreactor-reactor-bom.version>
     <spring-cloud-context.version>4.1.4</spring-cloud-context.version>
     <springdoc-openapi-common.version>1.8.0</springdoc-openapi-common.version>
     <aspectjrt.version>1.9.25.1</aspectjrt.version>
