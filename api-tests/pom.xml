@@ -40,7 +40,7 @@
     <springfox.swagger2.version>3.0.0</springfox.swagger2.version>
     <springfox.swagger-ui.version>3.0.0</springfox.swagger-ui.version>
     <json.version>20240303</json.version>
-    <netty.codec.http.version>4.2.5.Final</netty.codec.http.version>
+    <netty.codec.http.version>4.2.8.Final</netty.codec.http.version>
     <netty.codec.http2.version>4.2.3.Final</netty.codec.http2.version>
     <netty.transport.native.epoll.version>4.2.3.Final</netty.transport.native.epoll.version>
     <guava.version>33.4.8-jre</guava.version>
