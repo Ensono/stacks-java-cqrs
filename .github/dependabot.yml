@@ -1,69 +1,51 @@
 version: 2
+
+multi-ecosystem-groups:
+  all-dependencies:
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Europe/London
+    reviewers:
+      - Ensono/dependency-management
+
 updates:
   - package-ecosystem: maven
     directory: "/java"
-    schedule:
-      interval: weekly
-      day: monday
-      timezone: Europe/London
+    patterns:
+      - "*"
+    multi-ecosystem-group: all-dependencies
     open-pull-requests-limit: 50
-    assignees:
-      - steveclewer
     rebase-strategy: disabled
-    groups:
-      low-risk:
-        applies-to: version-updates
-        update-types:
-          - "minor"
-          - "patch"
 
   - package-ecosystem: npm
     directory: "/build/azDevOps/azure/coverage"
-    schedule:
-      interval: weekly
-      day: monday
-      timezone: Europe/London
+    patterns:
+      - "*"
+    multi-ecosystem-group: all-dependencies
     open-pull-requests-limit: 50
-    assignees:
-      - ElvenSpellmaker
     rebase-strategy: disabled
-    groups:
-      low-risk:
-        applies-to: version-updates
-        update-types:
-          - "minor"
-          - "patch"
 
   - package-ecosystem: maven
     directory: "/api-tests"
-    schedule:
-      interval: weekly
-      day: monday
-      timezone: Europe/London
+    patterns:
+      - "*"
+    multi-ecosystem-group: all-dependencies
     open-pull-requests-limit: 50
-    assignees:
-      - VitalinaVZdrobau
     rebase-strategy: disabled
-    groups:
-      low-risk:
-        applies-to: version-updates
-        update-types:
-          - "minor"
-          - "patch"
 
   - package-ecosystem: terraform
     directory: "/deploy/azure/app/kube"
-    schedule:
-      interval: weekly
-      day: monday
-      timezone: Europe/London
+    patterns:
+      - "*"
+    multi-ecosystem-group: all-dependencies
     open-pull-requests-limit: 50
-    assignees:
-      - ElvenSpellmaker
     rebase-strategy: disabled
-    groups:
-      low-risk:
-        applies-to: version-updates
-        update-types:
-          - "minor"
-          - "patch"
+
+  - package-ecosystem: docker
+    directory: "/java"
+    patterns:
+      - "*"
+    multi-ecosystem-group: all-dependencies
+    open-pull-requests-limit: 50
+    rebase-strategy: disabled
