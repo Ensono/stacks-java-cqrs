@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-alpine:17.0.9 as build
+FROM azul/zulu-openjdk-alpine:17.0.18-jdk AS build
 WORKDIR /workspace/app
 
 # Copy the m2 directory if it exists to re-use an external cache.
@@ -13,10 +13,19 @@ COPY src src
 
 RUN ./mvnw dependency:go-offline --quiet \
     && ./mvnw process-resources --quiet \
-    && ./mvnw clean package -Dmaven.default-test.skip=true -Dmaven.test.skip=true -DskipTests --no-transfer-progress --quiet \
-    && mkdir -p extracted && find target -maxdepth 1 -type f -name '*.jar' ! -name '*-javadoc.jar' ! -name '*-sources.jar' -exec java -Djarmode=layertools -jar {} extract --destination extracted \;
+    && ./mvnw clean package \
+        -Dmaven.default-test.skip=true \
+        -Dmaven.test.skip=true \
+        -DskipTests \
+        --no-transfer-progress \
+        --quiet \
+    && mkdir -p extracted \
+    && find target -maxdepth 1 -type f -name '*.jar' \
+        ! -name '*-javadoc.jar' \
+        ! -name '*-sources.jar' \
+        -exec java -Djarmode=layertools -jar {} extract --destination extracted \;
 
-FROM azul/zulu-openjdk-alpine:17-jre
+FROM azul/zulu-openjdk-alpine:17.0.18-jre
 
 VOLUME /tmp
 
@@ -30,7 +39,12 @@ COPY --from=build ${DEPENDENCY}/snapshot-dependencies/ ./
 RUN true
 COPY --from=build ${DEPENDENCY}/application/ ./
 
-RUN if [ -e "/BOOT-INF/classes/emulatorcert.crt" ]; then cd $JAVA_HOME/lib/security && keytool -importcert -cacerts -storepass changeit -noprompt -alias documentdbemulator -file /BOOT-INF/classes/emulatorcert.crt; fi
+RUN if [ -e "/BOOT-INF/classes/emulatorcert.crt" ]; then \
+            cd "$JAVA_HOME/lib/security" \
+            && keytool -importcert -cacerts -storepass changeit -noprompt \
+                -alias documentdbemulator \
+                -file /BOOT-INF/classes/emulatorcert.crt; \
+        fi
 
 ENTRYPOINT ["java","org.springframework.boot.loader.launch.JarLauncher"]
 

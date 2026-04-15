@@ -33,16 +33,16 @@
     <puppycrawl-tools-checkstyle.version>10.20.2</puppycrawl-tools-checkstyle.version>
     <junit-jupiter.version>5.13.4</junit-jupiter.version>
     <freemarker.version>2.3.34</freemarker.version>
-    <assertj.core.version>3.27.4</assertj.core.version>
+    <assertj.core.version>3.27.7</assertj.core.version>
     <hamcrest.version>3.0</hamcrest.version>
     <byte.buddy.version>1.17.6</byte.buddy.version>
     <org.projectlombok.version>1.18.38</org.projectlombok.version>
     <springfox.swagger2.version>3.0.0</springfox.swagger2.version>
     <springfox.swagger-ui.version>3.0.0</springfox.swagger-ui.version>
     <json.version>20240303</json.version>
-    <netty.codec.http.version>4.2.8.Final</netty.codec.http.version>
-    <netty.codec.http2.version>4.2.3.Final</netty.codec.http2.version>
-    <netty.transport.native.epoll.version>4.2.3.Final</netty.transport.native.epoll.version>
+    <netty.codec.http.version>4.2.12.Final</netty.codec.http.version>
+    <netty.codec.http2.version>4.2.12.Final</netty.codec.http2.version>
+    <netty.transport.native.epoll.version>4.2.12.Final</netty.transport.native.epoll.version>
     <guava.version>33.4.8-jre</guava.version>
     <httpclient5.version>5.5</httpclient5.version>
     <xerces.version>2.12.2</xerces.version>
