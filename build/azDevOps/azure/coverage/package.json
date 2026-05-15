@@ -2,16 +2,16 @@
   "description": "N/A",
   "license": "Apache-2.0",
   "repository": "N/A",
-
   "engines": {
     "node": ">=20.16.0 <21"
   },
-
   "devDependencies": {
     "gulp": "^5.0.1",
     "gulp-postcss": "^10.0.0",
     "inline-source": "^8.0.3",
     "postcss-image-inliner": "^7.0.1"
+  },
+  "overrides": {
+    "postcss": ">=8.5.10"
   }
-
 }
