@@ -3,7 +3,7 @@
   "license": "Apache-2.0",
   "repository": "N/A",
   "engines": {
-    "node": ">=20.16.0 <21"
+    "node": ">=24"
   },
   "devDependencies": {
     "gulp": "^5.0.1",
